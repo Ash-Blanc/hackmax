@@ -60,21 +60,23 @@ export default function Onboarding() {
   };
 
   return (
-    <div className="min-h-screen bg-bg text-fg flex flex-col items-center justify-center p-6 select-none relative overflow-hidden">
+    <div className="min-h-screen ambient-canvas text-fg flex flex-col items-center justify-center p-6 select-none relative overflow-hidden">
       {/* Glow background accent */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent/10 rounded-full blur-3xl pointer-events-none -z-10" />
 
       {/* Container */}
-      <div className="glass rounded-3xl p-8 w-full max-w-xl border border-border shadow-2xl relative">
+      <div className="glass-panel rounded-3xl p-8 w-full max-w-xl border border-white/[0.08] shadow-2xl chamfer-top relative">
         {/* Top bar with logo and progress dots */}
-        <div className="flex items-center justify-between pb-6 mb-8 border-b border-border">
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-accent/20 border border-accent/30 flex items-center justify-center text-accent">
-              <Zap className="w-4 h-4 fill-accent" />
+        <div className="flex items-center justify-between pb-6 mb-8 border-b border-white/[0.06]">
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-accent to-indigo-500 p-0.5 shadow-glow flex items-center justify-center">
+              <div className="w-full h-full bg-[#0d0f17] rounded-[10px] flex items-center justify-center">
+                <Zap className="w-4 h-4 text-accent fill-accent" />
+              </div>
             </div>
             <div>
-              <span className="font-bold text-fg text-base">HackMax</span>
-              <span className="text-[10px] text-muted block -mt-1">5-Step Setup</span>
+              <span className="font-extrabold text-white text-base">HackMax</span>
+              <span className="text-[10px] text-muted block -mt-0.5 font-mono">5-Step Calibration</span>
             </div>
           </div>
 
@@ -85,10 +87,10 @@ export default function Onboarding() {
                 key={s.num}
                 className={`h-1.5 rounded-full transition-all duration-300 ${
                   s.num === step
-                    ? 'w-8 bg-accent'
+                    ? 'w-8 bg-accent shadow-glow'
                     : s.num < step
                     ? 'w-4 bg-accent/50'
-                    : 'w-4 bg-border'
+                    : 'w-4 bg-white/[0.08]'
                 }`}
               />
             ))}

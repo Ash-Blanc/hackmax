@@ -22,18 +22,22 @@ export default function Landing() {
   const [demoTaskDone, setDemoTaskDone] = useState(false);
 
   return (
-    <div className="min-h-screen bg-bg text-fg flex flex-col font-sans selection:bg-accent/30 selection:text-white">
+    <div className="min-h-screen ambient-canvas text-fg flex flex-col font-sans selection:bg-accent/30 selection:text-white">
       {/* Landing Navbar */}
-      <header className="h-16 border-b border-border/80 px-6 sm:px-12 flex items-center justify-between bg-bg/80 backdrop-blur-md sticky top-0 z-40">
+      <header className="h-16 border-b border-white/[0.06] px-6 sm:px-12 flex items-center justify-between glass-panel sticky top-0 z-40">
         <div className="flex items-center gap-3 cursor-pointer" onClick={() => navigate('/')}>
-          <div className="w-9 h-9 rounded-xl bg-accent/20 border border-accent/40 flex items-center justify-center text-accent shadow-glow">
-            <Zap className="w-5 h-5 fill-accent" />
+          <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-accent to-indigo-500 p-0.5 shadow-glow flex items-center justify-center">
+            <div className="w-full h-full bg-[#0d0f17] rounded-[10px] flex items-center justify-center">
+              <Zap className="w-4 h-4 text-accent fill-accent" />
+            </div>
           </div>
           <div>
-            <span className="font-bold text-lg tracking-tight">HackMax</span>
-            <span className="text-[10px] text-muted ml-2 px-1.5 py-0.5 rounded bg-elevated border border-border">
-              MVP v0.1
-            </span>
+            <div className="flex items-center gap-1.5">
+              <span className="font-extrabold text-white text-lg tracking-tight">HackMax</span>
+              <span className="text-[9px] px-1.5 py-0.2 rounded-full bg-accent/20 border border-accent/30 text-accent-bright font-mono font-semibold">
+                v0.2
+              </span>
+            </div>
           </div>
         </div>
 
@@ -139,21 +143,21 @@ export default function Landing() {
 
       {/* Interactive Command Center Mini-Preview */}
       <section id="preview" className="py-12 px-6 sm:px-12 max-w-6xl mx-auto w-full">
-        <div className="p-1 rounded-2xl bg-gradient-to-b from-accent/30 via-border to-border/40 shadow-2xl">
-          <div className="bg-surface rounded-xl p-6 border border-border">
+        <div className="p-1 rounded-3xl bg-gradient-to-b from-accent/40 via-white/[0.08] to-transparent shadow-2xl">
+          <div className="glass-panel rounded-[22px] p-6 border border-white/[0.08] chamfer-top">
             {/* Header bar of preview */}
-            <div className="flex items-center justify-between pb-4 mb-6 border-b border-border">
+            <div className="flex items-center justify-between pb-4 mb-6 border-b border-white/[0.06]">
               <div className="flex items-center gap-3">
                 <span className="w-3 h-3 rounded-full bg-red-500/80" />
-                <span className="w-3 h-3 rounded-full bg-yellow-500/80" />
-                <span className="w-3 h-3 rounded-full bg-green-500/80" />
+                <span className="w-3 h-3 rounded-full bg-amber-500/80" />
+                <span className="w-3 h-3 rounded-full bg-emerald-500/80" />
                 <span className="text-xs font-mono text-muted ml-2">
                   hackmax-command-center://autonomous-agents-hackathon
                 </span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="px-2 py-0.5 rounded-full bg-success/10 border border-success/20 text-[11px] text-success font-medium">
-                  ● Live Simulation
+                <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-[11px] text-emerald-400 font-mono font-semibold">
+                  ● Live Telemetry
                 </span>
               </div>
             </div>
@@ -161,12 +165,12 @@ export default function Landing() {
             {/* Preview Grid */}
             <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
               {/* Card 1: Urgency Countdown */}
-              <div className="md:col-span-4 glass rounded-xl p-5 flex flex-col justify-between border-border/80 hover:border-accent/40 transition-colors">
-                <div className="flex items-center justify-between mb-2">
+              <div className="md:col-span-4 glass-card rounded-2xl p-5 flex flex-col justify-between border border-white/[0.06] chamfer-top">
+                <div className="flex items-center justify-between mb-2 font-mono">
                   <span className="text-xs font-bold text-muted uppercase tracking-wider flex items-center gap-1.5">
                     <Clock className="w-3.5 h-3.5 text-red-400" /> Deadline Clock
                   </span>
-                  <span className="px-2 py-0.5 rounded bg-red-500/10 text-red-400 text-[10px] font-bold">
+                  <span className="px-2 py-0.5 rounded-full bg-red-500/15 border border-red-500/30 text-red-400 text-[10px] font-bold">
                     CRITICAL
                   </span>
                 </div>
@@ -174,10 +178,10 @@ export default function Landing() {
                   <p className="text-3xl font-extrabold font-mono text-red-400 animate-pulse">
                     0d 19h 42m 14s
                   </p>
-                  <p className="text-[11px] text-muted mt-1">Autonomous Agents Hackathon</p>
+                  <p className="text-[11px] text-muted mt-1 font-mono">Autonomous Agents Hackathon</p>
                 </div>
-                <div className="p-2.5 rounded-lg bg-elevated/80 border border-border text-[11px] text-secondary">
-                  ⚠️ <span className="text-fg font-medium">Triage Recommendation:</span> Drop low-impact tasks now. Focus strictly on demo video.
+                <div className="p-3 rounded-xl bg-white/[0.02] border border-white/[0.06] text-[11px] text-secondary">
+                  ⚠️ <strong className="text-white">Triage Alert:</strong> Drop low-impact tasks now. Protect demo polish.
                 </div>
               </div>
 

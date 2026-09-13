@@ -11,9 +11,19 @@ export default {
           raised: "#0f111a",
           elevated: "#181b26",
         },
-        surface: "#0f111a",
+        surface: {
+          DEFAULT: "#0d0f17",
+          1: "#0d0f17",
+          2: "#131622",
+          3: "#1c2030",
+        },
         elevated: "#181b26",
-        border: "#1e2333",
+        border: {
+          DEFAULT: "#1e2333",
+          subtle: "rgba(255, 255, 255, 0.06)",
+          highlight: "rgba(255, 255, 255, 0.12)",
+          accent: "rgba(99, 102, 241, 0.35)",
+        },
         line: "#1e2333",
         fg: "#f8fafc",
         secondary: "#94a3b8",
@@ -39,7 +49,13 @@ export default {
       },
       boxShadow: {
         glow: "0 0 0 1px rgba(99,102,241,0.25), 0 0 24px rgba(99,102,241,0.12)",
+        "glow-lg": "0 0 0 1px rgba(99,102,241,0.35), 0 0 36px rgba(99,102,241,0.2)",
         emerald: "0 0 0 1px rgba(16,185,129,0.25), 0 0 20px rgba(16,185,129,0.12)",
+        rose: "0 0 0 1px rgba(244,63,94,0.25), 0 0 20px rgba(244,63,94,0.12)",
+        "inner-glow": "inset 0 1px 0 0 rgba(255,255,255,0.08)",
+      },
+      transitionTimingFunction: {
+        spring: "cubic-bezier(0.16, 1, 0.3, 1)",
       },
       keyframes: {
         pulseWarn: {
@@ -51,10 +67,15 @@ export default {
           "40%": { transform: "scale(1.04)" },
           "100%": { transform: "scale(1)" },
         },
+        radar: {
+          "0%": { transform: "scale(0.95)", opacity: "0.8" },
+          "100%": { transform: "scale(1.35)", opacity: "0" },
+        },
       },
       animation: {
         "pulse-warn": "pulseWarn 1.6s ease-in-out infinite",
         tick: "tick 1s ease-in-out infinite",
+        radar: "radar 2s cubic-bezier(0.16, 1, 0.3, 1) infinite",
       },
     },
   },

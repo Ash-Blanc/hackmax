@@ -56,12 +56,12 @@ export default function Projects() {
   return (
     <div className="space-y-6 max-w-7xl mx-auto animate-in fade-in duration-200">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-border/60">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-3 border-b border-white/[0.06]">
         <div>
-          <div className="flex items-center gap-2.5">
-            <h1 className="text-2xl font-bold text-fg tracking-tight">Projects & DNA</h1>
-            <span className="px-2 py-0.5 rounded-full bg-accent/10 border border-accent/20 text-accent-light text-[11px] font-mono font-semibold">
-              {state.projects.length} Repositories
+          <div className="flex items-center gap-3">
+            <h1 className="text-2xl font-extrabold text-white tracking-tight">Projects & DNA</h1>
+            <span className="px-2.5 py-0.5 rounded-full bg-accent/15 border border-accent/30 text-accent-bright text-[11px] font-mono font-semibold">
+              {state.projects.length} Repositories Connected
             </span>
           </div>
           <p className="text-secondary text-xs mt-1">
@@ -71,10 +71,10 @@ export default function Projects() {
 
         <button
           onClick={() => setIsAddProjectOpen(true)}
-          className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-accent text-white text-xs font-semibold hover:bg-accent-bright shadow-glow transition-all"
+          className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-accent to-indigo-600 text-white text-xs font-semibold hover:from-accent-bright hover:to-indigo-500 shadow-glow transition-all active:scale-95"
         >
           <Plus className="w-3.5 h-3.5" />
-          <span>New Project</span>
+          <span>New Project DNA</span>
         </button>
       </div>
 
@@ -84,22 +84,24 @@ export default function Projects() {
           <div
             key={p.id}
             onClick={() => navigate(`/projects/${p.id}`)}
-            className="glass rounded-2xl p-6 border-border hover:border-accent/40 transition-all cursor-pointer flex flex-col justify-between group"
+            className="glass-panel rounded-2xl p-6 border border-white/[0.06] chamfer-top hover:border-white/[0.15] transition-all cursor-pointer flex flex-col justify-between group shadow-lg"
           >
             <div>
               <div className="flex items-start justify-between mb-3">
-                <div className="flex items-center gap-2.5">
-                  <div className="w-10 h-10 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center text-accent group-hover:scale-105 transition-transform">
-                    <FolderGit2 className="w-5 h-5" />
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-accent to-indigo-500 p-0.5 shadow-glow flex items-center justify-center group-hover:scale-105 transition-transform">
+                    <div className="w-full h-full bg-[#0d0f17] rounded-[10px] flex items-center justify-center">
+                      <FolderGit2 className="w-5 h-5 text-accent" />
+                    </div>
                   </div>
                   <div>
-                    <h3 className="font-bold text-fg text-base group-hover:text-accent-light transition-colors">
+                    <h3 className="font-bold text-white text-base group-hover:text-accent-light transition-colors">
                       {p.name}
                     </h3>
                     <p className="text-xs text-muted font-mono">{p.repositoryName}</p>
                   </div>
                 </div>
-                <span className="text-[10px] px-2 py-0.5 rounded-full bg-success/10 border border-success/20 text-success font-medium">
+                <span className="text-[10px] px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 font-mono font-semibold">
                   Primary DNA
                 </span>
               </div>
@@ -111,7 +113,7 @@ export default function Projects() {
                 {p.techStack.map((t) => (
                   <span
                     key={t}
-                    className="px-2.5 py-0.5 rounded-md bg-elevated border border-border text-[10px] text-fg font-medium"
+                    className="px-2.5 py-1 rounded-lg bg-white/[0.04] border border-white/[0.08] text-[10px] text-white font-mono"
                   >
                     {t}
                   </span>
@@ -120,21 +122,21 @@ export default function Projects() {
             </div>
 
             {/* Bottom DNA summary */}
-            <div className="pt-4 border-t border-border flex items-center justify-between text-xs">
-              <div className="flex items-center gap-3 text-[11px] text-muted">
+            <div className="pt-4 border-t border-white/[0.06] flex items-center justify-between text-xs">
+              <div className="flex items-center gap-3 text-[11px] text-muted font-mono">
                 <span className="flex items-center gap-1">
                   <Target className="w-3.5 h-3.5 text-accent" />
                   {p.capabilities.length} capabilities
                 </span>
                 <span>•</span>
                 <span className="flex items-center gap-1">
-                  <Layers className="w-3.5 h-3.5 text-success" />
+                  <Layers className="w-3.5 h-3.5 text-emerald-400" />
                   {p.reusableComponents.length} components
                 </span>
               </div>
 
               <span className="text-accent-light text-xs font-semibold flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
-                <span>Workspace</span>
+                <span>DNA Vault</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </span>
             </div>
@@ -144,13 +146,13 @@ export default function Projects() {
 
       {/* Add Project Modal */}
       {isAddProjectOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4">
-          <div className="bg-surface border border-border rounded-2xl p-6 w-full max-w-md shadow-2xl">
-            <div className="flex items-center justify-between pb-3 mb-4 border-b border-border">
-              <h3 className="font-bold text-fg text-sm">Add New Project</h3>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-md p-4 animate-in fade-in duration-150">
+          <div className="glass-elevated border border-white/[0.12] rounded-2xl p-6 w-full max-w-md shadow-2xl chamfer-top animate-in zoom-in-95 duration-150">
+            <div className="flex items-center justify-between pb-3 mb-4 border-b border-white/[0.08]">
+              <h3 className="font-extrabold text-white text-sm">Add New Project DNA</h3>
               <button
                 onClick={() => setIsAddProjectOpen(false)}
-                className="p-1 rounded text-secondary hover:text-fg"
+                className="p-1 rounded-lg text-secondary hover:text-white hover:bg-white/[0.06]"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -165,7 +167,7 @@ export default function Projects() {
                   onChange={(e) => setName(e.target.value)}
                   placeholder="e.g. Autonoma Engine"
                   required
-                  className="w-full py-2 px-3 rounded-lg bg-elevated border border-border text-fg focus:outline-none focus:border-accent"
+                  className="w-full py-2.5 px-3 rounded-xl bg-[#131622] border border-white/[0.08] text-white focus:outline-none focus:border-accent"
                 />
               </div>
 
@@ -176,7 +178,7 @@ export default function Projects() {
                   value={tagline}
                   onChange={(e) => setTagline(e.target.value)}
                   placeholder="e.g. Production multi-agent orchestration runtime"
-                  className="w-full py-2 px-3 rounded-lg bg-elevated border border-border text-fg focus:outline-none focus:border-accent"
+                  className="w-full py-2.5 px-3 rounded-xl bg-[#131622] border border-white/[0.08] text-white focus:outline-none focus:border-accent"
                 />
               </div>
 
@@ -187,7 +189,7 @@ export default function Projects() {
                   value={repoName}
                   onChange={(e) => setRepoName(e.target.value)}
                   placeholder="username/repo-name"
-                  className="w-full py-2 px-3 rounded-lg bg-elevated border border-border text-fg focus:outline-none focus:border-accent"
+                  className="w-full py-2.5 px-3 rounded-xl bg-[#131622] border border-white/[0.08] text-white focus:outline-none focus:border-accent font-mono"
                 />
               </div>
 
@@ -198,21 +200,21 @@ export default function Projects() {
                   value={techStack}
                   onChange={(e) => setTechStack(e.target.value)}
                   placeholder="React, TypeScript, Python, FastAPI"
-                  className="w-full py-2 px-3 rounded-lg bg-elevated border border-border text-fg focus:outline-none focus:border-accent"
+                  className="w-full py-2.5 px-3 rounded-xl bg-[#131622] border border-white/[0.08] text-white focus:outline-none focus:border-accent font-mono"
                 />
               </div>
 
-              <div className="pt-3 flex justify-end gap-2 border-t border-border">
+              <div className="pt-3 flex justify-end gap-2.5 border-t border-white/[0.08]">
                 <button
                   type="button"
                   onClick={() => setIsAddProjectOpen(false)}
-                  className="px-4 py-2 rounded-lg bg-elevated text-secondary hover:text-fg font-medium"
+                  className="px-4 py-2 rounded-xl bg-white/[0.04] text-secondary hover:text-white font-medium"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 rounded-lg bg-accent text-white font-bold hover:bg-accent-bright shadow-glow"
+                  className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-accent to-indigo-600 text-white font-bold hover:from-accent-bright hover:to-indigo-500 shadow-glow"
                 >
                   Create Project
                 </button>

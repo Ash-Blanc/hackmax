@@ -80,15 +80,15 @@ export default function GithubView() {
           </div>
           <div>
             <h3 className="text-2xs font-semibold text-accent-bright uppercase tracking-wider font-mono">
-              Max Telemetry Insight
+              Sprint Engineering Insight
             </h3>
             <p className="text-xs text-secondary mt-0.5 leading-relaxed">
-              Your backend and agent workflows are <span className="text-emerald-400 font-medium">90% complete</span> with high commit velocity. Shift focus now to demo video recording and submission checklist.
+              Your backend and core workflows are <span className="text-emerald-400 font-medium">90% complete</span> with high commit velocity. Shift focus now to demo video recording and submission checklist.
             </p>
           </div>
         </div>
         <button
-          onClick={() => toast.info('Anti-slop rule enforced: Non-critical code commits blocked.')}
+          onClick={() => toast.success('Focus locked on demo video & submission checklist!')}
           className="px-3 py-1.5 rounded-lg bg-accent hover:bg-accent-bright text-white text-xs font-medium shadow-ambient transition-all active:scale-[0.97] shrink-0"
         >
           Acknowledge

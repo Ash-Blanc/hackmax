@@ -199,7 +199,7 @@ export default function Settings() {
                     type="checkbox"
                     checked={notifDeadlines}
                     onChange={() => setNotifDeadlines(!notifDeadlines)}
-                    className="accent-indigo-500 rounded"
+                    className="accent-blue-500 rounded"
                   />
                 </div>
                 <div className="flex items-center justify-between text-secondary text-2xs">
@@ -208,16 +208,16 @@ export default function Settings() {
                     type="checkbox"
                     checked={notifScores}
                     onChange={() => setNotifScores(!notifScores)}
-                    className="accent-indigo-500 rounded"
+                    className="accent-blue-500 rounded"
                   />
                 </div>
                 <div className="flex items-center justify-between text-secondary text-2xs">
-                  <span>New DNA opportunity alerts</span>
+                  <span>New hackathon matches</span>
                   <input
                     type="checkbox"
                     checked={notifOpps}
                     onChange={() => setNotifOpps(!notifOpps)}
-                    className="accent-indigo-500 rounded"
+                    className="accent-blue-500 rounded"
                   />
                 </div>
               </div>

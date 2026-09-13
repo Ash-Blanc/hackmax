@@ -122,7 +122,7 @@ export default function ProjectDetail() {
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-2">
               <Target className="w-4 h-4 text-emerald-400" />
-              <h3 className="font-semibold text-xs text-fg">Project Capabilities (DNA)</h3>
+              <h3 className="font-semibold text-xs text-fg">Key Features & Capabilities</h3>
             </div>
             <button
               onClick={() => setShowCapInput(!showCapInput)}
@@ -150,7 +150,7 @@ export default function ProjectDetail() {
                 type="text"
                 value={newCap}
                 onChange={(e) => setNewCap(e.target.value)}
-                placeholder="e.g. Vector Search, Graph Extraction"
+                placeholder="e.g. Vector Search, Auth Flow, API Client"
                 className="flex-1 py-1.5 px-3 rounded-lg bg-white/[0.03] border border-white/[0.06] text-xs text-fg focus:outline-none focus:border-accent"
                 autoFocus
               />
@@ -170,7 +170,7 @@ export default function ProjectDetail() {
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-2">
             <Rocket className="w-4 h-4 text-accent-bright" />
-            <h3 className="font-semibold text-xs text-fg">Reusable Scaffolding Components</h3>
+            <h3 className="font-semibold text-xs text-fg">Reusable Code & Starter Modules</h3>
           </div>
           <button
             onClick={() => setShowCompInput(!showCompInput)}
@@ -199,7 +199,7 @@ export default function ProjectDetail() {
               type="text"
               value={newComp}
               onChange={(e) => setNewComp(e.target.value)}
-              placeholder="e.g. Multi-agent DAG Scheduler"
+              placeholder="e.g. Auth Modal, SQLite Store, API Client"
               className="flex-1 py-1.5 px-3 rounded-lg bg-white/[0.03] border border-white/[0.06] text-xs text-fg focus:outline-none focus:border-accent"
               autoFocus
             />

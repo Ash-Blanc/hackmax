@@ -114,7 +114,7 @@ export default function Projects() {
                   </div>
                 </div>
                 <span className="text-2xs px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 font-mono font-medium">
-                  Primary DNA
+                  Primary Starter
                 </span>
               </div>
 
@@ -148,7 +148,7 @@ export default function Projects() {
               </div>
 
               <span className="text-secondary hover:text-fg font-medium flex items-center gap-1 transition-colors">
-                <span>DNA Vault</span>
+                <span>View Modules</span>
                 <ArrowRight className="w-3 h-3" />
               </span>
             </div>
@@ -161,7 +161,7 @@ export default function Projects() {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-md p-4 animate-fade-up">
           <div className="glass-elevated border border-white/[0.08] rounded-xl p-5 w-full max-w-md shadow-overlay">
             <div className="flex items-center justify-between pb-2.5 mb-3 border-b border-white/[0.06]">
-              <h3 className="font-semibold text-fg text-xs">Add Project DNA</h3>
+              <h3 className="font-semibold text-fg text-xs">Add Project / Starter Template</h3>
               <button
                 onClick={() => setIsAddProjectOpen(false)}
                 className="p-1 rounded-md text-secondary hover:text-fg hover:bg-white/[0.04] transition-colors"

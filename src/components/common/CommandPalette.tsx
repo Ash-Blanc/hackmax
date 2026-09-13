@@ -62,19 +62,23 @@ export default function CommandPalette({ open, onOpenChange, onOpenCopilot }: Co
           navigated = true;
         } else if (key === 'p') {
           navigate('/projects');
-          toast.info('Jumped to Projects & DNA (G P)');
+          toast.info('Jumped to Projects & Code (G P)');
           navigated = true;
         } else if (key === 'j') {
           navigate('/judge');
-          toast.info('Jumped to Judge Mode (G J)');
+          toast.info('Jumped to AI Practice Judge (G J)');
           navigated = true;
         } else if (key === 'o') {
           navigate('/opportunities');
-          toast.info('Jumped to Opportunities (G O)');
+          toast.info('Jumped to Find Hackathons (G O)');
           navigated = true;
         } else if (key === 'a') {
           navigate('/analytics');
-          toast.info('Jumped to Analytics (G A)');
+          toast.info('Jumped to Progress & Score (G A)');
+          navigated = true;
+        } else if (key === 't' || key === 'g') {
+          navigate('/github');
+          toast.info('Jumped to GitHub Sync (G T)');
           navigated = true;
         } else if (key === 's') {
           navigate('/settings');

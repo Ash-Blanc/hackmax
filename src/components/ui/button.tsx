@@ -4,22 +4,28 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center rounded-lg text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50',
+  'inline-flex items-center justify-center gap-2 text-sm font-medium tracking-snug transition-all duration-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 focus-visible:ring-offset-2 focus-visible:ring-offset-bg disabled:pointer-events-none disabled:opacity-40 active:scale-[0.97] select-none',
   {
     variants: {
       variant: {
-        default: 'bg-accent text-white hover:bg-accent-light',
-        destructive: 'bg-red-600 text-white hover:bg-red-700',
-        outline: 'border border-input bg-background hover:bg-accent hover:text-accent-foreground',
-        secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
-        ghost: 'hover:bg-accent hover:text-accent-foreground',
-        link: 'text-accent underline-offset-4 hover:underline',
+        default:
+          'bg-accent hover:bg-accent-bright text-white rounded-lg shadow-ambient',
+        secondary:
+          'bg-white/[0.04] hover:bg-white/[0.08] text-secondary hover:text-fg border border-white/[0.06] hover:border-white/[0.10] rounded-lg',
+        ghost:
+          'text-secondary hover:text-fg hover:bg-white/[0.04] rounded-md',
+        destructive:
+          'text-danger hover:bg-danger/10 border border-transparent hover:border-danger/20 rounded-lg',
+        outline:
+          'border border-white/[0.08] hover:border-white/[0.14] bg-transparent hover:bg-white/[0.03] text-fg rounded-lg',
+        link: 'text-accent-bright hover:text-accent underline-offset-4 hover:underline',
       },
       size: {
-        default: 'h-10 px-4 py-2',
-        sm: 'h-9 rounded-md px-3',
-        lg: 'h-11 rounded-md px-8',
-        icon: 'h-10 w-10',
+        default: 'h-9 px-4 py-2',
+        sm: 'h-8 px-3 py-1.5 text-xs',
+        lg: 'h-10 px-5 py-2.5',
+        icon: 'h-9 w-9',
+        xs: 'h-7 px-2.5 py-1 text-xs',
       },
     },
     defaultVariants: { variant: 'default', size: 'default' },

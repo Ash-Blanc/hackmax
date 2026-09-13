@@ -117,31 +117,30 @@ export default function CommandPalette({ open, onOpenChange, onOpenCopilot }: Co
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center pt-20 sm:pt-28 bg-black/75 backdrop-blur-md animate-in fade-in duration-150">
+    <div className="fixed inset-0 z-50 flex items-start justify-center pt-20 sm:pt-24 bg-black/60 backdrop-blur-md animate-fade-up">
       <div className="fixed inset-0" onClick={() => onOpenChange(false)} />
-      <div className="relative w-full max-w-xl glass-elevated border border-white/[0.12] chamfer-top rounded-2xl shadow-2xl overflow-hidden z-10 mx-4 animate-in zoom-in-95 duration-150">
+      <div className="relative w-full max-w-lg bg-bg-raised/95 border border-white/[0.08] rounded-xl shadow-overlay overflow-hidden z-10 mx-4">
         <Command label="Global Command Palette" className="w-full flex flex-col">
-          <div className="flex items-center px-4 py-3.5 border-b border-white/[0.08] bg-white/[0.02]">
-            <Search className="w-4 h-4 text-accent shrink-0 mr-3" />
+          {/* Top Search Input (Raycast seamless style) */}
+          <div className="flex items-center px-3.5 py-3 border-b border-white/[0.06] bg-bg/50">
+            <Search className="w-4 h-4 text-ink-faint shrink-0 mr-2.5" />
             <Command.Input
-              placeholder="Type a command or jump to page... (Esc to close)"
-              className="w-full bg-transparent text-sm text-white placeholder:text-muted focus:outline-none"
+              placeholder="Search actions, views, commands… (Esc to close)"
+              className="w-full bg-transparent text-[13px] text-fg placeholder:text-ink-faint focus:outline-none"
               autoFocus
             />
-            <kbd className="px-2 py-0.5 rounded-lg bg-surface-3 border border-white/[0.08] text-[10px] font-mono text-muted">
-              ESC
-            </kbd>
+            <span className="keycap">ESC</span>
           </div>
 
-          <Command.List className="max-h-88 overflow-y-auto p-2.5 text-sm text-secondary space-y-1.5 no-scrollbar">
-            <Command.Empty className="p-6 text-center text-xs text-muted">
-              No matching commands or pages found.
+          <Command.List className="max-h-80 overflow-y-auto p-2 text-xs text-secondary space-y-1 no-scrollbar">
+            <Command.Empty className="p-6 text-center text-2xs text-ink-faint">
+              No matching commands found.
             </Command.Empty>
 
             {/* Quick AI & Task Actions */}
             <Command.Group
-              heading="High-Impact AI Actions"
-              className="px-2 py-1 text-[10px] font-bold text-muted uppercase tracking-wider font-mono"
+              heading="High-Impact Actions"
+              className="px-2 py-1 text-2xs font-semibold text-ink-faint uppercase tracking-wider font-mono"
             >
               {nextTask && (
                 <Command.Item
@@ -151,15 +150,15 @@ export default function CommandPalette({ open, onOpenChange, onOpenCopilot }: Co
                       toast.success(`Completed highest-impact action: ${nextTask.title}`);
                     })
                   }
-                  className="flex items-center gap-3 px-3 py-2.5 rounded-xl cursor-pointer text-white hover:bg-accent/15 hover:border-accent/30 border border-transparent transition-all group"
+                  className="flex items-center gap-2.5 px-2.5 py-2 rounded-lg cursor-pointer text-fg hover:bg-white/[0.04] transition-colors group"
                 >
-                  <Flame className="w-4 h-4 text-accent shrink-0 group-hover:scale-110 transition-transform" />
+                  <Flame className="w-3.5 h-3.5 text-accent-bright shrink-0" />
                   <div className="flex-1 truncate">
-                    <span className="font-semibold text-xs">Execute Next Action: </span>
-                    <span className="text-secondary text-xs">{nextTask.title}</span>
+                    <span className="font-medium text-xs">Execute Next: </span>
+                    <span className="text-ink-muted text-xs">{nextTask.title}</span>
                   </div>
-                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-accent/20 text-accent-bright font-mono font-bold">
-                    +6 Pts Lift
+                  <span className="text-2xs px-1.5 py-0.5 rounded-md bg-accent/15 text-accent-bright font-mono font-medium">
+                    +6 Pts
                   </span>
                 </Command.Item>
               )}
@@ -170,13 +169,11 @@ export default function CommandPalette({ open, onOpenChange, onOpenCopilot }: Co
                     onOpenCopilot();
                   })
                 }
-                className="flex items-center gap-3 px-3 py-2.5 rounded-xl cursor-pointer text-white hover:bg-white/[0.06] border border-transparent transition-all group"
+                className="flex items-center gap-2.5 px-2.5 py-2 rounded-lg cursor-pointer text-fg hover:bg-white/[0.04] transition-colors group"
               >
-                <Sparkles className="w-4 h-4 text-accent animate-pulse shrink-0" />
-                <span className="font-semibold text-xs flex-1">Ask Max (AI Copilot Drawer)</span>
-                <kbd className="text-[10px] font-mono text-muted px-1.5 py-0.5 rounded bg-surface-3">
-                  Alt+M
-                </kbd>
+                <Sparkles className="w-3.5 h-3.5 text-accent-bright shrink-0" />
+                <span className="font-medium text-xs flex-1">Ask Max (AI Copilot)</span>
+                <span className="keycap">⌥M</span>
               </Command.Item>
 
               {cuttableTasks.length > 0 && (
@@ -184,16 +181,16 @@ export default function CommandPalette({ open, onOpenChange, onOpenCopilot }: Co
                   onSelect={() =>
                     runCommand(() => {
                       cuttableTasks.forEach((t) => cutTask(t.id));
-                      toast.warning(`Cut ${cuttableTasks.length} non-essential tasks! Freeing demo time.`);
+                      toast.warning(`Cut ${cuttableTasks.length} non-essential tasks!`);
                     })
                   }
-                  className="flex items-center gap-3 px-3 py-2.5 rounded-xl cursor-pointer text-white hover:bg-red-500/10 border border-transparent transition-all group"
+                  className="flex items-center gap-2.5 px-2.5 py-2 rounded-lg cursor-pointer text-fg hover:bg-red-500/10 transition-colors group"
                 >
-                  <Scissors className="w-4 h-4 text-red-400 shrink-0" />
-                  <span className="font-semibold text-xs flex-1">
+                  <Scissors className="w-3.5 h-3.5 text-red-400 shrink-0" />
+                  <span className="font-medium text-xs flex-1">
                     Trim {cuttableTasks.length} Non-Essential Tasks
                   </span>
-                  <span className="text-[10px] font-mono text-red-400">Save ~120m</span>
+                  <span className="text-2xs font-mono text-red-400">Save ~120m</span>
                 </Command.Item>
               )}
 
@@ -204,25 +201,25 @@ export default function CommandPalette({ open, onOpenChange, onOpenCopilot }: Co
                     toast.info(`Demo Mode ${!state.demoMode ? 'enabled' : 'disabled'}`);
                   })
                 }
-                className="flex items-center gap-3 px-3 py-2.5 rounded-xl cursor-pointer text-white hover:bg-white/[0.06] border border-transparent transition-all"
+                className="flex items-center gap-2.5 px-2.5 py-2 rounded-lg cursor-pointer text-fg hover:bg-white/[0.04] transition-colors"
               >
-                <ToggleLeft className="w-4 h-4 text-yellow-400 shrink-0" />
-                <span className="text-xs">Toggle Demo Mode (currently {state.demoMode ? 'ON' : 'OFF'})</span>
+                <ToggleLeft className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                <span className="text-xs">Toggle Demo Mode ({state.demoMode ? 'ON' : 'OFF'})</span>
               </Command.Item>
             </Command.Group>
 
-            <Command.Separator className="my-1.5 border-b border-white/[0.06]" />
+            <Command.Separator className="my-1 border-b border-white/[0.04]" />
 
             {/* Navigation Group */}
             <Command.Group
-              heading="Jump to View (Chords: G + [Key])"
-              className="px-2 py-1 text-[10px] font-bold text-muted uppercase tracking-wider font-mono"
+              heading="Jump to View (Chords)"
+              className="px-2 py-1 text-2xs font-semibold text-ink-faint uppercase tracking-wider font-mono"
             >
               {[
                 { to: '/dashboard', label: 'Command Center', icon: LayoutDashboard, chord: 'G D' },
                 { to: '/hackathons', label: 'My Hackathons', icon: FlaskConical, chord: 'G H' },
                 { to: '/projects', label: 'Projects & DNA', icon: FolderGit2, chord: 'G P' },
-                { to: '/judge', label: 'Judge Mode (AI Simulation)', icon: Scale, chord: 'G J' },
+                { to: '/judge', label: 'Judge Mode', icon: Scale, chord: 'G J' },
                 { to: '/opportunities', label: 'Opportunities & Reuse', icon: Target, chord: 'G O' },
                 { to: '/analytics', label: 'Analytics & Trajectory', icon: TrendingUp, chord: 'G A' },
                 { to: '/github', label: 'GitHub Telemetry', icon: Github, chord: 'G T' },
@@ -231,26 +228,24 @@ export default function CommandPalette({ open, onOpenChange, onOpenCopilot }: Co
                 <Command.Item
                   key={to}
                   onSelect={() => runCommand(() => navigate(to))}
-                  className="flex items-center gap-3 px-3 py-2 rounded-xl cursor-pointer text-secondary hover:text-white hover:bg-white/[0.05] transition-colors"
+                  className="flex items-center gap-2.5 px-2.5 py-2 rounded-lg cursor-pointer text-ink-muted hover:text-fg hover:bg-white/[0.04] transition-colors"
                 >
-                  <Icon className="w-4 h-4 text-muted shrink-0" />
-                  <span className="text-xs font-medium flex-1">{label}</span>
-                  <kbd className="text-[10px] font-mono text-muted px-1.5 py-0.5 rounded bg-surface-3">
-                    {chord}
-                  </kbd>
+                  <Icon className="w-3.5 h-3.5 text-ink-faint shrink-0" />
+                  <span className="text-xs font-normal flex-1">{label}</span>
+                  <span className="keycap">{chord}</span>
                 </Command.Item>
               ))}
             </Command.Group>
           </Command.List>
 
-          <div className="px-4 py-2.5 border-t border-white/[0.08] bg-white/[0.02] flex items-center justify-between text-[11px] text-muted font-mono">
+          <div className="px-3.5 py-2 border-t border-white/[0.05] bg-bg/50 flex items-center justify-between text-2xs text-ink-faint font-mono">
             <div className="flex items-center gap-2">
-              <span className="px-1.5 py-0.5 rounded bg-surface-3 border border-white/[0.06]">↑↓</span>
+              <span className="keycap">↑↓</span>
               <span>Navigate</span>
-              <span className="px-1.5 py-0.5 rounded bg-surface-3 border border-white/[0.06]">↵</span>
+              <span className="keycap">↵</span>
               <span>Select</span>
             </div>
-            <span>HackMax Engine • 2026</span>
+            <span>HackMax</span>
           </div>
         </Command>
       </div>

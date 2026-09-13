@@ -11,13 +11,13 @@ export const Progress = React.forwardRef<
     aria-valuenow={value}
     aria-valuemin={0}
     aria-valuemax={max}
-    className={cn('relative h-2 w-full overflow-hidden rounded-full bg-border', className)}
+    className={cn('relative h-1.5 w-full overflow-hidden rounded-full bg-white/[0.06]', className)}
     {...props}
   >
     {value !== undefined && (
       <div
-        className="h-full w-full bg-accent transition-all"
-        style={{ transform: `translateX(-${(1 - value / max) * 100}%)`, width: `${(value / max) * 100}%` }}
+        className="h-full rounded-full bg-accent transition-all duration-500 ease-spring"
+        style={{ width: `${Math.min((value / max) * 100, 100)}%` }}
       />
     )}
   </div>

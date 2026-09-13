@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import {
   Sparkles,
   X,
@@ -12,6 +12,9 @@ import {
   Copy,
   Plus,
   ShieldCheck,
+  Bot,
+  User,
+  CornerDownLeft,
 } from 'lucide-react';
 import { useHackMaxStore } from '@/lib/store';
 import { toast } from 'sonner';
@@ -43,6 +46,9 @@ export default function CopilotDrawer({ open, onClose }: CopilotDrawerProps) {
   const [input, setInput] = useState('');
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
   const [selectedHookTab, setSelectedHookTab] = useState<number>(0);
+  const [isTyping, setIsTyping] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
   const [messages, setMessages] = useState<Message[]>([
     {
       id: 'm-init',
@@ -50,6 +56,16 @@ export default function CopilotDrawer({ open, onClose }: CopilotDrawerProps) {
       text: `Hey Ash! I'm Max, your hackathon AI copilot. I'm actively analyzing your repo telemetry, criteria weights, and deadline clock for "${primaryHackathon?.title}". You have ${Math.round(hoursRemaining)} hours remaining with a live Max Score of ${liveMaxScore}/100. Ask me what to prioritize, what to cut, or how to boost your judging score.`,
     },
   ]);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  useEffect(() => {
+    if (open) {
+      scrollToBottom();
+    }
+  }, [messages, open]);
 
   if (!open) return null;
 
@@ -64,9 +80,11 @@ export default function CopilotDrawer({ open, onClose }: CopilotDrawerProps) {
 
     setMessages((prev) => [...prev, userMsg]);
     setInput('');
+    setIsTyping(true);
 
-    // Process Copilot intelligence
+    // Process Copilot intelligence with simulated streaming latency
     setTimeout(() => {
+      setIsTyping(false);
       const lower = userText.toLowerCase();
       let reply: Message;
 
@@ -168,7 +186,7 @@ export default function CopilotDrawer({ open, onClose }: CopilotDrawerProps) {
       }
 
       setMessages((prev) => [...prev, reply]);
-    }, 450);
+    }, 400);
   };
 
   const handleCopyVariant = (text: string, index: number) => {
@@ -179,25 +197,23 @@ export default function CopilotDrawer({ open, onClose }: CopilotDrawerProps) {
   };
 
   return (
-    <div className="fixed inset-y-0 right-0 z-50 w-full max-w-lg glass-elevated border-l border-white/[0.1] shadow-2xl flex flex-col animate-in slide-in-from-right duration-300">
-      {/* Header */}
-      <div className="p-4 border-b border-white/[0.08] flex items-center justify-between bg-white/[0.02]">
-        <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-accent to-indigo-500 p-0.5 shadow-glow flex items-center justify-center">
-            <div className="w-full h-full bg-[#0d0f17] rounded-[10px] flex items-center justify-center">
-              <Sparkles className="w-4 h-4 text-accent animate-pulse" />
-            </div>
+    <div className="fixed inset-y-0 right-0 z-50 w-full max-w-md bg-bg-raised/95 backdrop-blur-2xl border-l border-white/[0.08] shadow-overlay flex flex-col animate-slide-in">
+      {/* Header (Claude/Linear Inspired) */}
+      <div className="p-3.5 border-b border-white/[0.06] flex items-center justify-between bg-bg/40">
+        <div className="flex items-center gap-2.5">
+          <div className="w-7 h-7 rounded-lg bg-accent/15 border border-accent/30 flex items-center justify-center">
+            <Sparkles className="w-3.5 h-3.5 text-accent-bright" />
           </div>
           <div>
-            <div className="flex items-center gap-2">
-              <h3 className="font-extrabold text-white text-sm">Ask Max</h3>
-              <span className="flex items-center gap-1 px-2 py-0.2 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[10px] font-mono">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                Active AX
+            <div className="flex items-center gap-1.5">
+              <h3 className="font-semibold text-fg text-xs tracking-snug">Ask Max</h3>
+              <span className="flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-2xs font-mono">
+                <span className="w-1 h-1 rounded-full bg-emerald-400" />
+                Active
               </span>
             </div>
-            <p className="text-[11px] text-secondary font-mono mt-0.5">
-              Score: <span className="text-accent-bright font-bold">{liveMaxScore}/100</span> •{' '}
+            <p className="text-2xs text-ink-muted font-mono mt-0.5">
+              Score: <span className="text-accent-bright font-medium">{liveMaxScore}/100</span> •{' '}
               <span className="text-red-400">{Math.round(hoursRemaining)}h left</span>
             </p>
           </div>
@@ -205,73 +221,87 @@ export default function CopilotDrawer({ open, onClose }: CopilotDrawerProps) {
 
         <button
           onClick={onClose}
-          className="p-2 rounded-xl text-secondary hover:text-white hover:bg-white/[0.06] transition-colors"
+          className="p-1 rounded-md text-ink-faint hover:text-fg hover:bg-white/[0.04] transition-colors"
           title="Close Copilot (Esc)"
         >
           <X className="w-4 h-4" />
         </button>
       </div>
 
-      {/* Suggested chips */}
-      <div className="p-3 border-b border-white/[0.06] bg-[#0d0f17]/80 flex gap-2 overflow-x-auto no-scrollbar">
+      {/* Suggested chips (Cursor Context Pills) */}
+      <div className="px-3 py-2 border-b border-white/[0.04] bg-bg/20 flex gap-1.5 overflow-x-auto no-scrollbar">
         {[
-          { label: 'What should I cut?', icon: Scissors },
-          { label: 'What should I do next?', icon: ArrowRight },
-          { label: 'Review pitch hook', icon: Lightbulb },
-          { label: 'Am I on track?', icon: TrendingUp },
+          { label: 'What to cut?', icon: Scissors },
+          { label: 'Next action?', icon: ArrowRight },
+          { label: 'Pitch hooks', icon: Lightbulb },
+          { label: 'Score track', icon: TrendingUp },
         ].map((chip) => (
           <button
             key={chip.label}
             onClick={() => handleSend(chip.label)}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full glass-pill text-[11px] text-secondary hover:text-white hover:border-accent/40 transition-all shrink-0 whitespace-nowrap"
+            className="flex items-center gap-1 px-2.5 py-1 rounded-md bg-white/[0.02] border border-white/[0.05] hover:border-white/[0.12] hover:bg-white/[0.05] text-2xs text-secondary hover:text-fg transition-all shrink-0 whitespace-nowrap active:scale-[0.97]"
           >
-            <chip.icon className="w-3 h-3 text-accent" />
+            <chip.icon className="w-3 h-3 text-accent-bright" />
             <span>{chip.label}</span>
           </button>
         ))}
       </div>
 
-      {/* Messages list */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-4 no-scrollbar">
+      {/* Messages list (Claude Clean Reading Style) */}
+      <div className="flex-1 overflow-y-auto p-3.5 space-y-3.5 no-scrollbar">
         {messages.map((m) => (
           <div
             key={m.id}
             className={`flex flex-col ${m.sender === 'user' ? 'items-end' : 'items-start'}`}
           >
+            <div className="flex items-center gap-1.5 mb-1 px-1">
+              {m.sender === 'user' ? (
+                <>
+                  <span className="text-2xs font-mono text-ink-faint">You</span>
+                  <User className="w-3 h-3 text-ink-faint" />
+                </>
+              ) : (
+                <>
+                  <Bot className="w-3 h-3 text-accent-bright" />
+                  <span className="text-2xs font-mono text-accent-bright font-medium">Max</span>
+                </>
+              )}
+            </div>
+
             <div
-              className={`max-w-[88%] p-3.5 rounded-2xl text-xs leading-relaxed ${
+              className={`max-w-[90%] p-3 rounded-xl text-xs leading-relaxed ${
                 m.sender === 'user'
-                  ? 'bg-gradient-to-r from-accent to-indigo-600 text-white rounded-br-none shadow-glow font-medium'
-                  : 'glass-card border-white/[0.08] text-white rounded-bl-none shadow-sm chamfer-top'
+                  ? 'bg-accent/15 border border-accent/30 text-fg rounded-tr-none'
+                  : 'bg-white/[0.03] border border-white/[0.06] text-ink-body rounded-tl-none'
               }`}
             >
               <p className="whitespace-pre-wrap">{m.text}</p>
             </div>
 
-            {/* Rich Generative UI Action Cards */}
+            {/* Rich Generative UI Action Cards (Cursor Composer Inspired) */}
             {m.actionCard && (
-              <div className="w-[94%] mt-3 p-4 rounded-2xl glass-elevated border border-accent/30 shadow-xl chamfer-top animate-in zoom-in-95 duration-200">
+              <div className="w-[94%] mt-2 p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.08] shadow-ambient animate-fade-up">
                 {/* Variant 1: Triage Diff Widget */}
                 {m.actionCard.type === 'cut_tasks' && (
                   <div>
-                    <div className="flex items-center justify-between pb-2 mb-2 border-b border-white/[0.08]">
-                      <div className="flex items-center gap-2">
-                        <Scissors className="w-4 h-4 text-red-400" />
-                        <h4 className="text-xs font-bold text-white">{m.actionCard.title}</h4>
+                    <div className="flex items-center justify-between pb-2 mb-2 border-b border-white/[0.06]">
+                      <div className="flex items-center gap-1.5">
+                        <Scissors className="w-3.5 h-3.5 text-red-400" />
+                        <h4 className="text-xs font-medium text-fg">{m.actionCard.title}</h4>
                       </div>
-                      <span className="text-[10px] font-mono text-emerald-400 font-semibold">
+                      <span className="text-2xs font-mono text-emerald-400 font-medium">
                         ~{m.actionCard.meta.totalMinutesSaved}m Saved
                       </span>
                     </div>
 
-                    <div className="space-y-1.5 max-h-40 overflow-y-auto no-scrollbar my-2">
+                    <div className="space-y-1 max-h-36 overflow-y-auto no-scrollbar my-2">
                       {m.actionCard.meta.tasks?.map((t: any) => (
                         <div
                           key={t.id}
-                          className="flex items-center justify-between text-xs p-2 rounded-lg bg-red-500/5 border border-red-500/15"
+                          className="flex items-center justify-between text-xs p-2 rounded-md bg-red-500/5 border border-red-500/10"
                         >
-                          <span className="text-red-300 truncate">{t.title}</span>
-                          <span className="text-[10px] font-mono text-muted shrink-0 ml-2">
+                          <span className="text-red-300/90 text-2xs truncate">{t.title}</span>
+                          <span className="text-2xs font-mono text-ink-faint shrink-0 ml-2">
                             ~{t.estimatedMinutes}m
                           </span>
                         </div>
@@ -282,13 +312,13 @@ export default function CopilotDrawer({ open, onClose }: CopilotDrawerProps) {
                       onClick={() => {
                         m.actionCard?.meta.tasks?.forEach((t: any) => cutTask(t.id));
                         toast.success(
-                          `Pruned ${m.actionCard?.meta.tasks?.length} tasks! Focus protected for demo recording.`
+                          `Pruned ${m.actionCard?.meta.tasks?.length} tasks! Focus protected for demo.`
                         );
                       }}
-                      className="w-full mt-2 py-2.5 px-3 rounded-xl bg-red-500/20 hover:bg-red-500/30 text-red-300 border border-red-500/30 text-xs font-bold transition-all flex items-center justify-center gap-2 shadow-sm"
+                      className="w-full mt-2 py-2 px-3 rounded-lg bg-red-500/15 hover:bg-red-500/25 text-red-300 border border-red-500/20 text-xs font-medium transition-all flex items-center justify-center gap-1.5 active:scale-[0.97]"
                     >
                       <Scissors className="w-3.5 h-3.5" />
-                      <span>Execute 1-Click Plan Triage</span>
+                      <span>Execute Plan Triage</span>
                     </button>
                   </div>
                 )}
@@ -296,24 +326,24 @@ export default function CopilotDrawer({ open, onClose }: CopilotDrawerProps) {
                 {/* Variant 2: Pitch Variants Selector Widget */}
                 {m.actionCard.type === 'pitch_variants' && (
                   <div>
-                    <div className="flex items-center justify-between pb-2 mb-2 border-b border-white/[0.08]">
-                      <div className="flex items-center gap-2">
-                        <Lightbulb className="w-4 h-4 text-amber-400" />
-                        <h4 className="text-xs font-bold text-white">{m.actionCard.title}</h4>
+                    <div className="flex items-center justify-between pb-2 mb-2 border-b border-white/[0.06]">
+                      <div className="flex items-center gap-1.5">
+                        <Lightbulb className="w-3.5 h-3.5 text-amber-400" />
+                        <h4 className="text-xs font-medium text-fg">{m.actionCard.title}</h4>
                       </div>
-                      <span className="text-[10px] font-mono text-accent-light">3 Styles</span>
+                      <span className="text-2xs font-mono text-secondary">3 Styles</span>
                     </div>
 
                     {/* Tab Switcher */}
-                    <div className="flex items-center gap-1 p-1 rounded-xl bg-white/[0.03] mb-3">
+                    <div className="flex items-center gap-1 p-0.5 rounded-lg bg-white/[0.03] mb-2.5">
                       {m.actionCard.meta.variants?.map((v: any, idx: number) => (
                         <button
                           key={v.label}
                           onClick={() => setSelectedHookTab(idx)}
-                          className={`flex-1 py-1 px-2 rounded-lg text-[10px] font-mono font-medium transition-all ${
+                          className={`flex-1 py-1 px-2 rounded-md text-2xs font-mono font-medium transition-all ${
                             selectedHookTab === idx
-                              ? 'bg-accent text-white shadow-glow'
-                              : 'text-muted hover:text-white'
+                              ? 'bg-accent text-white shadow-ambient'
+                              : 'text-ink-faint hover:text-fg'
                           }`}
                         >
                           {v.label}
@@ -323,11 +353,11 @@ export default function CopilotDrawer({ open, onClose }: CopilotDrawerProps) {
 
                     {/* Selected Hook Details */}
                     {m.actionCard.meta.variants?.[selectedHookTab] && (
-                      <div className="p-3 rounded-xl bg-[#131622] border border-white/[0.06] text-xs">
-                        <p className="text-white font-medium leading-relaxed italic mb-2">
+                      <div className="p-2.5 rounded-lg bg-black/30 border border-white/[0.04] text-xs">
+                        <p className="text-fg font-normal leading-relaxed italic mb-1.5 text-2xs">
                           {m.actionCard.meta.variants[selectedHookTab].hook}
                         </p>
-                        <p className="text-[10px] text-muted font-mono">
+                        <p className="text-2xs text-ink-faint font-mono">
                           Target: {m.actionCard.meta.variants[selectedHookTab].takeaway}
                         </p>
 
@@ -338,16 +368,16 @@ export default function CopilotDrawer({ open, onClose }: CopilotDrawerProps) {
                               selectedHookTab
                             )
                           }
-                          className="w-full mt-3 py-2 px-3 rounded-lg bg-white/[0.06] hover:bg-white/[0.1] text-white border border-white/[0.08] text-xs font-semibold transition-all flex items-center justify-center gap-2"
+                          className="w-full mt-2 py-1.5 px-2.5 rounded-md bg-white/[0.04] hover:bg-white/[0.08] text-secondary hover:text-fg border border-white/[0.06] text-2xs font-medium transition-all flex items-center justify-center gap-1.5 active:scale-[0.97]"
                         >
                           {copiedIndex === selectedHookTab ? (
                             <>
-                              <Check className="w-3.5 h-3.5 text-emerald-400" />
-                              <span className="text-emerald-400">Copied to Clipboard!</span>
+                              <Check className="w-3 h-3 text-emerald-400" />
+                              <span className="text-emerald-400">Copied to Clipboard</span>
                             </>
                           ) : (
                             <>
-                              <Copy className="w-3.5 h-3.5 text-accent" />
+                              <Copy className="w-3 h-3 text-accent-bright" />
                               <span>Copy Pitch Hook</span>
                             </>
                           )}
@@ -360,17 +390,17 @@ export default function CopilotDrawer({ open, onClose }: CopilotDrawerProps) {
                 {/* Variant 3: Highest-Impact Next Action Widget */}
                 {m.actionCard.type === 'next_action' && (
                   <div>
-                    <div className="flex items-center justify-between pb-2 mb-2 border-b border-white/[0.08]">
-                      <div className="flex items-center gap-2">
-                        <Flame className="w-4 h-4 text-accent" />
-                        <h4 className="text-xs font-bold text-white">{m.actionCard.title}</h4>
+                    <div className="flex items-center justify-between pb-2 mb-2 border-b border-white/[0.06]">
+                      <div className="flex items-center gap-1.5">
+                        <Flame className="w-3.5 h-3.5 text-accent-bright" />
+                        <h4 className="text-xs font-medium text-fg">{m.actionCard.title}</h4>
                       </div>
-                      <span className="text-[10px] px-2 py-0.5 rounded-full bg-accent/20 text-accent-bright font-mono font-bold">
+                      <span className="text-2xs px-1.5 py-0.5 rounded-md bg-accent/15 text-accent-bright font-mono font-medium">
                         +6 Pts
                       </span>
                     </div>
 
-                    <p className="text-xs text-secondary leading-relaxed mb-3">
+                    <p className="text-2xs text-secondary leading-relaxed mb-2.5">
                       {m.actionCard.description}
                     </p>
 
@@ -384,7 +414,7 @@ export default function CopilotDrawer({ open, onClose }: CopilotDrawerProps) {
                           toast.info('Started task! In-progress timer ticking.');
                         }
                       }}
-                      className="w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-accent to-indigo-600 hover:from-accent-bright hover:to-indigo-500 text-white text-xs font-bold shadow-glow transition-all flex items-center justify-center gap-2"
+                      className="w-full py-2 px-3 rounded-lg bg-accent hover:bg-accent-bright text-white text-xs font-medium shadow-ambient transition-all flex items-center justify-center gap-1.5 active:scale-[0.97]"
                     >
                       <ArrowRight className="w-3.5 h-3.5" />
                       <span>{m.actionCard.buttonText}</span>
@@ -395,15 +425,15 @@ export default function CopilotDrawer({ open, onClose }: CopilotDrawerProps) {
                 {/* Variant 4: Judge Fix Injector */}
                 {m.actionCard.type === 'judge_fix' && (
                   <div>
-                    <div className="flex items-center justify-between pb-2 mb-2 border-b border-white/[0.08]">
-                      <div className="flex items-center gap-2">
-                        <ShieldCheck className="w-4 h-4 text-red-400" />
-                        <h4 className="text-xs font-bold text-white">{m.actionCard.title}</h4>
+                    <div className="flex items-center justify-between pb-2 mb-2 border-b border-white/[0.06]">
+                      <div className="flex items-center gap-1.5">
+                        <ShieldCheck className="w-3.5 h-3.5 text-red-400" />
+                        <h4 className="text-xs font-medium text-fg">{m.actionCard.title}</h4>
                       </div>
-                      <span className="text-[10px] font-mono text-red-400 font-bold">Blocker</span>
+                      <span className="text-2xs font-mono text-red-400 font-medium">Blocker</span>
                     </div>
 
-                    <p className="text-xs text-secondary leading-relaxed mb-3">
+                    <p className="text-2xs text-secondary leading-relaxed mb-2.5">
                       {m.actionCard.description}
                     </p>
 
@@ -412,7 +442,7 @@ export default function CopilotDrawer({ open, onClose }: CopilotDrawerProps) {
                         dispatch({ type: 'add_task', task: m.actionCard?.meta.task });
                         toast.success('Added critical task to NOW execution stage!');
                       }}
-                      className="w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-accent to-indigo-600 hover:from-accent-bright hover:to-indigo-500 text-white text-xs font-bold shadow-glow transition-all flex items-center justify-center gap-2"
+                      className="w-full py-2 px-3 rounded-lg bg-accent hover:bg-accent-bright text-white text-xs font-medium shadow-ambient transition-all flex items-center justify-center gap-1.5 active:scale-[0.97]"
                     >
                       <Plus className="w-3.5 h-3.5" />
                       <span>{m.actionCard.buttonText}</span>
@@ -423,30 +453,44 @@ export default function CopilotDrawer({ open, onClose }: CopilotDrawerProps) {
             )}
           </div>
         ))}
+
+        {isTyping && (
+          <div className="flex items-center gap-2 text-2xs text-ink-faint font-mono animate-fade-up">
+            <Sparkles className="w-3 h-3 text-accent-bright animate-pulse" />
+            <span>Max is thinking…</span>
+          </div>
+        )}
+
+        <div ref={messagesEndRef} />
       </div>
 
-      {/* Input Form */}
-      <div className="p-3.5 border-t border-white/[0.08] bg-[#0d0f17]">
+      {/* Floating Prompt Input Dock (ChatGPT / Gemini / Cursor Composer Inspired) */}
+      <div className="p-3 border-t border-white/[0.06] bg-bg/80 backdrop-blur-md">
         <form
           onSubmit={(e) => {
             e.preventDefault();
             handleSend(input);
           }}
-          className="flex items-center gap-2"
+          className="relative flex items-center rounded-xl bg-white/[0.03] border border-white/[0.08] focus-within:border-accent/50 focus-within:bg-white/[0.05] transition-all"
         >
           <input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Ask Max about deadlines, triage, pitch hooks..."
-            className="flex-1 py-2.5 px-3.5 bg-[#131622] border border-white/[0.08] rounded-xl text-xs text-white placeholder:text-muted focus:outline-none focus:border-accent"
+            placeholder="Ask Max about deadlines, triage, pitch hooks…"
+            className="flex-1 py-2.5 pl-3 pr-10 bg-transparent text-xs text-fg placeholder:text-ink-faint focus:outline-none"
           />
           <button
             type="submit"
             disabled={!input.trim()}
-            className="p-2.5 rounded-xl bg-gradient-to-r from-accent to-indigo-600 text-white hover:from-accent-bright hover:to-indigo-500 disabled:opacity-40 transition-all shadow-glow"
+            className="absolute right-1.5 p-1.5 rounded-lg bg-accent hover:bg-accent-bright text-white disabled:opacity-30 disabled:hover:bg-accent transition-all active:scale-[0.95]"
+            title="Send (Enter)"
           >
-            <Send className="w-4 h-4" />
+            {input.trim() ? (
+              <Send className="w-3.5 h-3.5" />
+            ) : (
+              <CornerDownLeft className="w-3.5 h-3.5 text-white/50" />
+            )}
           </button>
         </form>
       </div>

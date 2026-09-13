@@ -91,17 +91,17 @@ export default function Opportunities() {
   };
 
   return (
-    <div className="space-y-6 max-w-7xl mx-auto animate-in fade-in duration-200">
+    <div className="space-y-5 max-w-6xl mx-auto animate-fade-up">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-3 border-b border-white/[0.06]">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-white/[0.05]">
         <div>
-          <div className="flex items-center gap-3">
-            <h1 className="text-2xl font-extrabold text-white tracking-tight">Opportunities</h1>
-            <span className="px-2.5 py-0.5 rounded-full bg-accent/15 border border-accent/30 text-accent-bright text-[11px] font-mono font-semibold">
+          <div className="flex items-center gap-2.5">
+            <h1 className="text-lg font-semibold text-fg tracking-snug">Opportunities</h1>
+            <span className="px-2 py-0.5 rounded-full bg-accent/10 border border-accent/20 text-accent-bright text-2xs font-mono font-medium">
               Cross-Hackathon DNA
             </span>
           </div>
-          <p className="text-secondary text-xs mt-1">
+          <p className="text-secondary text-xs mt-0.5">
             Discover upcoming hackathons matched against your project's reusable capabilities.
           </p>
         </div>
@@ -109,20 +109,20 @@ export default function Opportunities() {
 
       {/* Project DNA Summary Bar */}
       {project && (
-        <div className="glass-panel rounded-2xl p-5 border border-white/[0.06] chamfer-top flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-lg">
+        <div className="glass-panel rounded-xl p-4 border border-white/[0.05] flex flex-col md:flex-row md:items-center justify-between gap-3 shadow-ambient">
           <div>
-            <div className="flex items-center gap-2 mb-1.5">
-              <Target className="w-4 h-4 text-accent" />
-              <h3 className="font-bold text-sm text-white">Active Project DNA: {project.name}</h3>
+            <div className="flex items-center gap-1.5 mb-1">
+              <Target className="w-3.5 h-3.5 text-accent-bright" />
+              <h3 className="font-semibold text-xs text-fg">Active DNA: {project.name}</h3>
             </div>
-            <p className="text-xs text-secondary leading-relaxed">
+            <p className="text-2xs text-secondary leading-relaxed">
               Matching engine analyzes your tech stack and reusable components to compute code adaptation %:
             </p>
-            <div className="flex flex-wrap gap-1.5 mt-3">
+            <div className="flex flex-wrap gap-1 mt-2">
               {project.capabilities.map((c) => (
                 <span
                   key={c}
-                  className="px-2.5 py-1 rounded-lg bg-accent/15 text-accent-bright text-[10px] font-mono font-medium border border-accent/25"
+                  className="px-2 py-0.5 rounded-md bg-accent/10 text-accent-bright text-2xs font-mono font-medium border border-accent/20"
                 >
                   {c}
                 </span>
@@ -130,7 +130,7 @@ export default function Opportunities() {
               {project.reusableComponents.map((comp) => (
                 <span
                   key={comp}
-                  className="px-2.5 py-1 rounded-lg bg-white/[0.04] text-secondary text-[10px] font-mono border border-white/[0.08]"
+                  className="px-2 py-0.5 rounded-md bg-white/[0.03] text-secondary text-2xs font-mono border border-white/[0.06]"
                 >
                   📦 {comp}
                 </span>
@@ -138,23 +138,23 @@ export default function Opportunities() {
             </div>
           </div>
 
-          <div className="text-right shrink-0 bg-[#131622] p-4 rounded-2xl border border-white/[0.08] chamfer-top">
-            <span className="text-[10px] text-muted block uppercase font-mono font-semibold">Average Code Reuse</span>
-            <span className="text-2xl font-extrabold font-mono text-emerald-400">71%</span>
+          <div className="text-right shrink-0 bg-white/[0.02] p-3 rounded-lg border border-white/[0.05]">
+            <span className="text-2xs text-ink-faint block uppercase font-mono">Average Code Reuse</span>
+            <span className="text-xl font-bold font-mono text-emerald-400">71%</span>
           </div>
         </div>
       )}
 
       {/* Category Filter Chips */}
-      <div className="flex flex-wrap items-center gap-2">
+      <div className="flex flex-wrap items-center gap-1.5">
         {categories.map((cat) => (
           <button
             key={cat}
             onClick={() => setSelectedCategory(cat)}
-            className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold border transition-all ${
+            className={`px-3 py-1 rounded-lg text-xs font-medium border transition-all active:scale-[0.97] ${
               selectedCategory === cat
-                ? 'bg-accent/20 text-accent-light border-accent/40 shadow-glow'
-                : 'glass-card border-white/[0.06] text-secondary hover:text-white'
+                ? 'bg-white/[0.08] text-fg border-white/[0.14]'
+                : 'bg-white/[0.02] border-white/[0.05] text-ink-muted hover:text-fg hover:bg-white/[0.04]'
             }`}
           >
             {cat}
@@ -163,63 +163,63 @@ export default function Opportunities() {
       </div>
 
       {/* Opportunities Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {filteredOpps.map((opp) => (
           <div
             key={opp.id}
-            className="glass-panel rounded-2xl p-6 border border-white/[0.06] chamfer-top hover:border-white/[0.15] transition-all flex flex-col justify-between group shadow-lg"
+            className="glass-panel rounded-xl p-5 border border-white/[0.05] hover:border-white/[0.10] transition-colors flex flex-col justify-between group shadow-ambient"
           >
             <div>
               {/* Card top */}
-              <div className="flex items-start justify-between mb-2">
-                <span className="text-[10px] px-2.5 py-0.5 rounded-full bg-white/[0.04] border border-white/[0.08] text-secondary font-mono">
+              <div className="flex items-start justify-between mb-1.5">
+                <span className="text-2xs px-2 py-0.5 rounded-md bg-white/[0.03] border border-white/[0.06] text-ink-faint font-mono">
                   {opp.category}
                 </span>
-                <span className="text-xs font-bold font-mono text-emerald-400">
+                <span className="text-2xs font-semibold font-mono text-emerald-400">
                   {opp.matchScore}% Match
                 </span>
               </div>
 
-              <h3 className="text-base font-extrabold text-white mt-1 group-hover:text-accent-light transition-colors">
+              <h3 className="text-xs font-semibold text-fg mt-1 group-hover:text-accent-bright transition-colors">
                 {opp.name}
               </h3>
-              <p className="text-xs text-secondary mt-1.5 leading-relaxed">{opp.tagline}</p>
+              <p className="text-2xs text-secondary mt-1 leading-relaxed">{opp.tagline}</p>
 
               {/* Progress Bar for Reuse % */}
-              <div className="mt-4 pt-3 border-t border-white/[0.06]">
-                <div className="flex items-center justify-between text-xs mb-1.5 font-mono">
-                  <span className="text-muted text-[11px]">Estimated Code Reuse</span>
-                  <span className="font-bold text-accent-bright text-[11px]">{opp.reusePercent}%</span>
+              <div className="mt-3 pt-2.5 border-t border-white/[0.04]">
+                <div className="flex items-center justify-between text-2xs mb-1 font-mono">
+                  <span className="text-ink-faint">Code Reuse</span>
+                  <span className="font-semibold text-accent-bright">{opp.reusePercent}%</span>
                 </div>
-                <div className="w-full h-2 bg-white/[0.06] rounded-full overflow-hidden">
+                <div className="w-full h-1.5 bg-white/[0.06] rounded-full overflow-hidden">
                   <div
-                    className="h-full bg-gradient-to-r from-accent to-emerald-400 rounded-full transition-all duration-500"
+                    className="h-full bg-accent rounded-full transition-all duration-500"
                     style={{ width: `${opp.reusePercent}%` }}
                   />
                 </div>
               </div>
 
               {/* Deadline & Prize */}
-              <div className="mt-4 grid grid-cols-2 gap-2 text-xs font-mono">
-                <div className="p-2.5 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                  <span className="text-muted block text-[10px]">Deadline</span>
-                  <strong className="text-red-400 text-xs">{opp.daysRemaining} days left</strong>
+              <div className="mt-3 grid grid-cols-2 gap-2 text-2xs font-mono">
+                <div className="p-2 rounded-lg bg-white/[0.02] border border-white/[0.05]">
+                  <span className="text-ink-faint block">Deadline</span>
+                  <strong className="text-red-400">{opp.daysRemaining}d left</strong>
                 </div>
-                <div className="p-2.5 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                  <span className="text-muted block text-[10px]">Prize</span>
-                  <strong className="text-emerald-400 text-xs">{opp.prize}</strong>
+                <div className="p-2 rounded-lg bg-white/[0.02] border border-white/[0.05]">
+                  <span className="text-ink-faint block">Prize</span>
+                  <strong className="text-emerald-400">{opp.prize}</strong>
                 </div>
               </div>
             </div>
 
             {/* Adapt Button */}
-            <div className="mt-5 pt-3 border-t border-white/[0.06]">
+            <div className="mt-4 pt-2.5 border-t border-white/[0.04]">
               <button
                 onClick={() => setAdaptingOpp(opp)}
-                className="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-accent to-indigo-600 hover:from-accent-bright hover:to-indigo-500 text-white font-bold text-xs transition-all flex items-center justify-center gap-2 shadow-glow active:scale-95"
+                className="w-full py-2 px-3 rounded-lg bg-accent hover:bg-accent-bright text-white font-medium text-xs shadow-ambient transition-all flex items-center justify-center gap-1.5 active:scale-[0.97]"
               >
                 <Sparkles className="w-3.5 h-3.5" />
-                <span>Adapt My Project DNA →</span>
+                <span>Adapt Project DNA →</span>
               </button>
             </div>
           </div>
@@ -228,49 +228,49 @@ export default function Opportunities() {
 
       {/* Adapt Project Modal */}
       {adaptingOpp && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-md p-4 animate-in fade-in duration-150">
-          <div className="glass-elevated border border-white/[0.12] rounded-2xl p-6 w-full max-w-lg shadow-2xl chamfer-top animate-in zoom-in-95 duration-150">
-            <div className="flex items-center justify-between pb-3 mb-4 border-b border-white/[0.08]">
-              <div className="flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-accent" />
-                <h3 className="font-extrabold text-white text-sm">Adapt Project DNA</h3>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-md p-4 animate-fade-up">
+          <div className="glass-elevated border border-white/[0.08] rounded-xl p-5 w-full max-w-md shadow-overlay">
+            <div className="flex items-center justify-between pb-2.5 mb-3 border-b border-white/[0.06]">
+              <div className="flex items-center gap-1.5">
+                <Sparkles className="w-3.5 h-3.5 text-accent-bright" />
+                <h3 className="font-semibold text-fg text-xs">Adapt Project DNA</h3>
               </div>
               <button
                 onClick={() => setAdaptingOpp(null)}
-                className="p-1 rounded-lg text-secondary hover:text-white hover:bg-white/[0.06]"
+                className="p-1 rounded-md text-secondary hover:text-fg hover:bg-white/[0.04] transition-colors"
               >
-                <X className="w-4 h-4" />
+                <X className="w-3.5 h-3.5" />
               </button>
             </div>
 
-            <div className="space-y-4 text-xs">
+            <div className="space-y-3 text-xs">
               <div>
-                <h4 className="font-bold text-white text-base">{adaptingOpp.name}</h4>
-                <p className="text-secondary mt-0.5">{adaptingOpp.tagline}</p>
+                <h4 className="font-medium text-fg text-sm">{adaptingOpp.name}</h4>
+                <p className="text-secondary text-2xs mt-0.5">{adaptingOpp.tagline}</p>
               </div>
 
-              <div className="p-3.5 rounded-xl bg-[#131622] border border-white/[0.06] space-y-2 font-mono">
+              <div className="p-3 rounded-lg bg-white/[0.02] border border-white/[0.05] space-y-1.5 font-mono text-2xs">
                 <div className="flex items-center justify-between">
-                  <span className="text-muted">Target Adaptation Reuse</span>
-                  <span className="font-bold text-emerald-400 text-sm">
+                  <span className="text-ink-faint">Target Adaptation Reuse</span>
+                  <span className="font-bold text-emerald-400">
                     {adaptingOpp.reusePercent}% Reuse
                   </span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-muted">Estimated Adaptation Time</span>
-                  <span className="text-white font-semibold">~4.5 Hours</span>
+                  <span className="text-ink-faint">Estimated Time</span>
+                  <span className="text-fg font-medium">~4.5 Hours</span>
                 </div>
               </div>
 
               <div>
-                <span className="text-muted block mb-2 font-semibold uppercase text-[10px] font-mono">
+                <span className="text-ink-faint block mb-1.5 font-mono uppercase text-2xs">
                   Reusable Scaffolding from {project?.name}
                 </span>
-                <div className="flex flex-wrap gap-1.5">
+                <div className="flex flex-wrap gap-1">
                   {adaptingOpp.reusableComponents.map((c) => (
                     <span
                       key={c}
-                      className="px-2.5 py-1 rounded-lg bg-accent/15 text-accent-bright border border-accent/25 text-[11px] font-mono"
+                      className="px-2 py-0.5 rounded-md bg-accent/10 text-accent-bright border border-accent/20 text-2xs font-mono"
                     >
                       ✓ {c}
                     </span>
@@ -278,23 +278,23 @@ export default function Opportunities() {
                 </div>
               </div>
 
-              <div className="p-3 rounded-xl bg-white/[0.02] border border-white/[0.06] text-secondary text-[11px] leading-relaxed">
+              <div className="p-2.5 rounded-lg bg-white/[0.02] border border-white/[0.05] text-secondary text-2xs leading-relaxed">
                 Clicking <strong>Import Hackathon</strong> creates a tailored workspace with sprint tasks to bridge the remaining {100 - adaptingOpp.reusePercent}% domain gap.
               </div>
 
-              <div className="pt-3 flex justify-end gap-2 border-t border-white/[0.08]">
+              <div className="pt-2.5 flex justify-end gap-2 border-t border-white/[0.06]">
                 <button
                   onClick={() => setAdaptingOpp(null)}
-                  className="px-4 py-2 rounded-xl bg-white/[0.04] text-secondary hover:text-white font-medium"
+                  className="px-3.5 py-1.5 rounded-lg bg-white/[0.03] text-secondary hover:text-fg font-medium"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={() => handleImportToHackathons(adaptingOpp)}
-                  className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-accent to-indigo-600 text-white font-bold hover:from-accent-bright hover:to-indigo-500 shadow-glow flex items-center gap-2"
+                  className="px-4 py-1.5 rounded-lg bg-accent hover:bg-accent-bright text-white font-medium shadow-ambient flex items-center gap-1.5 active:scale-[0.97]"
                 >
-                  <CheckCircle2 className="w-4 h-4" />
-                  <span>Import to My Hackathons</span>
+                  <CheckCircle2 className="w-3.5 h-3.5" />
+                  <span>Import to Hackathons</span>
                 </button>
               </div>
             </div>

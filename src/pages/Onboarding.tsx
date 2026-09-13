@@ -60,23 +60,18 @@ export default function Onboarding() {
   };
 
   return (
-    <div className="min-h-screen ambient-canvas text-fg flex flex-col items-center justify-center p-6 select-none relative overflow-hidden">
-      {/* Glow background accent */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent/10 rounded-full blur-3xl pointer-events-none -z-10" />
-
+    <div className="min-h-screen bg-bg text-fg flex flex-col items-center justify-center p-6 select-none relative overflow-hidden">
       {/* Container */}
-      <div className="glass-panel rounded-3xl p-8 w-full max-w-xl border border-white/[0.08] shadow-2xl chamfer-top relative">
+      <div className="glass-panel rounded-2xl p-7 w-full max-w-lg border border-white/[0.06] shadow-overlay relative">
         {/* Top bar with logo and progress dots */}
-        <div className="flex items-center justify-between pb-6 mb-8 border-b border-white/[0.06]">
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-accent to-indigo-500 p-0.5 shadow-glow flex items-center justify-center">
-              <div className="w-full h-full bg-[#0d0f17] rounded-[10px] flex items-center justify-center">
-                <Zap className="w-4 h-4 text-accent fill-accent" />
-              </div>
+        <div className="flex items-center justify-between pb-5 mb-6 border-b border-white/[0.05]">
+          <div className="flex items-center gap-2.5">
+            <div className="w-7 h-7 rounded-lg bg-accent/15 border border-accent/25 flex items-center justify-center">
+              <Zap className="w-3.5 h-3.5 text-accent-bright" />
             </div>
             <div>
-              <span className="font-extrabold text-white text-base">HackMax</span>
-              <span className="text-[10px] text-muted block -mt-0.5 font-mono">5-Step Calibration</span>
+              <span className="font-semibold text-fg text-sm tracking-snug">HackMax</span>
+              <span className="text-2xs text-ink-faint block -mt-0.5 font-mono">5-Step Calibration</span>
             </div>
           </div>
 
@@ -85,12 +80,12 @@ export default function Onboarding() {
             {steps.map((s) => (
               <div
                 key={s.num}
-                className={`h-1.5 rounded-full transition-all duration-300 ${
+                className={`h-1 rounded-full transition-all duration-300 ${
                   s.num === step
-                    ? 'w-8 bg-accent shadow-glow'
+                    ? 'w-6 bg-accent'
                     : s.num < step
-                    ? 'w-4 bg-accent/50'
-                    : 'w-4 bg-white/[0.08]'
+                    ? 'w-3 bg-accent/40'
+                    : 'w-3 bg-white/[0.08]'
                 }`}
               />
             ))}
@@ -99,36 +94,36 @@ export default function Onboarding() {
 
         {/* STEP 1: WELCOME */}
         {step === 1 && (
-          <div className="text-center py-4">
-            <div className="w-16 h-16 rounded-2xl bg-accent/10 border border-accent/20 flex items-center justify-center mx-auto mb-6 text-accent shadow-glow">
-              <Sparkles className="w-8 h-8" />
+          <div className="text-center py-2">
+            <div className="w-12 h-12 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center mx-auto mb-4 text-accent-bright">
+              <Sparkles className="w-6 h-6" />
             </div>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-fg tracking-tight">
+            <h2 className="text-xl font-bold text-fg tracking-snug">
               Welcome to HackMax
             </h2>
-            <p className="text-secondary text-sm sm:text-base mt-3 max-w-md mx-auto leading-relaxed">
+            <p className="text-secondary text-xs mt-2 max-w-sm mx-auto leading-relaxed">
               Your AI copilot engineered to maximize submission quality per hour remaining. Not a generic to-do list.
             </p>
-            <div className="mt-6 p-4 rounded-xl bg-elevated/70 border border-border text-xs text-left space-y-2">
+            <div className="mt-5 p-3.5 rounded-lg bg-white/[0.02] border border-white/[0.05] text-xs text-left space-y-2">
               <div className="flex items-center gap-2 text-fg">
-                <CheckCircle2 className="w-4 h-4 text-success" />
-                <span>Transparent 0–100 Max Score readiness gauge</span>
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                <span className="text-2xs">Transparent 0–100 Max Score readiness gauge</span>
               </div>
               <div className="flex items-center gap-2 text-fg">
-                <CheckCircle2 className="w-4 h-4 text-success" />
-                <span>Multi-perspective AI judge simulation</span>
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                <span className="text-2xs">Multi-perspective AI judge simulation</span>
               </div>
               <div className="flex items-center gap-2 text-fg">
-                <CheckCircle2 className="w-4 h-4 text-success" />
-                <span>Time-sliced NOW / NEXT / LATER execution plan</span>
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                <span className="text-2xs">Time-sliced NOW / NEXT / LATER execution plan</span>
               </div>
             </div>
             <button
               onClick={() => setStep(2)}
-              className="mt-8 w-full py-3.5 px-4 bg-accent hover:bg-accent-bright text-white rounded-xl font-bold text-sm shadow-glow transition-all flex items-center justify-center gap-2"
+              className="mt-6 w-full py-2.5 px-4 bg-accent hover:bg-accent-bright text-white rounded-lg font-medium text-xs shadow-ambient transition-all flex items-center justify-center gap-2 active:scale-[0.97]"
             >
               <span>Get Started</span>
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-3.5 h-3.5" />
             </button>
           </div>
         )}
@@ -136,14 +131,14 @@ export default function Onboarding() {
         {/* STEP 2: GOAL SELECTION */}
         {step === 2 && (
           <div>
-            <h2 className="text-xl sm:text-2xl font-bold text-fg tracking-tight mb-2">
+            <h2 className="text-lg font-semibold text-fg tracking-snug mb-1">
               What are you trying to maximize?
             </h2>
-            <p className="text-secondary text-xs mb-6">
+            <p className="text-secondary text-2xs mb-4">
               Max adapts its triage suggestions and scoring weights based on your primary objective.
             </p>
 
-            <div className="space-y-3">
+            <div className="space-y-2">
               {[
                 {
                   id: 'win_more',
@@ -169,31 +164,31 @@ export default function Onboarding() {
                 <div
                   key={option.id}
                   onClick={() => setSelectedGoal(option.id)}
-                  className={`p-4 rounded-xl cursor-pointer border transition-all ${
+                  className={`p-3 rounded-lg cursor-pointer border transition-all ${
                     selectedGoal === option.id
-                      ? 'bg-accent/15 border-accent text-fg shadow-sm'
-                      : 'bg-elevated/60 border-border text-secondary hover:border-border/80 hover:text-fg'
+                      ? 'bg-accent/10 border-accent/30 text-fg'
+                      : 'bg-white/[0.02] border-white/[0.05] text-ink-muted hover:border-white/[0.10] hover:text-fg'
                   }`}
                 >
-                  <p className="font-semibold text-sm text-fg">{option.title}</p>
-                  <p className="text-xs text-secondary mt-1">{option.desc}</p>
+                  <p className="font-medium text-xs text-fg">{option.title}</p>
+                  <p className="text-2xs text-secondary mt-0.5">{option.desc}</p>
                 </div>
               ))}
             </div>
 
-            <div className="flex justify-between items-center mt-8 pt-4 border-t border-border">
+            <div className="flex justify-between items-center mt-6 pt-3 border-t border-white/[0.05]">
               <button
                 onClick={() => setStep(1)}
-                className="px-4 py-2 text-xs font-medium text-secondary hover:text-fg"
+                className="px-3 py-1.5 text-2xs font-medium text-secondary hover:text-fg"
               >
                 ← Back
               </button>
               <button
                 onClick={() => setStep(3)}
-                className="px-6 py-2.5 bg-accent hover:bg-accent-bright text-white rounded-xl font-semibold text-xs shadow-glow transition-all flex items-center gap-1.5"
+                className="px-4 py-2 bg-accent hover:bg-accent-bright text-white rounded-lg font-medium text-xs shadow-ambient transition-all flex items-center gap-1.5 active:scale-[0.97]"
               >
                 <span>Continue</span>
-                <ArrowRight className="w-3.5 h-3.5" />
+                <ArrowRight className="w-3 h-3" />
               </button>
             </div>
           </div>
@@ -202,51 +197,51 @@ export default function Onboarding() {
         {/* STEP 3: CONNECT GITHUB */}
         {step === 3 && (
           <div>
-            <h2 className="text-xl sm:text-2xl font-bold text-fg tracking-tight mb-2">
+            <h2 className="text-lg font-semibold text-fg tracking-snug mb-1">
               Connect Your GitHub
             </h2>
-            <p className="text-secondary text-xs mb-6">
+            <p className="text-secondary text-2xs mb-4">
               Link your repository to extract project DNA, analyze commit velocity, and index reusable components.
             </p>
 
             {/* Simulated connected repo card */}
-            <div className="p-4 rounded-xl bg-elevated border border-border space-y-3">
+            <div className="p-3.5 rounded-lg bg-white/[0.02] border border-white/[0.05] space-y-2.5">
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-surface border border-border flex items-center justify-center text-fg">
-                    <Github className="w-5 h-5" />
+                <div className="flex items-center gap-2.5">
+                  <div className="w-8 h-8 rounded-lg bg-white/[0.03] border border-white/[0.06] flex items-center justify-center text-fg">
+                    <Github className="w-4 h-4" />
                   </div>
                   <div>
-                    <p className="font-semibold text-sm text-fg">ash-agentic</p>
-                    <p className="text-xs text-muted">Connected via GitHub App</p>
+                    <p className="font-medium text-xs text-fg">ash-agentic</p>
+                    <p className="text-2xs text-ink-faint">Connected via GitHub App</p>
                   </div>
                 </div>
-                <span className="px-2 py-0.5 rounded-full bg-success/10 border border-success/20 text-success text-[11px] font-medium">
+                <span className="px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-2xs font-mono font-medium">
                   ✓ Active
                 </span>
               </div>
 
-              <div className="p-3 rounded-lg bg-surface/80 border border-border/80 text-xs">
-                <div className="flex items-center justify-between mb-1 text-muted">
-                  <span>Detected primary repository:</span>
-                  <span className="font-mono text-accent-light">agentic-researcher</span>
+              <div className="p-2.5 rounded-lg bg-white/[0.02] border border-white/[0.04] text-xs">
+                <div className="flex items-center justify-between mb-1 text-ink-faint text-2xs font-mono">
+                  <span>Detected repo:</span>
+                  <span className="text-accent-bright">agentic-researcher</span>
                 </div>
-                <div className="flex flex-wrap gap-1.5 mt-2">
-                  <span className="px-2 py-0.5 rounded bg-elevated text-[10px] text-secondary">React 18</span>
-                  <span className="px-2 py-0.5 rounded bg-elevated text-[10px] text-secondary">TypeScript</span>
-                  <span className="px-2 py-0.5 rounded bg-elevated text-[10px] text-secondary">FastAPI</span>
-                  <span className="px-2 py-0.5 rounded bg-elevated text-[10px] text-secondary">Anthropic</span>
+                <div className="flex flex-wrap gap-1 mt-1.5">
+                  <span className="px-2 py-0.5 rounded bg-white/[0.03] text-2xs text-secondary font-mono">React 18</span>
+                  <span className="px-2 py-0.5 rounded bg-white/[0.03] text-2xs text-secondary font-mono">TypeScript</span>
+                  <span className="px-2 py-0.5 rounded bg-white/[0.03] text-2xs text-secondary font-mono">FastAPI</span>
+                  <span className="px-2 py-0.5 rounded bg-white/[0.03] text-2xs text-secondary font-mono">Anthropic</span>
                 </div>
               </div>
             </div>
 
-            <div className="mt-6 flex flex-col gap-2.5">
+            <div className="mt-5 flex flex-col gap-2">
               <button
                 onClick={() => {
                   toast.success('GitHub repository synced with Project DNA catalog!');
                   setStep(4);
                 }}
-                className="w-full py-3 px-4 bg-accent hover:bg-accent-bright text-white rounded-xl font-bold text-xs shadow-glow transition-all flex items-center justify-center gap-2"
+                className="w-full py-2.5 px-4 bg-accent hover:bg-accent-bright text-white rounded-lg font-medium text-xs shadow-ambient transition-all flex items-center justify-center gap-2 active:scale-[0.97]"
               >
                 <span>Import Repository DNA</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -254,7 +249,7 @@ export default function Onboarding() {
 
               <button
                 onClick={handleComplete}
-                className="w-full py-2.5 text-xs text-muted hover:text-secondary transition-colors"
+                className="w-full py-2 text-2xs text-ink-faint hover:text-secondary transition-colors"
               >
                 Skip configuration with Pre-seeded Demo Mode →
               </button>
@@ -265,16 +260,16 @@ export default function Onboarding() {
         {/* STEP 4: ADD HACKATHON */}
         {step === 4 && (
           <div>
-            <h2 className="text-xl sm:text-2xl font-bold text-fg tracking-tight mb-2">
+            <h2 className="text-lg font-semibold text-fg tracking-snug mb-1">
               Add Your Active Hackathon
             </h2>
-            <p className="text-secondary text-xs mb-6">
+            <p className="text-secondary text-2xs mb-4">
               Paste a DevPost URL to auto-extract judging criteria, weights, and deadlines.
             </p>
 
-            <div className="space-y-4">
+            <div className="space-y-3">
               <div>
-                <label className="text-xs font-semibold text-secondary uppercase tracking-wider block mb-1.5">
+                <label className="text-2xs font-medium text-secondary uppercase tracking-wider block mb-1">
                   Hackathon / DevPost URL
                 </label>
                 <div className="flex gap-2">
@@ -283,7 +278,7 @@ export default function Onboarding() {
                     value={hackathonUrl}
                     onChange={(e) => setHackathonUrl(e.target.value)}
                     placeholder="https://devpost.com/..."
-                    className="flex-1 py-2.5 px-3 rounded-xl bg-elevated border border-border text-xs text-fg placeholder:text-muted focus:outline-none focus:border-accent"
+                    className="flex-1 py-2 px-3 rounded-lg bg-white/[0.03] border border-white/[0.06] text-xs text-fg placeholder:text-ink-faint focus:outline-none focus:border-accent"
                   />
                   <button
                     onClick={() => {
@@ -294,52 +289,52 @@ export default function Onboarding() {
                         toast.success('Extracted 5 judging criteria & deadline: 19h remaining!');
                       }, 600);
                     }}
-                    className="px-4 py-2.5 rounded-xl bg-elevated hover:bg-surface border border-border text-xs font-semibold text-fg flex items-center gap-1.5 transition-colors"
+                    className="px-3 py-2 rounded-lg bg-white/[0.03] hover:bg-white/[0.06] border border-white/[0.06] text-xs font-medium text-fg flex items-center gap-1.5 transition-colors"
                   >
-                    {isParsing ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Sparkles className="w-3.5 h-3.5 text-accent" />}
-                    <span>AI Parse</span>
+                    {isParsing ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Sparkles className="w-3.5 h-3.5 text-accent-bright" />}
+                    <span>Parse</span>
                   </button>
                 </div>
               </div>
 
               {/* Extracted preview */}
               {parseComplete && (
-                <div className="p-4 rounded-xl bg-elevated/70 border border-border/80 space-y-3 animate-in fade-in duration-200">
+                <div className="p-3.5 rounded-lg bg-white/[0.02] border border-white/[0.05] space-y-2.5 animate-fade-up">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold text-fg">Autonomous Agents Hackathon</span>
-                    <span className="text-xs font-mono text-accent-light font-bold">19h 42m remaining</span>
+                    <span className="text-xs font-medium text-fg">Autonomous Agents Hackathon</span>
+                    <span className="text-2xs font-mono text-accent-bright">19h 42m remaining</span>
                   </div>
-                  <div className="grid grid-cols-3 gap-2 text-center text-[11px]">
-                    <div className="p-2 rounded bg-surface border border-border">
-                      <span className="text-muted block text-[10px]">Prize Pool</span>
+                  <div className="grid grid-cols-3 gap-2 text-center text-2xs">
+                    <div className="p-2 rounded bg-white/[0.02] border border-white/[0.04]">
+                      <span className="text-ink-faint block">Prize Pool</span>
                       <strong className="text-fg font-mono">$50,000</strong>
                     </div>
-                    <div className="p-2 rounded bg-surface border border-border">
-                      <span className="text-muted block text-[10px]">Criteria</span>
+                    <div className="p-2 rounded bg-white/[0.02] border border-white/[0.04]">
+                      <span className="text-ink-faint block">Criteria</span>
                       <strong className="text-fg">5 Categories</strong>
                     </div>
-                    <div className="p-2 rounded bg-surface border border-border">
-                      <span className="text-muted block text-[10px]">Est. Readiness</span>
-                      <strong className="text-accent font-mono">74/100</strong>
+                    <div className="p-2 rounded bg-white/[0.02] border border-white/[0.04]">
+                      <span className="text-ink-faint block">Est. Readiness</span>
+                      <strong className="text-accent-bright font-mono">74/100</strong>
                     </div>
                   </div>
                 </div>
               )}
             </div>
 
-            <div className="flex justify-between items-center mt-8 pt-4 border-t border-border">
+            <div className="flex justify-between items-center mt-6 pt-3 border-t border-white/[0.05]">
               <button
                 onClick={() => setStep(3)}
-                className="px-4 py-2 text-xs font-medium text-secondary hover:text-fg"
+                className="px-3 py-1.5 text-2xs font-medium text-secondary hover:text-fg"
               >
                 ← Back
               </button>
               <button
                 onClick={startPlanGeneration}
-                className="px-6 py-2.5 bg-accent hover:bg-accent-bright text-white rounded-xl font-semibold text-xs shadow-glow transition-all flex items-center gap-1.5"
+                className="px-4 py-2 bg-accent hover:bg-accent-bright text-white rounded-lg font-medium text-xs shadow-ambient transition-all flex items-center gap-1.5 active:scale-[0.97]"
               >
                 <span>Synthesize Max Plan</span>
-                <ArrowRight className="w-3.5 h-3.5" />
+                <ArrowRight className="w-3 h-3" />
               </button>
             </div>
           </div>
@@ -347,60 +342,60 @@ export default function Onboarding() {
 
         {/* STEP 5: INITIAL MAX PLAN & CELEBRATION */}
         {step === 5 && (
-          <div className="text-center py-4">
-            <div className="w-20 h-20 rounded-full bg-success/15 border border-success/30 flex items-center justify-center mx-auto mb-6 text-success shadow-emerald">
-              <CheckCircle2 className="w-10 h-10" />
+          <div className="text-center py-2">
+            <div className="w-14 h-14 rounded-full bg-emerald-500/10 border border-emerald-500/25 flex items-center justify-center mx-auto mb-4 text-emerald-400">
+              <CheckCircle2 className="w-7 h-7" />
             </div>
 
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-fg tracking-tight">
+            <h2 className="text-xl font-bold text-fg tracking-snug">
               Your Max Plan is Live!
             </h2>
-            <p className="text-secondary text-sm mt-3 max-w-md mx-auto leading-relaxed">
+            <p className="text-secondary text-xs mt-2 max-w-sm mx-auto leading-relaxed">
               We synthesized your Project DNA against the Autonomous Agents criteria. Your execution schedule is time-sliced into NOW, NEXT, and LATER.
             </p>
 
-            <div className="mt-6 p-4 rounded-xl bg-elevated/70 border border-border text-left space-y-3">
-              <div className="flex items-center justify-between text-xs pb-2 border-b border-border">
-                <span className="text-muted">Initial Max Score</span>
-                <span className="font-mono font-bold text-accent-light text-sm">74 / 100</span>
+            <div className="mt-5 p-3.5 rounded-lg bg-white/[0.02] border border-white/[0.05] text-left space-y-2">
+              <div className="flex items-center justify-between text-xs pb-2 border-b border-white/[0.04]">
+                <span className="text-ink-faint text-2xs">Initial Max Score</span>
+                <span className="font-mono font-bold text-accent-bright text-xs">74 / 100</span>
               </div>
               <div className="flex items-center justify-between text-xs">
-                <span className="text-muted">Highest-Impact Action</span>
-                <span className="font-semibold text-fg">Finish core agent workflow</span>
+                <span className="text-ink-faint text-2xs">Highest-Impact Action</span>
+                <span className="font-medium text-fg text-2xs">Finish core agent workflow</span>
               </div>
               <div className="flex items-center justify-between text-xs">
-                <span className="text-muted">Anti-Slop Protection</span>
-                <span className="text-success font-medium">Active (Demo video priority)</span>
+                <span className="text-ink-faint text-2xs">Anti-Slop Protection</span>
+                <span className="text-emerald-400 font-medium text-2xs">Active (Demo video priority)</span>
               </div>
             </div>
 
             <button
               onClick={handleComplete}
-              className="mt-8 w-full py-3.5 px-4 bg-accent hover:bg-accent-bright text-white rounded-xl font-bold text-sm shadow-glow transition-all flex items-center justify-center gap-2"
+              className="mt-6 w-full py-2.5 px-4 bg-accent hover:bg-accent-bright text-white rounded-lg font-medium text-xs shadow-ambient transition-all flex items-center justify-center gap-2 active:scale-[0.97]"
             >
               <span>Launch Command Center</span>
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-3.5 h-3.5" />
             </button>
           </div>
         )}
 
         {/* Loading overlay while generating plan */}
         {generatingPlan && (
-          <div className="absolute inset-0 bg-surface/95 backdrop-blur-md rounded-3xl flex flex-col items-center justify-center p-8 z-20">
-            <div className="w-12 h-12 rounded-xl bg-accent/20 border border-accent/30 flex items-center justify-center text-accent mb-4">
-              <Loader2 className="w-6 h-6 animate-spin" />
+          <div className="absolute inset-0 bg-bg-raised/95 backdrop-blur-md rounded-2xl flex flex-col items-center justify-center p-8 z-20">
+            <div className="w-10 h-10 rounded-lg bg-accent/15 border border-accent/25 flex items-center justify-center text-accent-bright mb-3">
+              <Loader2 className="w-5 h-5 animate-spin" />
             </div>
-            <h3 className="font-bold text-fg text-base">Synthesizing Your Max Plan</h3>
-            <p className="text-secondary text-xs mt-1">
-              Analyzing judging criteria, computing score weights, and scheduling tasks...
+            <h3 className="font-semibold text-fg text-xs">Synthesizing Your Max Plan</h3>
+            <p className="text-secondary text-2xs mt-1">
+              Analyzing criteria, computing weights, and scheduling tasks…
             </p>
-            <div className="w-full max-w-xs mt-6 h-2 bg-border rounded-full overflow-hidden">
+            <div className="w-full max-w-xs mt-4 h-1.5 bg-white/[0.06] rounded-full overflow-hidden">
               <div
                 className="h-full bg-accent transition-all duration-300"
                 style={{ width: `${generationProgress}%` }}
               />
             </div>
-            <span className="text-[11px] font-mono text-muted mt-2">{generationProgress}%</span>
+            <span className="text-2xs font-mono text-ink-faint mt-1.5">{generationProgress}%</span>
           </div>
         )}
       </div>

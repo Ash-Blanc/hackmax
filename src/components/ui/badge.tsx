@@ -8,7 +8,7 @@ export const Badge = React.forwardRef<
   <span
     ref={ref}
     className={cn(
-      'inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2',
+      'inline-flex items-center rounded-md border border-white/[0.06] px-2 py-0.5 text-2xs font-medium tracking-snug transition-colors',
       className
     )}
     {...props}

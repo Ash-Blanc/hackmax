@@ -33,53 +33,53 @@ export default function Settings() {
   };
 
   return (
-    <div className="space-y-6 max-w-4xl mx-auto animate-in fade-in duration-200">
+    <div className="space-y-5 max-w-4xl mx-auto animate-fade-up">
       {/* Header */}
-      <div className="pb-3 border-b border-white/[0.06]">
-        <h1 className="text-2xl font-extrabold text-white tracking-tight">Settings</h1>
-        <p className="text-secondary text-xs mt-1">
+      <div className="pb-3 border-b border-white/[0.05]">
+        <h1 className="text-lg font-semibold text-fg tracking-snug">Settings</h1>
+        <p className="text-secondary text-xs mt-0.5">
           Manage your hacker profile, GitHub integration, AI model provider, and system preferences.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* Profile Card */}
-        <div className="glass-panel rounded-2xl p-6 border border-white/[0.06] chamfer-top flex flex-col justify-between shadow-lg">
+        <div className="glass-panel rounded-xl p-5 border border-white/[0.05] flex flex-col justify-between">
           <div>
-            <div className="flex items-center gap-2 mb-4">
-              <User className="w-4 h-4 text-accent" />
-              <h3 className="font-extrabold text-sm text-white">Profile & Identity</h3>
+            <div className="flex items-center gap-2 mb-3">
+              <User className="w-4 h-4 text-accent-bright" />
+              <h3 className="font-semibold text-xs text-fg">Profile & Identity</h3>
             </div>
 
-            <form onSubmit={handleSaveProfile} className="space-y-3.5 text-xs">
+            <form onSubmit={handleSaveProfile} className="space-y-3 text-xs">
               <div>
-                <label className="block text-secondary mb-1.5 uppercase text-[10px] font-semibold font-mono">
+                <label className="block text-secondary mb-1 uppercase text-2xs font-medium font-mono">
                   Full Name
                 </label>
                 <input
                   type="text"
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
-                  className="w-full py-2.5 px-3.5 rounded-xl bg-[#131622] border border-white/[0.08] text-white focus:outline-none focus:border-accent"
+                  className="w-full py-2 px-3 rounded-lg bg-white/[0.03] border border-white/[0.06] text-fg focus:outline-none focus:border-accent"
                 />
               </div>
 
               <div>
-                <label className="block text-secondary mb-1.5 uppercase text-[10px] font-semibold font-mono">
+                <label className="block text-secondary mb-1 uppercase text-2xs font-medium font-mono">
                   GitHub Username
                 </label>
                 <input
                   type="text"
                   value={githubUsername}
                   onChange={(e) => setGithubUsername(e.target.value)}
-                  className="w-full py-2.5 px-3.5 rounded-xl bg-[#131622] border border-white/[0.08] text-white focus:outline-none focus:border-accent font-mono"
+                  className="w-full py-2 px-3 rounded-lg bg-white/[0.03] border border-white/[0.06] text-fg focus:outline-none focus:border-accent font-mono"
                 />
               </div>
 
-              <div className="pt-2">
+              <div className="pt-1">
                 <button
                   type="submit"
-                  className="py-2.5 px-5 rounded-xl bg-gradient-to-r from-accent to-indigo-600 hover:from-accent-bright hover:to-indigo-500 text-white font-bold text-xs shadow-glow transition-all active:scale-95"
+                  className="py-2 px-4 rounded-lg bg-accent hover:bg-accent-bright text-white font-medium text-xs shadow-ambient transition-all active:scale-[0.97]"
                 >
                   Save Profile
                 </button>
@@ -89,36 +89,36 @@ export default function Settings() {
         </div>
 
         {/* GitHub OAuth Card */}
-        <div className="glass-panel rounded-2xl p-6 border border-white/[0.06] chamfer-top flex flex-col justify-between shadow-lg">
+        <div className="glass-panel rounded-xl p-5 border border-white/[0.05] flex flex-col justify-between">
           <div>
-            <div className="flex items-center gap-2 mb-4">
-              <Github className="w-4 h-4 text-accent" />
-              <h3 className="font-extrabold text-sm text-white">GitHub Integration</h3>
+            <div className="flex items-center gap-2 mb-3">
+              <Github className="w-4 h-4 text-accent-bright" />
+              <h3 className="font-semibold text-xs text-fg">GitHub Integration</h3>
             </div>
 
-            <div className="p-4 rounded-xl bg-[#131622] border border-white/[0.08] mb-4">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-xs font-semibold text-white font-mono">ash-agentic</span>
-                <span className="text-[10px] px-2.5 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 font-mono font-semibold">
+            <div className="p-3.5 rounded-lg bg-white/[0.02] border border-white/[0.05] mb-3">
+              <div className="flex items-center justify-between mb-1.5">
+                <span className="text-xs font-medium text-fg font-mono">ash-agentic</span>
+                <span className="text-2xs px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 font-mono font-medium">
                   ✓ Connected
                 </span>
               </div>
-              <p className="text-[11px] text-secondary leading-relaxed">
+              <p className="text-2xs text-secondary leading-relaxed">
                 Repository permissions: Read repository metadata, commits, pull requests, and telemetry.
               </p>
             </div>
           </div>
 
-          <div className="pt-3 border-t border-white/[0.06] flex gap-2">
+          <div className="pt-2.5 border-t border-white/[0.04] flex gap-2">
             <button
               onClick={() => toast.success('GitHub OAuth connection refreshed.')}
-              className="flex-1 py-2 rounded-xl glass-card text-xs font-semibold text-white hover:border-white/[0.15] transition-colors"
+              className="flex-1 py-1.5 rounded-lg bg-white/[0.03] hover:bg-white/[0.06] border border-white/[0.06] text-xs font-medium text-fg transition-colors"
             >
               Sync Repos
             </button>
             <button
               onClick={() => toast.info('Disconnected GitHub integration.')}
-              className="py-2 px-3 rounded-xl text-xs text-muted hover:text-red-400 hover:bg-red-500/10 transition-colors font-mono"
+              className="py-1.5 px-3 rounded-lg text-xs text-ink-faint hover:text-red-400 hover:bg-red-500/10 transition-colors font-mono"
             >
               Disconnect
             </button>
@@ -126,18 +126,18 @@ export default function Settings() {
         </div>
 
         {/* AI Model & Copilot Provider */}
-        <div className="glass-panel rounded-2xl p-6 border border-white/[0.06] chamfer-top flex flex-col justify-between shadow-lg">
+        <div className="glass-panel rounded-xl p-5 border border-white/[0.05] flex flex-col justify-between">
           <div>
-            <div className="flex items-center gap-2 mb-4">
-              <Cpu className="w-4 h-4 text-accent" />
-              <h3 className="font-extrabold text-sm text-white">AI Intelligence Engine</h3>
+            <div className="flex items-center gap-2 mb-3">
+              <Cpu className="w-4 h-4 text-accent-bright" />
+              <h3 className="font-semibold text-xs text-fg">AI Intelligence Engine</h3>
             </div>
 
-            <p className="text-xs text-secondary mb-3 leading-relaxed">
+            <p className="text-2xs text-secondary mb-2.5 leading-relaxed">
               Provider used by "Max" for live judging simulations, criteria evaluation, and plan triage:
             </p>
 
-            <div className="space-y-2 text-xs">
+            <div className="space-y-1.5 text-xs">
               {[
                 { id: 'anthropic', label: 'Anthropic Claude 3.5 Sonnet', desc: 'Superior nuanced code and judging analysis (Recommended)' },
                 { id: 'openai', label: 'OpenAI GPT-4o', desc: 'Fast multimodal evaluation' },
@@ -150,14 +150,14 @@ export default function Settings() {
                     setSelectedProvider(prov.id);
                     toast.success(`Selected ${prov.label} as AI provider.`);
                   }}
-                  className={`p-3 rounded-xl cursor-pointer border transition-all ${
+                  className={`p-2.5 rounded-lg cursor-pointer border transition-all ${
                     selectedProvider === prov.id
-                      ? 'bg-accent/15 border-accent text-white shadow-glow'
-                      : 'bg-white/[0.02] border-white/[0.06] text-secondary hover:text-white hover:border-white/[0.12]'
+                      ? 'bg-accent/10 border-accent/30 text-fg'
+                      : 'bg-white/[0.02] border-white/[0.05] text-ink-muted hover:text-fg hover:border-white/[0.10]'
                   }`}
                 >
-                  <p className="font-semibold text-xs text-white">{prov.label}</p>
-                  <p className="text-[10px] text-muted mt-0.5">{prov.desc}</p>
+                  <p className="font-medium text-xs text-fg">{prov.label}</p>
+                  <p className="text-2xs text-ink-faint mt-0.5">{prov.desc}</p>
                 </div>
               ))}
             </div>
@@ -165,35 +165,35 @@ export default function Settings() {
         </div>
 
         {/* System & Demo Mode */}
-        <div className="glass-panel rounded-2xl p-6 border border-white/[0.06] chamfer-top flex flex-col justify-between shadow-lg">
+        <div className="glass-panel rounded-xl p-5 border border-white/[0.05] flex flex-col justify-between">
           <div>
-            <div className="flex items-center gap-2 mb-4">
-              <Settings2 className="w-4 h-4 text-accent" />
-              <h3 className="font-extrabold text-sm text-white">Demo & Offline Engine</h3>
+            <div className="flex items-center gap-2 mb-3">
+              <Settings2 className="w-4 h-4 text-accent-bright" />
+              <h3 className="font-semibold text-xs text-fg">Demo & Offline Engine</h3>
             </div>
 
-            <div className="space-y-3 text-xs">
+            <div className="space-y-2.5 text-xs">
               {/* Demo Mode Row */}
-              <div className="p-3.5 rounded-xl bg-[#131622] border border-white/[0.08] flex items-center justify-between">
+              <div className="p-3 rounded-lg bg-white/[0.02] border border-white/[0.05] flex items-center justify-between">
                 <div>
-                  <p className="font-semibold text-white">Demo Mode</p>
-                  <p className="text-[10px] text-muted mt-0.5">
+                  <p className="font-medium text-fg text-xs">Demo Mode</p>
+                  <p className="text-2xs text-ink-faint mt-0.5">
                     Pre-seeds Autonomous Agents Hackathon and mock telemetry.
                   </p>
                 </div>
-                <button onClick={toggleDemo} className="text-accent text-lg">
+                <button onClick={toggleDemo} className="text-accent-bright transition-transform active:scale-90">
                   {state.demoMode ? (
                     <ToggleRight className="w-6 h-6 text-emerald-400" />
                   ) : (
-                    <ToggleLeft className="w-6 h-6 text-muted" />
+                    <ToggleLeft className="w-6 h-6 text-ink-faint" />
                   )}
                 </button>
               </div>
 
               {/* Notifications preferences */}
-              <div className="p-3.5 rounded-xl bg-[#131622] border border-white/[0.08] space-y-2.5 font-mono">
-                <p className="font-semibold text-white text-xs font-sans">Notification Preferences</p>
-                <div className="flex items-center justify-between text-secondary text-xs">
+              <div className="p-3 rounded-lg bg-white/[0.02] border border-white/[0.05] space-y-2 font-mono">
+                <p className="font-medium text-fg text-xs font-sans">Notification Preferences</p>
+                <div className="flex items-center justify-between text-secondary text-2xs">
                   <span>Urgent deadline warnings (&lt; 24h)</span>
                   <input
                     type="checkbox"
@@ -202,7 +202,7 @@ export default function Settings() {
                     className="accent-indigo-500 rounded"
                   />
                 </div>
-                <div className="flex items-center justify-between text-secondary text-xs">
+                <div className="flex items-center justify-between text-secondary text-2xs">
                   <span>Max Score lift alerts</span>
                   <input
                     type="checkbox"
@@ -211,7 +211,7 @@ export default function Settings() {
                     className="accent-indigo-500 rounded"
                   />
                 </div>
-                <div className="flex items-center justify-between text-secondary text-xs">
+                <div className="flex items-center justify-between text-secondary text-2xs">
                   <span>New DNA opportunity alerts</span>
                   <input
                     type="checkbox"

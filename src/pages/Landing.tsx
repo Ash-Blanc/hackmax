@@ -30,7 +30,7 @@ export default function Landing() {
             <CubeLogo className="w-4.5 h-4.5" />
           </div>
           <div className="flex items-center gap-1.5">
-            <span className="font-semibold text-fg text-sm tracking-snug">HackMax</span>
+            <span className="font-fenix text-fg text-base tracking-normal">HackMax</span>
             <span className="text-2xs px-1.5 py-0.2 rounded-md bg-white/[0.04] border border-white/[0.06] text-ink-muted font-mono">
               v0.2
             </span>
@@ -79,7 +79,7 @@ export default function Landing() {
           <span className="text-accent-bright font-mono">Noobs to Podium Winners</span>
         </div>
 
-        <h1 className="text-3xl sm:text-5xl font-bold text-fg tracking-display max-w-3xl mx-auto leading-[1.12]">
+        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-fenix font-normal text-fg tracking-normal max-w-3xl mx-auto leading-[1.15]">
           Stop tracking hackathons.{' '}
           <span className="text-accent-bright">
             Start maximizing them.
@@ -90,7 +90,7 @@ export default function Landing() {
           Not another generic Kanban board. HackMax is an AI-powered command center answering the only question that matters under deadline pressure:
         </p>
 
-        <div className="mt-4 inline-block px-4 py-2 rounded-lg bg-white/[0.02] border border-white/[0.06] text-fg font-mono text-xs sm:text-sm">
+        <div className="mt-4 inline-block px-4 py-2 rounded-lg bg-white/[0.02] border border-white/[0.06] text-fg font-fenix italic text-sm sm:text-base">
           "What should I do next, and why is it the highest-impact thing right now?"
         </div>
 
@@ -272,7 +272,7 @@ export default function Landing() {
       {/* Feature Bento Grid */}
       <section id="features" className="py-12 px-6 sm:px-10 max-w-5xl mx-auto">
         <div className="text-center max-w-xl mx-auto mb-8">
-          <h2 className="text-xl sm:text-2xl font-bold text-fg tracking-tight">
+          <h2 className="text-2xl sm:text-3xl font-fenix font-normal text-fg tracking-tight">
             Built for ruthless hackathon efficiency
           </h2>
           <p className="text-secondary text-xs mt-1.5">
@@ -390,7 +390,7 @@ export default function Landing() {
       {/* The Core User Loop */}
       <section id="how-it-works" className="py-12 px-6 sm:px-10 max-w-4xl mx-auto border-t border-white/[0.05]">
         <div className="text-center max-w-xl mx-auto mb-8">
-          <h2 className="text-xl sm:text-2xl font-bold text-fg tracking-tight">The HackMax Core Loop</h2>
+          <h2 className="text-2xl sm:text-3xl font-fenix font-normal text-fg tracking-tight">The HackMax Core Loop</h2>
           <p className="text-secondary text-xs mt-1">
             How elite hackathon builders consistently produce podium submissions under extreme time constraints.
           </p>
@@ -415,7 +415,7 @@ export default function Landing() {
       {/* CTA Bottom Banner */}
       <section className="py-16 px-6 sm:px-10 max-w-3xl mx-auto text-center">
         <div className="p-8 rounded-2xl glass-panel border border-white/[0.06] shadow-overlay">
-          <h2 className="text-2xl sm:text-3xl font-bold text-fg tracking-tight">
+          <h2 className="text-2xl sm:text-3xl font-fenix font-normal text-fg tracking-tight">
             Ready to win your next hackathon?
           </h2>
           <p className="text-secondary text-xs sm:text-sm mt-2 max-w-md mx-auto">
@@ -443,7 +443,7 @@ export default function Landing() {
       <footer className="mt-auto border-t border-white/[0.05] py-6 px-6 sm:px-10 text-center text-2xs text-ink-faint flex flex-col sm:flex-row items-center justify-between gap-3">
         <div className="flex items-center gap-2">
           <CubeLogo className="w-4 h-4" />
-          <span className="font-medium text-fg">HackMax</span>
+          <span className="font-fenix text-sm text-fg">HackMax</span>
           <span>• Maximize your hackathon.</span>
         </div>
         <div className="flex items-center gap-4">

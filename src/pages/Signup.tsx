@@ -31,10 +31,10 @@ export default function Signup() {
           <div className="w-7 h-7 rounded-lg bg-accent/15 border border-accent/30 flex items-center justify-center shadow-[0_0_12px_rgba(59,130,246,0.25)]">
             <CubeLogo className="w-4.5 h-4.5" />
           </div>
-          <span className="text-sm font-semibold text-fg tracking-snug">HackMax</span>
+          <span className="text-base font-fenix text-fg tracking-normal">HackMax</span>
         </div>
 
-        <h2 className="text-sm font-semibold text-fg">Create your account</h2>
+        <h2 className="text-base font-fenix text-fg">Create your account</h2>
         <p className="text-2xs text-secondary mt-0.5 mb-4">
           Join thousands of developers maximizing their hackathons.
         </p>

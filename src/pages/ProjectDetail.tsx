@@ -71,7 +71,7 @@ export default function ProjectDetail() {
             <span>Back to Projects</span>
           </button>
           <div className="flex items-center gap-2.5">
-            <h1 className="text-lg font-semibold text-fg tracking-snug">{project.name}</h1>
+            <h1 className="text-xl font-fenix text-fg tracking-normal">{project.name}</h1>
             <span className="px-2 py-0.5 rounded-full bg-accent/10 border border-accent/20 text-accent-bright text-2xs font-mono">
               {project.repositoryName}
             </span>

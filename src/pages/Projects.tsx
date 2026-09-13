@@ -60,7 +60,7 @@ export default function Projects() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-white/[0.05]">
         <div>
           <div className="flex items-center gap-2.5">
-            <h1 className="text-lg font-semibold text-fg tracking-snug">Projects &amp; Reusable Code</h1>
+            <h1 className="text-xl font-fenix text-fg tracking-normal">Projects &amp; Reusable Code</h1>
             <span className="px-2 py-0.5 rounded-full bg-accent/10 border border-accent/20 text-accent-bright text-2xs font-mono font-medium">
               {state.projects.length} Repositories Connected
             </span>

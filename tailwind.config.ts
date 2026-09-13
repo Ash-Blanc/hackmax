@@ -77,6 +77,24 @@ export default {
       },
 
       fontFamily: {
+        fenix: [
+          "Fenix",
+          "Georgia",
+          "Cambria",
+          "serif",
+        ],
+        serif: [
+          "Fenix",
+          "Georgia",
+          "Cambria",
+          "serif",
+        ],
+        display: [
+          "Fenix",
+          "Georgia",
+          "Cambria",
+          "serif",
+        ],
         sans: [
           "Inter",
           "Geist",

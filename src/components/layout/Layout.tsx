@@ -88,7 +88,7 @@ export default function Layout() {
                 <CubeLogo className="w-4.5 h-4.5" />
               </div>
               <div>
-                <span className="text-sm font-semibold text-fg tracking-snug block leading-tight">HackMax</span>
+                <span className="text-base font-fenix text-fg tracking-normal block leading-tight">HackMax</span>
                 <span className="text-2xs text-accent-cyan/80 font-mono">v0.2</span>
               </div>
             </div>

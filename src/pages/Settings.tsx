@@ -36,7 +36,7 @@ export default function Settings() {
     <div className="space-y-5 max-w-4xl mx-auto animate-fade-up">
       {/* Header */}
       <div className="pb-3 border-b border-white/[0.05]">
-        <h1 className="text-lg font-semibold text-fg tracking-snug">Settings</h1>
+        <h1 className="text-xl font-fenix text-fg tracking-normal">Settings</h1>
         <p className="text-secondary text-xs mt-0.5">
           Manage your hacker profile, GitHub integration, AI model provider, and system preferences.
         </p>

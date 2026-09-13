@@ -70,7 +70,7 @@ export default function Onboarding() {
               <CubeLogo className="w-4.5 h-4.5" />
             </div>
             <div>
-              <span className="font-semibold text-fg text-sm tracking-snug">HackMax</span>
+              <span className="font-fenix text-fg text-base tracking-normal">HackMax</span>
               <span className="text-2xs text-ink-faint block -mt-0.5 font-mono">5-Step Calibration</span>
             </div>
           </div>
@@ -98,7 +98,7 @@ export default function Onboarding() {
             <div className="w-12 h-12 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center mx-auto mb-4 text-accent-bright">
               <Sparkles className="w-6 h-6" />
             </div>
-            <h2 className="text-xl font-bold text-fg tracking-snug">
+            <h2 className="text-2xl font-fenix text-fg tracking-normal">
               Welcome to HackMax
             </h2>
             <p className="text-secondary text-xs mt-2 max-w-sm mx-auto leading-relaxed">
@@ -131,7 +131,7 @@ export default function Onboarding() {
         {/* STEP 2: GOAL SELECTION */}
         {step === 2 && (
           <div>
-            <h2 className="text-lg font-semibold text-fg tracking-snug mb-1">
+            <h2 className="text-xl font-fenix text-fg tracking-normal mb-1">
               What are you trying to maximize?
             </h2>
             <p className="text-secondary text-2xs mb-4">
@@ -197,7 +197,7 @@ export default function Onboarding() {
         {/* STEP 3: CONNECT GITHUB */}
         {step === 3 && (
           <div>
-            <h2 className="text-lg font-semibold text-fg tracking-snug mb-1">
+            <h2 className="text-xl font-fenix text-fg tracking-normal mb-1">
               Connect Your GitHub
             </h2>
             <p className="text-secondary text-2xs mb-4">
@@ -260,7 +260,7 @@ export default function Onboarding() {
         {/* STEP 4: ADD HACKATHON */}
         {step === 4 && (
           <div>
-            <h2 className="text-lg font-semibold text-fg tracking-snug mb-1">
+            <h2 className="text-xl font-fenix text-fg tracking-normal mb-1">
               Add Your Active Hackathon
             </h2>
             <p className="text-secondary text-2xs mb-4">
@@ -347,7 +347,7 @@ export default function Onboarding() {
               <CheckCircle2 className="w-7 h-7" />
             </div>
 
-            <h2 className="text-xl font-bold text-fg tracking-snug">
+            <h2 className="text-2xl font-fenix text-fg tracking-normal">
               Your Max Plan is Live!
             </h2>
             <p className="text-secondary text-xs mt-2 max-w-sm mx-auto leading-relaxed">

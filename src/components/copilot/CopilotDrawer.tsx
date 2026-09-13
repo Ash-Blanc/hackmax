@@ -432,7 +432,7 @@ export default function CopilotDrawer({ open, onClose }: CopilotDrawerProps) {
                     {/* Selected Hook Details */}
                     {m.actionCard.meta.variants?.[selectedHookTab] && (
                       <div className="p-2.5 rounded-lg bg-black/30 border border-white/[0.04] text-xs">
-                        <p className="text-fg font-normal leading-relaxed italic mb-1.5 text-2xs">
+                        <p className="text-fg font-fenix leading-relaxed italic mb-1.5 text-xs sm:text-[13px]">
                           {m.actionCard.meta.variants[selectedHookTab].hook}
                         </p>
                         <p className="text-2xs text-ink-faint font-mono">

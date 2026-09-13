@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Zap, Github, Sparkles, Mail, Lock } from 'lucide-react';
+import { Github, Sparkles, Mail, Lock } from 'lucide-react';
+import { CubeLogo } from '@/components/common/CubeLogo';
 import { toast } from 'sonner';
 
 export default function Login() {
@@ -26,8 +27,8 @@ export default function Login() {
           onClick={() => navigate('/')}
           className="flex items-center gap-2 mb-5 cursor-pointer"
         >
-          <div className="w-7 h-7 rounded-lg bg-accent/15 border border-accent/25 flex items-center justify-center text-accent-bright">
-            <Zap className="w-3.5 h-3.5 fill-accent" />
+          <div className="w-7 h-7 rounded-lg bg-accent/15 border border-accent/30 flex items-center justify-center shadow-[0_0_12px_rgba(59,130,246,0.25)]">
+            <CubeLogo className="w-4.5 h-4.5" />
           </div>
           <span className="text-sm font-semibold text-fg tracking-snug">HackMax</span>
         </div>

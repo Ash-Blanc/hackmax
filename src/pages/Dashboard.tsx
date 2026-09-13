@@ -14,11 +14,11 @@ import {
   Target,
   Sparkles,
   X,
-  Zap,
   Scissors,
   TrendingUp,
   Cpu,
 } from 'lucide-react';
+import { CubeLogo } from '@/components/common/CubeLogo';
 import { toast } from 'sonner';
 
 export default function Dashboard() {
@@ -65,8 +65,8 @@ export default function Dashboard() {
     return (
       <div className="flex items-center justify-center h-full min-h-[60vh]">
         <div className="text-center p-8 glass-panel rounded-xl border border-white/[0.06] max-w-sm">
-          <div className="w-10 h-10 rounded-lg bg-accent/10 border border-accent/20 flex items-center justify-center mx-auto mb-3">
-            <Zap className="w-5 h-5 text-accent-bright" />
+          <div className="w-12 h-12 rounded-xl bg-accent/15 border border-accent/30 flex items-center justify-center mx-auto mb-3 shadow-[0_0_16px_rgba(59,130,246,0.3)]">
+            <CubeLogo className="w-7 h-7" />
           </div>
           <h2 className="text-sm font-semibold text-fg mb-1">No Active Hackathon</h2>
           <p className="text-secondary text-xs mb-5">

@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
-  Zap,
   ArrowRight,
   Sparkles,
   CheckCircle2,
@@ -14,6 +13,7 @@ import {
   Flame,
   Layers,
 } from 'lucide-react';
+import { CubeLogo } from '@/components/common/CubeLogo';
 import { useHackMaxStore } from '@/lib/store';
 
 export default function Landing() {
@@ -26,8 +26,8 @@ export default function Landing() {
       {/* Landing Navbar */}
       <header className="h-14 border-b border-white/[0.05] px-6 sm:px-10 flex items-center justify-between bg-bg-raised/70 backdrop-blur-xl sticky top-0 z-40">
         <div className="flex items-center gap-2.5 cursor-pointer" onClick={() => navigate('/')}>
-          <div className="w-7 h-7 rounded-lg bg-accent/15 border border-accent/30 flex items-center justify-center">
-            <Zap className="w-3.5 h-3.5 text-accent-bright" />
+          <div className="w-7 h-7 rounded-lg bg-accent/15 border border-accent/30 flex items-center justify-center shadow-[0_0_12px_rgba(59,130,246,0.25)]">
+            <CubeLogo className="w-4.5 h-4.5" />
           </div>
           <div className="flex items-center gap-1.5">
             <span className="font-semibold text-fg text-sm tracking-snug">HackMax</span>
@@ -442,7 +442,7 @@ export default function Landing() {
       {/* Footer */}
       <footer className="mt-auto border-t border-white/[0.05] py-6 px-6 sm:px-10 text-center text-2xs text-ink-faint flex flex-col sm:flex-row items-center justify-between gap-3">
         <div className="flex items-center gap-2">
-          <Zap className="w-3.5 h-3.5 text-accent-bright" />
+          <CubeLogo className="w-4 h-4" />
           <span className="font-medium text-fg">HackMax</span>
           <span>• Maximize your hackathon.</span>
         </div>

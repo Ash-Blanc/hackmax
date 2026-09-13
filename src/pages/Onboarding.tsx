@@ -3,13 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { useHackMaxStore } from '@/lib/store';
 import { MOCK_DATA } from '@/lib/mock-data';
 import {
-  Zap,
   ArrowRight,
   CheckCircle2,
   Github,
   Sparkles,
   Loader2,
 } from 'lucide-react';
+import { CubeLogo } from '@/components/common/CubeLogo';
 import { toast } from 'sonner';
 
 export default function Onboarding() {
@@ -66,8 +66,8 @@ export default function Onboarding() {
         {/* Top bar with logo and progress dots */}
         <div className="flex items-center justify-between pb-5 mb-6 border-b border-white/[0.05]">
           <div className="flex items-center gap-2.5">
-            <div className="w-7 h-7 rounded-lg bg-accent/15 border border-accent/25 flex items-center justify-center">
-              <Zap className="w-3.5 h-3.5 text-accent-bright" />
+            <div className="w-7 h-7 rounded-lg bg-accent/15 border border-accent/30 flex items-center justify-center shadow-[0_0_12px_rgba(59,130,246,0.25)]">
+              <CubeLogo className="w-4.5 h-4.5" />
             </div>
             <div>
               <span className="font-semibold text-fg text-sm tracking-snug">HackMax</span>

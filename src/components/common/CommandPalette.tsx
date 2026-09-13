@@ -2,14 +2,14 @@ import { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Command } from 'cmdk';
 import {
-  LayoutDashboard,
-  FlaskConical,
-  FolderGit2,
+  LayoutGrid,
+  Trophy,
+  Boxes,
   Scale,
-  Target,
-  TrendingUp,
+  Crosshair,
+  Activity,
   Github,
-  Settings,
+  SlidersHorizontal,
   Sparkles,
   ToggleLeft,
   Search,
@@ -216,22 +216,24 @@ export default function CommandPalette({ open, onOpenChange, onOpenCopilot }: Co
               className="px-2 py-1 text-2xs font-semibold text-ink-faint uppercase tracking-wider font-mono"
             >
               {[
-                { to: '/dashboard', label: 'Command Center', icon: LayoutDashboard, chord: 'G D' },
-                { to: '/hackathons', label: 'My Hackathons', icon: FlaskConical, chord: 'G H' },
-                { to: '/projects', label: 'Projects & DNA', icon: FolderGit2, chord: 'G P' },
+                { to: '/dashboard', label: 'Command Center', icon: LayoutGrid, chord: 'G D' },
+                { to: '/hackathons', label: 'My Hackathons', icon: Trophy, chord: 'G H' },
+                { to: '/projects', label: 'Projects & DNA', icon: Boxes, chord: 'G P' },
                 { to: '/judge', label: 'Judge Mode', icon: Scale, chord: 'G J' },
-                { to: '/opportunities', label: 'Opportunities & Reuse', icon: Target, chord: 'G O' },
-                { to: '/analytics', label: 'Analytics & Trajectory', icon: TrendingUp, chord: 'G A' },
+                { to: '/opportunities', label: 'Opportunities & Reuse', icon: Crosshair, chord: 'G O' },
+                { to: '/analytics', label: 'Analytics & Trajectory', icon: Activity, chord: 'G A' },
                 { to: '/github', label: 'GitHub Telemetry', icon: Github, chord: 'G T' },
-                { to: '/settings', label: 'Settings', icon: Settings, chord: 'G S' },
+                { to: '/settings', label: 'Settings', icon: SlidersHorizontal, chord: 'G S' },
               ].map(({ to, label, icon: Icon, chord }) => (
                 <Command.Item
                   key={to}
                   onSelect={() => runCommand(() => navigate(to))}
-                  className="flex items-center gap-2.5 px-2.5 py-2 rounded-lg cursor-pointer text-ink-muted hover:text-fg hover:bg-white/[0.04] transition-colors"
+                  className="flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg cursor-pointer text-ink-muted hover:text-fg hover:bg-white/[0.04] transition-colors group"
                 >
-                  <Icon className="w-3.5 h-3.5 text-ink-faint shrink-0" />
-                  <span className="text-xs font-normal flex-1">{label}</span>
+                  <div className="w-5 h-5 rounded-md bg-white/[0.03] border border-white/[0.06] flex items-center justify-center text-ink-faint group-hover:text-accent-bright group-hover:border-accent/30 group-hover:bg-accent/10 transition-all shrink-0">
+                    <Icon className="w-3 h-3" />
+                  </div>
+                  <span className="text-xs font-normal flex-1 text-fg">{label}</span>
                   <span className="keycap">{chord}</span>
                 </Command.Item>
               ))}

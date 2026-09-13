@@ -12,7 +12,7 @@ export default {
           raised: "#0f1117",
           elevated: "#151823",
           popover: "#1c2030",
-          input: "#1a1e2e",
+          input: "#131622",
         },
         surface: {
           DEFAULT: "#0d0f17",
@@ -28,7 +28,8 @@ export default {
           subtle: "rgba(255, 255, 255, 0.05)",
           medium: "rgba(255, 255, 255, 0.08)",
           strong: "rgba(255, 255, 255, 0.14)",
-          accent: "rgba(99, 102, 241, 0.30)",
+          accent: "rgba(59, 130, 246, 0.32)",
+          cyan: "rgba(56, 217, 245, 0.30)",
         },
         line: "#1e2333",
 
@@ -43,12 +44,23 @@ export default {
         secondary: "#94a3b8",
         muted: "#64748b",
 
-        /* ── Brand & interactive ── */
+        /* ── Brand & Interactive AI Spectrum (Electric Azure + Ice Cyan + Deep Cobalt) ── */
         accent: {
-          DEFAULT: "#6366f1",
-          bright: "#818cf8",
-          light: "#818cf8",
-          subtle: "rgba(99, 102, 241, 0.12)",
+          DEFAULT: "#3b82f6",     /* Electric Azure (matches Cube primary) */
+          hover: "#2563eb",
+          bright: "#60a5fa",      /* Luminous Azure Highlight */
+          light: "#93c5fd",
+          cyan: "#38d9f5",        /* Ice Cyan (Cube top face & AI intelligence) */
+          cobalt: "#2953f4",      /* Deep High-Energy Cobalt (Cube deep face) */
+          violet: "#8b5cf6",      /* Multi-spectral AI reasoning */
+          amber: "#f59e0b",       /* Warm Claude urgency/alert */
+          subtle: "rgba(59, 130, 246, 0.12)",
+          glow: "rgba(59, 130, 246, 0.35)",
+        },
+        brand: {
+          blue: "#3298F3",
+          cyan: "#6FD7ED",
+          cobalt: "#2953F4",
         },
         success: "#10b981",
         glow: "#10b981",
@@ -111,10 +123,11 @@ export default {
         ambient: "0 1px 2px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.06)",
         lifted: "0 4px 16px -2px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08)",
         overlay: "0 16px 48px -8px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1)",
-        /* Glow shadows */
-        glow: "0 0 0 1px rgba(99,102,241,0.25), 0 0 20px rgba(99,102,241,0.10)",
-        "glow-lg": "0 0 0 1px rgba(99,102,241,0.35), 0 0 32px rgba(99,102,241,0.18)",
-        emerald: "0 0 0 1px rgba(16,185,129,0.25), 0 0 16px rgba(16,185,129,0.10)",
+        /* Luminous diffuse glow shadows */
+        glow: "0 0 0 1px rgba(59,130,246,0.30), 0 0 24px rgba(59,130,246,0.20), 0 0 40px rgba(56,217,245,0.10)",
+        "glow-lg": "0 0 0 1px rgba(59,130,246,0.45), 0 0 36px rgba(59,130,246,0.30), 0 0 64px rgba(56,217,245,0.20)",
+        "glow-cyan": "0 0 0 1px rgba(56,217,245,0.35), 0 0 24px rgba(56,217,245,0.20)",
+        "glow-emerald": "0 0 0 1px rgba(16,185,129,0.30), 0 0 20px rgba(16,185,129,0.14)",
         rose: "0 0 0 1px rgba(244,63,94,0.25), 0 0 16px rgba(244,63,94,0.10)",
         /* Inner highlight for glass surfaces */
         "inner-glow": "inset 0 1px 0 0 rgba(255,255,255,0.08)",

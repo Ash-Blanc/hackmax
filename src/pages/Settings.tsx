@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useHackMaxStore } from '@/lib/store';
 import {
-  Settings2,
+  SlidersHorizontal,
   Github,
   Cpu,
   ToggleLeft,
@@ -168,7 +168,7 @@ export default function Settings() {
         <div className="glass-panel rounded-xl p-5 border border-white/[0.05] flex flex-col justify-between">
           <div>
             <div className="flex items-center gap-2 mb-3">
-              <Settings2 className="w-4 h-4 text-accent-bright" />
+              <SlidersHorizontal className="w-4 h-4 text-accent-bright" />
               <h3 className="font-semibold text-xs text-fg">Demo & Offline Engine</h3>
             </div>
 

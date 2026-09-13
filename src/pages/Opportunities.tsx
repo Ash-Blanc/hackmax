@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useHackMaxStore } from '@/lib/store';
 import { MOCK_OPPORTUNITIES, type OpportunityItem } from '@/lib/mock-data';
 import {
-  Target,
+  Crosshair,
   Sparkles,
   CheckCircle2,
   X,
@@ -112,7 +112,7 @@ export default function Opportunities() {
         <div className="glass-panel rounded-xl p-4 border border-white/[0.05] flex flex-col md:flex-row md:items-center justify-between gap-3 shadow-ambient">
           <div>
             <div className="flex items-center gap-1.5 mb-1">
-              <Target className="w-3.5 h-3.5 text-accent-bright" />
+              <Crosshair className="w-3.5 h-3.5 text-accent-bright" />
               <h3 className="font-semibold text-xs text-fg">Active DNA: {project.name}</h3>
             </div>
             <p className="text-2xs text-secondary leading-relaxed">

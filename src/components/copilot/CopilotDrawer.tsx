@@ -12,11 +12,11 @@ import {
   Copy,
   Plus,
   ShieldCheck,
-  Bot,
   User,
   CornerDownLeft,
 } from 'lucide-react';
 import { useHackMaxStore } from '@/lib/store';
+import { CubeLogo } from '@/components/common/CubeLogo';
 import { toast } from 'sonner';
 
 interface CopilotDrawerProps {
@@ -201,8 +201,8 @@ export default function CopilotDrawer({ open, onClose }: CopilotDrawerProps) {
       {/* Header (Claude/Linear Inspired) */}
       <div className="p-3.5 border-b border-white/[0.06] flex items-center justify-between bg-bg/40">
         <div className="flex items-center gap-2.5">
-          <div className="w-7 h-7 rounded-lg bg-accent/15 border border-accent/30 flex items-center justify-center">
-            <Sparkles className="w-3.5 h-3.5 text-accent-bright" />
+          <div className="w-8 h-8 rounded-lg bg-accent/15 border border-accent/30 flex items-center justify-center shadow-[0_0_12px_rgba(59,130,246,0.3)]">
+            <CubeLogo className="w-4.5 h-4.5" />
           </div>
           <div>
             <div className="flex items-center gap-1.5">
@@ -239,7 +239,7 @@ export default function CopilotDrawer({ open, onClose }: CopilotDrawerProps) {
           <button
             key={chip.label}
             onClick={() => handleSend(chip.label)}
-            className="flex items-center gap-1 px-2.5 py-1 rounded-md bg-white/[0.02] border border-white/[0.05] hover:border-white/[0.12] hover:bg-white/[0.05] text-2xs text-secondary hover:text-fg transition-all shrink-0 whitespace-nowrap active:scale-[0.97]"
+            className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white/[0.02] border border-white/[0.05] hover:border-accent/30 hover:bg-accent/10 text-2xs text-secondary hover:text-fg transition-all shrink-0 whitespace-nowrap active:scale-[0.97]"
           >
             <chip.icon className="w-3 h-3 text-accent-bright" />
             <span>{chip.label}</span>
@@ -258,11 +258,15 @@ export default function CopilotDrawer({ open, onClose }: CopilotDrawerProps) {
               {m.sender === 'user' ? (
                 <>
                   <span className="text-2xs font-mono text-ink-faint">You</span>
-                  <User className="w-3 h-3 text-ink-faint" />
+                  <div className="w-4 h-4 rounded bg-white/[0.06] flex items-center justify-center">
+                    <User className="w-2.5 h-2.5 text-ink-faint" />
+                  </div>
                 </>
               ) : (
                 <>
-                  <Bot className="w-3 h-3 text-accent-bright" />
+                  <div className="w-4 h-4 rounded bg-accent/20 flex items-center justify-center shadow-[0_0_6px_rgba(59,130,246,0.4)]">
+                    <CubeLogo className="w-3 h-3" />
+                  </div>
                   <span className="text-2xs font-mono text-accent-bright font-medium">Max</span>
                 </>
               )}

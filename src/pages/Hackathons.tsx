@@ -5,7 +5,7 @@ import {
   Clock,
   Plus,
   X,
-  FlaskConical,
+  Trophy,
 } from 'lucide-react';
 import { toast } from 'sonner';
 import { hoursFromNow } from '@/lib/time';
@@ -115,8 +115,8 @@ export default function Hackathons() {
               <div>
                 <div className="flex items-start justify-between mb-2.5">
                   <div className="flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-lg bg-accent/10 border border-accent/20 flex items-center justify-center text-accent-bright">
-                      <FlaskConical className="w-4 h-4" />
+                    <div className="w-8 h-8 rounded-lg bg-accent/15 border border-accent/25 flex items-center justify-center text-accent-bright shadow-[0_0_8px_rgba(59,130,246,0.2)]">
+                      <Trophy className="w-4 h-4" />
                     </div>
                     <div>
                       <h3 className="font-semibold text-fg text-xs group-hover:text-accent-bright transition-colors">

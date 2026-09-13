@@ -16,7 +16,7 @@ export const Progress = React.forwardRef<
   >
     {value !== undefined && (
       <div
-        className="h-full rounded-full bg-accent transition-all duration-500 ease-spring"
+        className="h-full rounded-full bg-gradient-to-r from-accent via-accent-bright to-accent-cyan transition-all duration-500 ease-spring shadow-[0_0_8px_rgba(59,130,246,0.5)]"
         style={{ width: `${Math.min((value / max) * 100, 100)}%` }}
       />
     )}

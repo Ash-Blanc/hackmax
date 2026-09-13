@@ -3,14 +3,14 @@ import { Outlet, NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { useHackMaxStore } from '@/lib/store';
 import { cn } from '@/lib/utils';
 import {
-  LayoutDashboard,
-  FlaskConical,
-  FolderGit2,
+  LayoutGrid,
+  Trophy,
+  Boxes,
   Scale,
-  Target,
-  TrendingUp,
+  Crosshair,
+  Activity,
   Github,
-  Settings,
+  SlidersHorizontal,
   Menu,
   X,
   Clock,
@@ -26,14 +26,14 @@ import { CubeLogo } from '@/components/common/CubeLogo';
 import { toast } from 'sonner';
 
 const navItems = [
-  { to: '/dashboard', icon: LayoutDashboard, label: 'Command Center', shortcut: '⌘1' },
-  { to: '/hackathons', icon: FlaskConical, label: 'Hackathons', shortcut: '⌘2' },
-  { to: '/projects', icon: FolderGit2, label: 'Projects', shortcut: '⌘3' },
+  { to: '/dashboard', icon: LayoutGrid, label: 'Command Center', shortcut: '⌘1' },
+  { to: '/hackathons', icon: Trophy, label: 'Hackathons', shortcut: '⌘2' },
+  { to: '/projects', icon: Boxes, label: 'Projects & DNA', shortcut: '⌘3' },
   { to: '/judge', icon: Scale, label: 'Judge Mode', shortcut: '⌘4' },
-  { to: '/opportunities', icon: Target, label: 'Opportunities', shortcut: '⌘5' },
-  { to: '/analytics', icon: TrendingUp, label: 'Analytics', shortcut: '⌘6' },
+  { to: '/opportunities', icon: Crosshair, label: 'Opportunities', shortcut: '⌘5' },
+  { to: '/analytics', icon: Activity, label: 'Analytics', shortcut: '⌘6' },
   { to: '/github', icon: Github, label: 'GitHub', shortcut: '⌘7' },
-  { to: '/settings', icon: Settings, label: 'Settings', shortcut: '⌘8' },
+  { to: '/settings', icon: SlidersHorizontal, label: 'Settings', shortcut: '⌘8' },
 ];
 
 export default function Layout() {
@@ -84,18 +84,18 @@ export default function Layout() {
         <div className="flex items-center justify-between px-3 h-14 border-b border-white/[0.05]">
           {sidebarOpen ? (
             <div onClick={() => navigate('/')} className="flex items-center gap-2.5 cursor-pointer group">
-              <div className="w-7 h-7 rounded-lg bg-accent/15 border border-accent/25 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
+              <div className="w-7 h-7 rounded-lg bg-accent/15 border border-accent/30 flex items-center justify-center group-hover:bg-accent/25 transition-all shadow-[0_0_12px_rgba(59,130,246,0.25)]">
                 <CubeLogo className="w-4.5 h-4.5" />
               </div>
               <div>
                 <span className="text-sm font-semibold text-fg tracking-snug block leading-tight">HackMax</span>
-                <span className="text-2xs text-muted font-mono">v0.2</span>
+                <span className="text-2xs text-accent-cyan/80 font-mono">v0.2</span>
               </div>
             </div>
           ) : (
             <button
               onClick={() => navigate('/')}
-              className="mx-auto w-7 h-7 rounded-lg bg-accent/15 border border-accent/25 flex items-center justify-center hover:bg-accent/20 transition-colors"
+              className="mx-auto w-7 h-7 rounded-lg bg-accent/15 border border-accent/30 flex items-center justify-center hover:bg-accent/25 transition-all shadow-[0_0_12px_rgba(59,130,246,0.25)]"
               title="HackMax Home"
             >
               <CubeLogo className="w-4.5 h-4.5" />
@@ -132,23 +132,33 @@ export default function Layout() {
                 key={to}
                 to={to}
                 className={cn(
-                  'flex items-center gap-2.5 px-2.5 py-2 rounded-md text-[13px] transition-all duration-hover group relative',
+                  'flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-[13px] transition-all duration-hover group relative',
                   isActive
-                    ? 'bg-white/[0.06] text-fg font-medium'
+                    ? 'bg-white/[0.06] text-fg font-medium shadow-ambient'
                     : 'text-ink-muted hover:text-fg hover:bg-white/[0.03]'
                 )}
                 title={!sidebarOpen ? `${label} (${shortcut})` : undefined}
               >
-                {/* Active indicator */}
+                {/* Active glow indicator */}
                 {isActive && (
-                  <span className="absolute left-0 w-0.5 h-4 rounded-full bg-accent" />
+                  <span className="absolute left-0 top-1.5 bottom-1.5 w-0.5 rounded-r-full bg-accent shadow-[0_0_8px_rgba(59,130,246,0.8)]" />
                 )}
-                <Icon className={cn('w-4 h-4 shrink-0', isActive ? 'text-fg' : 'text-ink-faint group-hover:text-ink-muted')} />
+                {/* Icon micro-container */}
+                <div
+                  className={cn(
+                    'w-6 h-6 rounded-md flex items-center justify-center shrink-0 transition-all duration-hover',
+                    isActive
+                      ? 'bg-accent/15 text-accent-bright border border-accent/25 shadow-[0_0_10px_rgba(59,130,246,0.2)]'
+                      : 'text-ink-faint group-hover:text-ink-body group-hover:bg-white/[0.04]'
+                  )}
+                >
+                  <Icon className="w-3.5 h-3.5" />
+                </div>
                 {sidebarOpen && (
-                  <div className="flex-1 flex items-center justify-between">
+                  <div className="flex-1 flex items-center justify-between min-w-0">
                     <span className="truncate">{label}</span>
                     <span className="keycap opacity-0 group-hover:opacity-100 transition-opacity">
-                      {shortcut.replace('⌘', '⌘')}
+                      {shortcut}
                     </span>
                   </div>
                 )}
@@ -197,10 +207,10 @@ export default function Layout() {
           {/* Left: Search */}
           <button
             onClick={() => setCommandPaletteOpen(true)}
-            className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/[0.03] border border-white/[0.06] text-[13px] text-ink-faint hover:text-secondary hover:border-white/[0.10] transition-all w-64 text-left group"
+            className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-surface-2 border border-white/[0.06] text-[13px] text-ink-faint hover:text-ink-body hover:border-white/[0.12] transition-all w-64 text-left group shadow-ambient"
           >
-            <Search className="w-3.5 h-3.5" />
-            <span className="flex-1 truncate">Search…</span>
+            <Search className="w-3.5 h-3.5 text-ink-faint group-hover:text-accent-bright transition-colors" />
+            <span className="flex-1 truncate">Search commands, views…</span>
             <span className="keycap">⌘K</span>
           </button>
 
@@ -209,23 +219,23 @@ export default function Layout() {
             {/* Ask Max */}
             <button
               onClick={() => setCopilotOpen(true)}
-              className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-accent hover:bg-accent-bright text-white text-[13px] font-medium transition-all duration-hover active:scale-[0.97]"
+              className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gradient-to-r from-accent to-accent-cobalt hover:from-accent-bright hover:to-accent text-white text-[13px] font-medium transition-all duration-hover shadow-glow hover:shadow-glow-lg active:scale-[0.97]"
             >
-              <Sparkles className="w-3.5 h-3.5" />
+              <Sparkles className="w-3.5 h-3.5 text-accent-cyan" />
               <span>Ask Max</span>
-              <span className="keycap !border-white/20 !bg-white/10 !text-white/70">⌥M</span>
+              <span className="keycap !border-white/20 !bg-white/10 !text-white/80">⌥M</span>
             </button>
 
             {/* Notifications */}
             <div className="relative">
               <button
                 onClick={() => setNotificationsOpen(!notificationsOpen)}
-                className="relative p-2 rounded-lg hover:bg-white/[0.04] text-ink-faint hover:text-secondary transition-colors"
+                className="relative p-2 rounded-lg bg-surface-2 hover:bg-surface-3 border border-white/[0.06] hover:border-white/[0.12] text-ink-faint hover:text-fg transition-colors"
                 title="Notifications"
               >
-                <Bell className="w-4 h-4" />
+                <Bell className="w-3.5 h-3.5" />
                 {unreadNotifs.length > 0 && (
-                  <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full bg-accent" />
+                  <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full bg-accent-cyan shadow-[0_0_6px_rgba(56,217,245,0.9)] animate-pulse" />
                 )}
               </button>
 

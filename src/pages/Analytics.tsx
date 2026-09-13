@@ -151,8 +151,8 @@ export default function Analytics() {
               <AreaChart data={trajectoryData}>
                 <defs>
                   <linearGradient id="scoreGlow" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#6366f1" stopOpacity={0.3} />
-                    <stop offset="95%" stopColor="#6366f1" stopOpacity={0.0} />
+                    <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.35} />
+                    <stop offset="95%" stopColor="#38d9f5" stopOpacity={0.0} />
                   </linearGradient>
                 </defs>
                 <CartesianGrid stroke="rgba(255,255,255,0.04)" strokeDasharray="3 3" />
@@ -162,7 +162,7 @@ export default function Analytics() {
                   contentStyle={{ backgroundColor: '#131622', borderColor: 'rgba(255,255,255,0.08)', borderRadius: '8px', fontSize: '11px', color: '#fff' }}
                 />
                 <Area type="monotone" dataKey="targetScore" stroke="#475569" strokeDasharray="4 4" fill="none" />
-                <Area type="monotone" dataKey="actualScore" stroke="#818cf8" strokeWidth={2} fillOpacity={1} fill="url(#scoreGlow)" />
+                <Area type="monotone" dataKey="actualScore" stroke="#60a5fa" strokeWidth={2} fillOpacity={1} fill="url(#scoreGlow)" />
               </AreaChart>
             </ResponsiveContainer>
           </div>
@@ -183,7 +183,7 @@ export default function Analytics() {
                   <Tooltip
                     contentStyle={{ backgroundColor: '#131622', borderColor: 'rgba(255,255,255,0.08)', borderRadius: '8px', fontSize: '11px', color: '#fff' }}
                   />
-                  <Bar dataKey="tasks" fill="#6366f1" radius={[4, 4, 0, 0]} />
+                  <Bar dataKey="tasks" fill="#3b82f6" radius={[4, 4, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </div>

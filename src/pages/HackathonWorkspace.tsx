@@ -251,6 +251,20 @@ export default function HackathonWorkspace() {
 
       {/* Max Plan Execution Board / List View */}
       <div>
+        {/* Student Execution Strategy Tip */}
+        <div className="mb-3 px-3 py-2 rounded-lg bg-accent/5 border border-accent/15 flex items-center justify-between text-2xs text-secondary">
+          <div className="flex items-center gap-2">
+            <span className="text-accent-bright font-medium">💡 Student Hacker Rule:</span>
+            <span>Keep your <strong className="text-fg">NOW</strong> column to 1–2 items at a time to avoid multitasking thrash. Tasks in <strong className="text-fg">LATER</strong> can be cut guilt-free if time runs out.</span>
+          </div>
+          <button
+            onClick={() => navigate('/judge')}
+            className="text-accent-bright hover:underline font-mono shrink-0 ml-3 hidden sm:inline"
+          >
+            Practice Judge →
+          </button>
+        </div>
+
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-2.5">
           <div>
             <h2 className="text-xs font-semibold uppercase tracking-wider text-ink-muted font-mono">

@@ -74,9 +74,9 @@ export default function Landing() {
         {/* Urgency tag (Linear Pill) */}
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.06] text-2xs text-secondary mb-5 shadow-ambient">
           <span className="flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
-          <span className="text-fg font-medium">Submission Quality Optimizer</span>
+          <span className="text-fg font-medium">For CS, ECE, IT Students & Hackers</span>
           <span className="text-ink-faint">•</span>
-          <span className="text-accent-bright font-mono">19h 42m Window</span>
+          <span className="text-accent-bright font-mono">Noobs to Podium Winners</span>
         </div>
 
         <h1 className="text-3xl sm:text-5xl font-bold text-fg tracking-display max-w-3xl mx-auto leading-[1.12]">
@@ -148,7 +148,7 @@ export default function Landing() {
               </span>
             </div>
             <span className="px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-2xs text-emerald-400 font-mono font-medium">
-              ● Live Telemetry
+              ● Live Sprint Status
             </span>
           </div>
 
@@ -185,7 +185,7 @@ export default function Landing() {
                     cy="50"
                     r="42"
                     fill="none"
-                    stroke="#6366f1"
+                    stroke="#3b82f6"
                     strokeWidth="6"
                     strokeDasharray={264}
                     strokeDashoffset={264 - (liveMaxScore / 100) * 264}
@@ -324,9 +324,9 @@ export default function Landing() {
               <div className="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 mb-3">
                 <GitBranch className="w-4 h-4" />
               </div>
-              <h3 className="text-sm font-semibold text-fg">GitHub Velocity Telemetry</h3>
+              <h3 className="text-sm font-semibold text-fg">GitHub Sync & Velocity</h3>
               <p className="text-secondary text-2xs mt-1.5 leading-relaxed">
-                Connect your repository to monitor commit velocity, PR status, and issue resolution in real-time. Max alerts when you bikeshed.
+                Connect your repository to monitor commit frequency, PR status, and branch health in real-time. Max alerts you before time traps derail your sprint.
               </p>
             </div>
             <div className="mt-4 p-2.5 rounded-lg bg-white/[0.02] border border-white/[0.04] font-mono text-2xs flex items-center justify-between text-emerald-400">
@@ -335,20 +335,20 @@ export default function Landing() {
             </div>
           </div>
 
-          {/* Bento 4: Cross-Hackathon DNA */}
+          {/* Bento 4: Projects & Reusable Code */}
           <div className="glass-panel rounded-xl p-5 border border-white/[0.05] flex flex-col justify-between">
             <div>
               <div className="w-8 h-8 rounded-lg bg-accent/10 border border-accent/20 flex items-center justify-center text-accent-bright mb-3">
                 <Layers className="w-4 h-4" />
               </div>
-              <h3 className="text-sm font-semibold text-fg">Cross-Hackathon DNA</h3>
+              <h3 className="text-sm font-semibold text-fg">Projects & Reusable Code</h3>
               <p className="text-secondary text-2xs mt-1.5 leading-relaxed">
-                Index reusable components, auth systems, and agent scaffolding across hackathons. Discover competitions with calculated 70%+ reuse.
+                Save time by indexing your starter templates, auth setups, and UI kits. Build projects faster with up to 70%+ pre-built code reuse.
               </p>
             </div>
             <div className="mt-4 flex items-center justify-between text-2xs text-ink-faint font-mono">
-              <span>Components:</span>
-              <span className="text-fg">Auth, UI, RAG</span>
+              <span>Starters:</span>
+              <span className="text-fg">Auth, UI, Agent RAG</span>
             </div>
           </div>
 

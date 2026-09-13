@@ -27,12 +27,12 @@ import { toast } from 'sonner';
 
 const navItems = [
   { to: '/dashboard', icon: LayoutGrid, label: 'Command Center', shortcut: '⌘1' },
-  { to: '/hackathons', icon: Trophy, label: 'Hackathons', shortcut: '⌘2' },
-  { to: '/projects', icon: Boxes, label: 'Projects & DNA', shortcut: '⌘3' },
-  { to: '/judge', icon: Scale, label: 'Judge Mode', shortcut: '⌘4' },
-  { to: '/opportunities', icon: Crosshair, label: 'Opportunities', shortcut: '⌘5' },
-  { to: '/analytics', icon: Activity, label: 'Analytics', shortcut: '⌘6' },
-  { to: '/github', icon: Github, label: 'GitHub', shortcut: '⌘7' },
+  { to: '/hackathons', icon: Trophy, label: 'My Hackathons', shortcut: '⌘2' },
+  { to: '/judge', icon: Scale, label: 'AI Practice Judge', shortcut: '⌘3' },
+  { to: '/opportunities', icon: Crosshair, label: 'Find Hackathons', shortcut: '⌘4' },
+  { to: '/projects', icon: Boxes, label: 'Projects & Code', shortcut: '⌘5' },
+  { to: '/analytics', icon: Activity, label: 'Progress & Score', shortcut: '⌘6' },
+  { to: '/github', icon: Github, label: 'GitHub Sync', shortcut: '⌘7' },
   { to: '/settings', icon: SlidersHorizontal, label: 'Settings', shortcut: '⌘8' },
 ];
 

@@ -11,6 +11,7 @@ import {
   Palette,
   AlertTriangle,
   ShieldCheck,
+  Lightbulb,
 } from 'lucide-react';
 import { toast } from 'sonner';
 import type { Task } from '@/types';
@@ -57,7 +58,7 @@ export default function Judge() {
 
   const handleRunEvaluation = () => {
     setIsSimulating(true);
-    setSimulationStep('Ingesting codebase AST & README...');
+    setSimulationStep('Analyzing repository code structure & README...');
 
     setTimeout(() => {
       setSimulationStep('Simulating Technical & Architecture Evaluation...');
@@ -70,7 +71,7 @@ export default function Judge() {
     setTimeout(() => {
       setIsSimulating(false);
       setSimulationStep('');
-      toast.success('AI Judge Simulation complete! 4 persona rubrics refreshed.');
+      toast.success('AI Practice Judging complete! 4 persona rubrics refreshed.');
     }, 1200);
   };
 
@@ -80,13 +81,13 @@ export default function Judge() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-white/[0.05]">
         <div>
           <div className="flex items-center gap-2.5">
-            <h1 className="text-lg font-semibold text-fg tracking-snug">Judge Mode</h1>
+            <h1 className="text-lg font-semibold text-fg tracking-snug">AI Practice Judge</h1>
             <span className="px-2 py-0.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-2xs font-mono font-medium">
-              4 AI Personas Calibrated
+              4 Real-World Rubrics
             </span>
           </div>
           <p className="text-secondary text-xs mt-0.5">
-            Simulate your project through the eyes of elite hackathon judges before you submit.
+            Simulate realistic scoring from Technical, Product, and Design judges before submitting your project.
           </p>
         </div>
 
@@ -102,6 +103,19 @@ export default function Judge() {
           )}
           <span>{isSimulating ? simulationStep || 'Simulating…' : 'Run Judge Simulation'}</span>
         </button>
+      </div>
+
+      {/* Student Guidance Banner */}
+      <div className="p-3.5 rounded-xl glass-panel border border-accent/20 bg-accent/[0.02] flex items-start gap-3 shadow-ambient">
+        <div className="w-7 h-7 rounded-lg bg-accent/15 border border-accent/25 flex items-center justify-center text-accent-bright shrink-0 mt-0.5">
+          <Lightbulb className="w-3.5 h-3.5" />
+        </div>
+        <div className="text-xs">
+          <p className="font-medium text-fg">Pro-Tip for CS/IT Students &amp; First-Timers:</p>
+          <p className="text-secondary text-2xs mt-0.5 leading-relaxed">
+            Real hackathon judges only have 2 to 3 minutes per team. If a judge gives your project a lower score below, click <strong className="text-fg">"Turn Fix into NOW Task"</strong> to automatically generate the code task that addresses their specific feedback!
+          </p>
+        </div>
       </div>
 
       {/* Persona Filters */}

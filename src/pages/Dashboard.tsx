@@ -9,6 +9,8 @@ import {
   Play,
   Check,
   ChevronRight,
+  ChevronDown,
+  ChevronUp,
   Info,
   ExternalLink,
   Target,
@@ -17,6 +19,8 @@ import {
   Scissors,
   TrendingUp,
   Cpu,
+  BookOpen,
+  Lightbulb,
 } from 'lucide-react';
 import { CubeLogo } from '@/components/common/CubeLogo';
 import { toast } from 'sonner';
@@ -27,6 +31,7 @@ export default function Dashboard() {
     useHackMaxStore();
 
   const [showScoreDrivers, setShowScoreDrivers] = useState(false);
+  const [showGuide, setShowGuide] = useState(true);
   const [secondsRemaining, setSecondsRemaining] = useState(0);
 
   // Active hackathon
@@ -92,17 +97,25 @@ export default function Dashboard() {
             <h1 className="text-lg font-semibold text-fg tracking-snug">Command Center</h1>
             <span className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-2xs font-mono font-medium">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              Live Telemetry
+              Live Sprint Status
             </span>
           </div>
           <p className="text-secondary text-xs mt-0.5">
-            Optimizing submission quality per hour remaining for{' '}
+            Prioritizing highest-impact tasks for{' '}
             <span className="text-fg font-medium">{active.title}</span>
           </p>
         </div>
 
         {/* Action buttons */}
         <div className="flex items-center gap-2">
+          <button
+            onClick={() => setShowGuide(!showGuide)}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/[0.03] hover:bg-white/[0.06] border border-white/[0.06] text-xs font-medium text-secondary hover:text-fg transition-all active:scale-[0.97]"
+          >
+            <BookOpen className="w-3.5 h-3.5 text-accent-bright" />
+            <span>Survival Guide</span>
+            {showGuide ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
+          </button>
           <button
             onClick={() => navigate(`/hackathons/${active.id}`)}
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/[0.03] hover:bg-white/[0.06] border border-white/[0.06] text-xs font-medium text-secondary hover:text-fg transition-all active:scale-[0.97]"
@@ -115,10 +128,69 @@ export default function Dashboard() {
             className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-accent hover:bg-accent-bright text-white text-xs font-medium shadow-ambient transition-all active:scale-[0.97]"
           >
             <Sparkles className="w-3.5 h-3.5" />
-            <span>AI Judge Check</span>
+            <span>AI Practice Judge</span>
           </button>
         </div>
       </div>
+
+      {/* Beginner Survival Guide (Noob to Podium) */}
+      {showGuide && (
+        <div className="glass-panel rounded-xl p-4 border border-accent/20 bg-accent/[0.02] shadow-ambient relative animate-fade-up">
+          <div className="flex items-center justify-between pb-2 mb-3 border-b border-white/[0.05]">
+            <div className="flex items-center gap-2">
+              <div className="w-5 h-5 rounded-md bg-accent/15 border border-accent/25 flex items-center justify-center text-accent-bright">
+                <Lightbulb className="w-3 h-3" />
+              </div>
+              <h3 className="font-semibold text-xs text-fg">Hackathon Survival Guide (Noob to Podium)</h3>
+              <span className="text-2xs text-ink-faint font-mono hidden sm:inline">• 4 core rules every CS & engineering student should follow</span>
+            </div>
+            <button
+              onClick={() => setShowGuide(false)}
+              className="text-2xs text-ink-faint hover:text-fg font-mono transition-colors"
+            >
+              Hide Guide
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
+            <div className="p-3 rounded-lg bg-white/[0.02] border border-white/[0.05]">
+              <div className="flex items-center gap-1.5 text-accent-bright font-medium text-2xs mb-1 font-mono">
+                <span>📹 Rule 1: Video is 80%</span>
+              </div>
+              <p className="text-2xs text-secondary leading-relaxed">
+                Judges have under 2 minutes per project. A working 90-second screen recording beats 10,000 lines of invisible code that crashes.
+              </p>
+            </div>
+
+            <div className="p-3 rounded-lg bg-white/[0.02] border border-white/[0.05]">
+              <div className="flex items-center gap-1.5 text-emerald-400 font-medium text-2xs mb-1 font-mono">
+                <span>🎯 Rule 2: Build MVP First</span>
+              </div>
+              <p className="text-2xs text-secondary leading-relaxed">
+                Don't build auth, password resets, or account settings first! Build the ONE magical core feature that solves the problem.
+              </p>
+            </div>
+
+            <div className="p-3 rounded-lg bg-white/[0.02] border border-white/[0.05]">
+              <div className="flex items-center gap-1.5 text-amber-400 font-medium text-2xs mb-1 font-mono">
+                <span>🚀 Rule 3: Deploy Early</span>
+              </div>
+              <p className="text-2xs text-secondary leading-relaxed">
+                Deploy to Vercel, Railway, or Streamlit 3 hours before the deadline. Avoid the dreaded 11:55 PM build & CORS panic.
+              </p>
+            </div>
+
+            <div className="p-3 rounded-lg bg-white/[0.02] border border-white/[0.05]">
+              <div className="flex items-center gap-1.5 text-red-400 font-medium text-2xs mb-1 font-mono">
+                <span>✂️ Rule 4: Cut Unfinished Stuff</span>
+              </div>
+              <p className="text-2xs text-secondary leading-relaxed">
+                If you have &lt; 4 hours left, stop starting new features. Drop unfinished tasks with 1 click so judges only see polished, working parts.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Main 3-Column Core Telemetry Row */}
       <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
@@ -201,8 +273,8 @@ export default function Dashboard() {
             <svg className="w-32 h-32 -rotate-90" viewBox="0 0 100 100">
               <defs>
                 <linearGradient id="scoreGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#6366f1" />
-                  <stop offset="100%" stopColor="#10b981" />
+                  <stop offset="0%" stopColor="#3b82f6" />
+                  <stop offset="100%" stopColor="#38d9f5" />
                 </linearGradient>
               </defs>
               <circle cx="50" cy="50" r="42" fill="none" stroke="rgba(255,255,255,0.05)" strokeWidth="6" />
@@ -374,7 +446,7 @@ export default function Dashboard() {
           <div className="flex items-center justify-between pb-2.5 mb-2.5 border-b border-white/[0.06]">
             <div className="flex items-center gap-2">
               <Sparkles className="w-4 h-4 text-accent-bright" />
-              <h3 className="font-semibold text-xs text-fg">Transparent Max Score Drivers (0–100)</h3>
+              <h3 className="font-semibold text-xs text-fg">How Your Max Score is Calculated (0–100)</h3>
             </div>
             <button
               onClick={() => setShowScoreDrivers(false)}
@@ -387,49 +459,49 @@ export default function Dashboard() {
           <div className="grid grid-cols-1 sm:grid-cols-4 gap-3 text-xs">
             <div className="p-3 rounded-lg bg-white/[0.02] border border-white/[0.05]">
               <div className="flex items-center justify-between text-ink-faint mb-1 font-mono text-2xs">
-                <span>Judging Criteria</span>
+                <span>1. Judging Criteria</span>
                 <span className="text-accent-bright">50% weight</span>
               </div>
               <p className="text-sm font-semibold text-fg font-mono">7.8 / 10</p>
               <p className="text-2xs text-secondary mt-1 leading-snug">
-                Weighted average across Innovation, Tech, UX, Impact, and Pitch.
+                Scores across Innovation, Technical Complexity, UI/UX, and Pitch clarity.
               </p>
             </div>
 
             <div className="p-3 rounded-lg bg-white/[0.02] border border-white/[0.05]">
               <div className="flex items-center justify-between text-ink-faint mb-1 font-mono text-2xs">
-                <span>Checklist Verification</span>
+                <span>2. Submission Checklist</span>
                 <span className="text-accent-bright">20% weight</span>
               </div>
               <p className="text-sm font-semibold text-fg font-mono">
                 {Math.round((doneChecks.length / Math.max(checklist.length, 1)) * 100)}% verified
               </p>
               <p className="text-2xs text-secondary mt-1 leading-snug">
-                Working demo & repo checked. Video upload pending.
+                Essential links: Working demo link, clean GitHub repo, and 2-minute video.
               </p>
             </div>
 
             <div className="p-3 rounded-lg bg-white/[0.02] border border-white/[0.05]">
               <div className="flex items-center justify-between text-ink-faint mb-1 font-mono text-2xs">
-                <span>Plan Execution</span>
+                <span>3. Core Task Execution</span>
                 <span className="text-accent-bright">20% weight</span>
               </div>
               <p className="text-sm font-semibold text-fg font-mono">
                 {Math.round((doneTasks.length / Math.max(activeTasks.length, 1)) * 100)}% done
               </p>
               <p className="text-2xs text-secondary mt-1 leading-snug">
-                Impact-weighted task completion in NOW / NEXT stages.
+                Completing highest-impact NOW tasks that directly boost judging points.
               </p>
             </div>
 
             <div className="p-3 rounded-lg bg-white/[0.02] border border-white/[0.05]">
               <div className="flex items-center justify-between text-ink-faint mb-1 font-mono text-2xs">
-                <span>Urgency Modifier</span>
+                <span>4. Deadline Buffer</span>
                 <span className="text-accent-bright">10% buffer</span>
               </div>
               <p className="text-sm font-semibold text-amber-400 font-mono">0.95x modifier</p>
               <p className="text-2xs text-secondary mt-1 leading-snug">
-                Paced execution buffer based on remaining competition window.
+                Pacing buffer to ensure you finish 2 hours early without burning out.
               </p>
             </div>
           </div>

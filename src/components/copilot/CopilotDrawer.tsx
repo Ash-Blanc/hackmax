@@ -5,7 +5,6 @@ import {
   Send,
   Scissors,
   ArrowRight,
-  TrendingUp,
   Lightbulb,
   Check,
   Flame,
@@ -14,6 +13,8 @@ import {
   ShieldCheck,
   User,
   CornerDownLeft,
+  Video,
+  Award,
 } from 'lucide-react';
 import { useHackMaxStore } from '@/lib/store';
 import { CubeLogo } from '@/components/common/CubeLogo';
@@ -25,7 +26,7 @@ interface CopilotDrawerProps {
 }
 
 interface ActionCardData {
-  type: 'cut_tasks' | 'next_action' | 'pitch_variants' | 'judge_fix';
+  type: 'cut_tasks' | 'next_action' | 'pitch_variants' | 'judge_fix' | 'video_script' | 'judging_rubric';
   title: string;
   description?: string;
   buttonText?: string;
@@ -53,7 +54,7 @@ export default function CopilotDrawer({ open, onClose }: CopilotDrawerProps) {
     {
       id: 'm-init',
       sender: 'max',
-      text: `Hey Ash! I'm Max, your hackathon AI copilot. I'm actively analyzing your repo telemetry, criteria weights, and deadline clock for "${primaryHackathon?.title}". You have ${Math.round(hoursRemaining)} hours remaining with a live Max Score of ${liveMaxScore}/100. Ask me what to prioritize, what to cut, or how to boost your judging score.`,
+      text: `Hey Ash! I'm Max, your hackathon mentor and AI copilot. Whether this is your first hackathon or your tenth, I'm here to help you prioritize your core MVP, script a winning 2-minute demo video, and submit on time. You currently have ${Math.round(hoursRemaining)} hours remaining with a live Max Score of ${liveMaxScore}/100. Ask me what to prioritize, what tasks to cut, or how to win your prize track!`,
     },
   ]);
 
@@ -122,7 +123,80 @@ export default function CopilotDrawer({ open, onClose }: CopilotDrawerProps) {
             meta: { taskId: nextTask?.id, status: nextTask?.status },
           },
         };
-      } else if (lower.includes('pitch') || lower.includes('hook') || lower.includes('narrative') || lower.includes('script')) {
+      } else if (lower.includes('video') || lower.includes('script')) {
+        reply = {
+          id: `m-${Date.now()}`,
+          sender: 'max',
+          text: `Here is the proven 2-minute (120s) hackathon video formula used by podium winners. Judges watch dozens of submissions—following this structure guarantees maximum retention and points:`,
+          actionCard: {
+            type: 'video_script',
+            title: 'Winning 2-Minute Demo Video Script',
+            meta: {
+              parts: [
+                {
+                  time: '0:00 - 0:20',
+                  phase: '1. The Problem Hook',
+                  script: 'Start directly with the human pain: "Have you ever tried to ... and spent 3 hours stuck? We faced this exact issue."',
+                  tip: 'Do NOT show code or architecture yet. Establish empathy and problem urgency.',
+                },
+                {
+                  time: '0:20 - 0:45',
+                  phase: '2. The Solution & Value',
+                  script: '"Introducing HackMax: the autonomous AI workspace that turns that 3-hour struggle into a 15-second 1-click workflow."',
+                  tip: 'State your 1-sentence value proposition clearly without technical buzzwords.',
+                },
+                {
+                  time: '0:45 - 1:40',
+                  phase: '3. Live Working Software',
+                  script: '"Let us show you how it works in real time. Watch what happens when I click here..." (Click through core workflow)',
+                  tip: '80% of points come from this! Show the actual running software. Never use static slide decks.',
+                },
+                {
+                  time: '1:40 - 2:00',
+                  phase: '4. Tech Stack & What Next',
+                  script: '"We built this using React, TypeScript, and FastAPI. In the future, we plan to expand with multi-agent orchestration. Thank you!"',
+                  tip: 'Briefly mention sponsor APIs/models used (to win partner bounties) and keep it under 2 minutes.',
+                },
+              ],
+              fullTemplate: `[0:00 - 0:20] THE HOOK\n"Have you ever tried to build something under extreme pressure, only to waste 3 hours on setup? We faced this exact issue."\n\n[0:20 - 0:45] THE SOLUTION\n"Meet HackMax: the autonomous AI copilot that optimizes your workflow and ensures you ship on time."\n\n[0:45 - 1:40] LIVE WORKING DEMO\n"Here is the live running software. Notice how clicking this action immediately calculates and executes the highest-impact task..."\n\n[1:40 - 2:00] TECH STACK & BOUNTIES\n"Built with React, Vite, and AI APIs. Thank you for watching!"`,
+            },
+          },
+        };
+      } else if (lower.includes('judge') || lower.includes('grade') || lower.includes('rubric')) {
+        reply = {
+          id: `m-${Date.now()}`,
+          sender: 'max',
+          text: `Hackathon judges typically evaluate your submission in just 2 to 3 minutes. Here is the standard 4-pillar rubric decoded for students:`,
+          actionCard: {
+            type: 'judging_rubric',
+            title: 'How Hackathon Judges Grade (Rubric Breakdown)',
+            meta: {
+              criteria: [
+                {
+                  name: 'Technical Execution (30%)',
+                  what: 'Does your demo actually work live without crashing?',
+                  proTip: 'A live deployed URL (e.g. on Vercel/Render) beats localhost screenshots every single time.',
+                },
+                {
+                  name: 'Innovation & Originality (25%)',
+                  what: 'Is this a novel approach or an unexpected combination of APIs?',
+                  proTip: 'Even if the problem is common, show a unique angle or novel multi-agent interaction.',
+                },
+                {
+                  name: 'UI/UX & Product Polish (25%)',
+                  what: 'Is the interface clear, intuitive, and beginner-friendly?',
+                  proTip: 'Judges shouldn\'t need a tutorial. Clean spacing, working buttons, and zero dead links win points.',
+                },
+                {
+                  name: 'Real-World Impact (20%)',
+                  what: 'Would real users or students actually use this on Monday morning?',
+                  proTip: 'Clearly show who benefits from this tool and why existing alternatives fall short.',
+                },
+              ],
+            },
+          },
+        };
+      } else if (lower.includes('pitch') || lower.includes('hook') || lower.includes('narrative')) {
         reply = {
           id: `m-${Date.now()}`,
           sender: 'max',
@@ -181,7 +255,7 @@ export default function CopilotDrawer({ open, onClose }: CopilotDrawerProps) {
         reply = {
           id: `m-${Date.now()}`,
           sender: 'max',
-          text: `Analyzing "${userText}" against your active project DNA and criteria weights... My recommendation is to focus 100% of remaining energy on end-to-end demo flow. Would you like me to generate pitch hooks or prune non-essential backlog tasks?`,
+          text: `Analyzing "${userText}" against your active project DNA and criteria weights... My recommendation is to focus 100% of remaining energy on end-to-end demo flow. Would you like me to generate pitch hooks, script your 2-minute demo video, or prune non-essential backlog tasks?`,
         };
       }
 
@@ -231,10 +305,10 @@ export default function CopilotDrawer({ open, onClose }: CopilotDrawerProps) {
       {/* Suggested chips (Cursor Context Pills) */}
       <div className="px-3 py-2 border-b border-white/[0.04] bg-bg/20 flex gap-1.5 overflow-x-auto no-scrollbar">
         {[
-          { label: 'What to cut?', icon: Scissors },
-          { label: 'Next action?', icon: ArrowRight },
-          { label: 'Pitch hooks', icon: Lightbulb },
-          { label: 'Score track', icon: TrendingUp },
+          { label: 'What to build next?', icon: ArrowRight },
+          { label: 'Script 2-min video', icon: Video },
+          { label: 'What tasks to cut?', icon: Scissors },
+          { label: 'How do judges grade?', icon: Award },
         ].map((chip) => (
           <button
             key={chip.label}
@@ -451,6 +525,88 @@ export default function CopilotDrawer({ open, onClose }: CopilotDrawerProps) {
                       <Plus className="w-3.5 h-3.5" />
                       <span>{m.actionCard.buttonText}</span>
                     </button>
+                  </div>
+                )}
+
+                {/* Variant 5: 2-Minute Video Script Generator */}
+                {m.actionCard.type === 'video_script' && (
+                  <div>
+                    <div className="flex items-center justify-between pb-2 mb-2 border-b border-white/[0.06]">
+                      <div className="flex items-center gap-1.5">
+                        <Video className="w-3.5 h-3.5 text-accent-bright" />
+                        <h4 className="text-xs font-medium text-fg">{m.actionCard.title}</h4>
+                      </div>
+                      <span className="text-2xs font-mono text-emerald-400 font-medium">120s Limit</span>
+                    </div>
+
+                    <div className="space-y-2 max-h-56 overflow-y-auto no-scrollbar my-2">
+                      {m.actionCard.meta.parts?.map((p: any, idx: number) => (
+                        <div
+                          key={idx}
+                          className="p-2.5 rounded-lg bg-white/[0.02] border border-white/[0.05] text-xs space-y-1"
+                        >
+                          <div className="flex items-center justify-between">
+                            <span className="font-semibold text-fg text-2xs">{p.phase}</span>
+                            <span className="font-mono text-2xs text-accent-bright px-1.5 py-0.2 rounded bg-accent/10 border border-accent/20">
+                              {p.time}
+                            </span>
+                          </div>
+                          <p className="text-2xs text-secondary italic leading-relaxed">
+                            {p.script}
+                          </p>
+                          <p className="text-3xs text-ink-muted leading-tight">
+                            💡 {p.tip}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+
+                    <button
+                      onClick={() => {
+                        navigator.clipboard.writeText(m.actionCard?.meta.fullTemplate);
+                        toast.success('Copied full 2-minute video script to clipboard!');
+                      }}
+                      className="w-full mt-2 py-2 px-3 rounded-lg bg-accent hover:bg-accent-bright text-white text-xs font-medium shadow-ambient transition-all flex items-center justify-center gap-1.5 active:scale-[0.97]"
+                    >
+                      <Copy className="w-3.5 h-3.5" />
+                      <span>Copy Full Script Template</span>
+                    </button>
+                  </div>
+                )}
+
+                {/* Variant 6: Hackathon Judging Rubric Breakdown */}
+                {m.actionCard.type === 'judging_rubric' && (
+                  <div>
+                    <div className="flex items-center justify-between pb-2 mb-2 border-b border-white/[0.06]">
+                      <div className="flex items-center gap-1.5">
+                        <Award className="w-3.5 h-3.5 text-amber-400" />
+                        <h4 className="text-xs font-medium text-fg">{m.actionCard.title}</h4>
+                      </div>
+                      <span className="text-2xs font-mono text-amber-400 font-medium">4 Pillars</span>
+                    </div>
+
+                    <div className="space-y-2 max-h-56 overflow-y-auto no-scrollbar my-2">
+                      {m.actionCard.meta.criteria?.map((c: any, idx: number) => (
+                        <div
+                          key={idx}
+                          className="p-2.5 rounded-lg bg-white/[0.02] border border-white/[0.05] text-xs space-y-1"
+                        >
+                          <div className="flex items-center justify-between">
+                            <span className="font-semibold text-fg text-2xs">{c.name}</span>
+                          </div>
+                          <p className="text-2xs text-secondary leading-relaxed">
+                            {c.what}
+                          </p>
+                          <p className="text-3xs text-accent-bright leading-tight">
+                            🏆 {c.proTip}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+
+                    <p className="text-3xs text-ink-faint text-center mt-2 font-mono">
+                      Tip: Use "AI Practice Judge" in the sidebar to simulate scoring anytime.
+                    </p>
                   </div>
                 )}
               </div>

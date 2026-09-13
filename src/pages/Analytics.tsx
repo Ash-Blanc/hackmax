@@ -5,6 +5,7 @@ import {
   ShieldAlert,
   Flame,
   ArrowUpRight,
+  Lightbulb,
 } from 'lucide-react';
 import {
   ResponsiveContainer,
@@ -52,13 +53,13 @@ export default function Analytics() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-white/[0.05]">
         <div>
           <div className="flex items-center gap-2.5">
-            <h1 className="text-lg font-semibold text-fg tracking-snug">Analytics & Trajectory</h1>
+            <h1 className="text-lg font-semibold text-fg tracking-snug">Progress & Score Analytics</h1>
             <span className="px-2 py-0.5 rounded-full bg-accent/10 border border-accent/20 text-accent-bright text-2xs font-mono font-medium">
-              Readiness Telemetry
+              Readiness Overview
             </span>
           </div>
           <p className="text-secondary text-xs mt-0.5">
-            Historical progression, impact vs effort distribution, and anti-slop intelligence.
+            Sprint trajectory, time allocation, and advice to maximize your final score.
           </p>
         </div>
       </div>
@@ -77,7 +78,7 @@ export default function Analytics() {
               <ArrowUpRight className="w-3 h-3" /> +16 pts
             </span>
           </div>
-          <p className="text-2xs text-secondary mt-1">Top 15% percentile among submissions.</p>
+          <p className="text-2xs text-secondary mt-1">Estimated judging readiness benchmark.</p>
         </div>
 
         <div className="glass-panel rounded-xl p-4 border border-white/[0.05]">
@@ -91,13 +92,13 @@ export default function Analytics() {
             </span>
             <span className="text-2xs text-ink-faint font-mono">left</span>
           </div>
-          <p className="text-2xs text-secondary mt-1">Critical submission window is active.</p>
+          <p className="text-2xs text-secondary mt-1">Aim to finish code 2 hours before deadline.</p>
         </div>
 
         <div className="glass-panel rounded-xl p-4 border border-white/[0.05]">
           <div className="flex items-center gap-1.5 text-ink-faint mb-1.5 font-mono text-2xs">
             <Flame className="w-3.5 h-3.5 text-red-400" />
-            <span className="uppercase tracking-wider">High Impact Ratio</span>
+            <span className="uppercase tracking-wider">High Impact Focus</span>
           </div>
           <div className="flex items-baseline gap-1.5">
             <span className="text-2xl font-bold font-mono text-fg">
@@ -109,19 +110,19 @@ export default function Analytics() {
               %
             </span>
           </div>
-          <p className="text-2xs text-secondary mt-1">Effort allocated to judging drivers.</p>
+          <p className="text-2xs text-secondary mt-1">Effort on core features judges evaluate.</p>
         </div>
 
         <div className="glass-panel rounded-xl p-4 border border-white/[0.05]">
           <div className="flex items-center gap-1.5 text-ink-faint mb-1.5 font-mono text-2xs">
             <ShieldAlert className="w-3.5 h-3.5 text-accent-bright" />
-            <span className="uppercase tracking-wider">Anti-Slop Ratio</span>
+            <span className="uppercase tracking-wider">Scope Buffer (Cuttable)</span>
           </div>
           <div className="flex items-baseline gap-1.5">
             <span className="text-2xl font-bold font-mono text-accent-bright">{antiSlopRatio}%</span>
-            <span className="text-2xs text-ink-faint font-mono">low priority</span>
+            <span className="text-2xs text-ink-faint font-mono">optional</span>
           </div>
-          <p className="text-2xs text-secondary mt-1">Tasks cuttable under deadline pressure.</p>
+          <p className="text-2xs text-secondary mt-1">Tasks you can drop to save time.</p>
         </div>
       </div>
 
@@ -195,30 +196,39 @@ export default function Analytics() {
         </div>
       </div>
 
-      {/* Anti-Slop Insights & Criteria Breakdown */}
+      {/* Hackathon Insights & Criteria Breakdown */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
-        {/* Anti-Slop Insights Callouts */}
+        {/* Hackathon Tips & Time Traps */}
         <div className="lg:col-span-6 glass-panel rounded-xl p-5 border border-white/[0.05] space-y-2.5">
           <div className="flex items-center gap-1.5 mb-1.5">
-            <ShieldAlert className="w-4 h-4 text-red-400" />
-            <h3 className="font-semibold text-xs text-fg">Anti-Slop AI Warnings</h3>
+            <Lightbulb className="w-4 h-4 text-amber-400" />
+            <h3 className="font-semibold text-xs text-fg">Hackathon Golden Rules & Time Traps</h3>
           </div>
 
           <div className="p-3 rounded-lg bg-red-500/5 border border-red-500/15">
             <span className="text-2xs font-medium text-red-400 uppercase tracking-wider font-mono block mb-0.5">
-              Warning: CSS & Micro-Polishing Trap
+              Time Trap: CSS & Button Tweaking
             </span>
             <p className="text-2xs text-secondary leading-relaxed">
-              Hackathon participants spend an average of 38% of final hours on CSS tweaks that judges spend 0 seconds reviewing. Prioritize your 2-minute demo video.
+              Hackathon teams lose points spending 4+ hours on CSS shadows while the core API crashes. Judges test functionality and concept first.
             </p>
           </div>
 
           <div className="p-3 rounded-lg bg-amber-500/5 border border-amber-500/15">
             <span className="text-2xs font-medium text-amber-400 uppercase tracking-wider font-mono block mb-0.5">
-              The 15-Second Judge Rule
+              Pitch Rule: The 15-Second Software Hook
             </span>
             <p className="text-2xs text-secondary leading-relaxed">
-              Hackathon judges review dozens of projects per track. If your demo video spends more than 20 seconds on slides before showing live software, retention drops 65%.
+              Judges watch dozens of submissions. Show your working software in the first 15 seconds of your demo video before talking about architecture.
+            </p>
+          </div>
+
+          <div className="p-3 rounded-lg bg-emerald-500/5 border border-emerald-500/15">
+            <span className="text-2xs font-medium text-emerald-400 uppercase tracking-wider font-mono block mb-0.5">
+              Pro-Tip: Working Deployed Demo &gt; Localhost
+            </span>
+            <p className="text-2xs text-secondary leading-relaxed">
+              Judges will not clone your repo or troubleshoot node modules. A live link (Vercel, Railway, Streamlit) gives your team instant credibility.
             </p>
           </div>
         </div>

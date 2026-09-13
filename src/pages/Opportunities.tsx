@@ -96,13 +96,13 @@ export default function Opportunities() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-white/[0.05]">
         <div>
           <div className="flex items-center gap-2.5">
-            <h1 className="text-lg font-semibold text-fg tracking-snug">Opportunities</h1>
+            <h1 className="text-lg font-semibold text-fg tracking-snug">Find Hackathons &amp; Bounties</h1>
             <span className="px-2 py-0.5 rounded-full bg-accent/10 border border-accent/20 text-accent-bright text-2xs font-mono font-medium">
-              Cross-Hackathon DNA
+              Smart Track Match
             </span>
           </div>
           <p className="text-secondary text-xs mt-0.5">
-            Discover upcoming hackathons matched against your project's reusable capabilities.
+            Discover upcoming hackathons where your skills and starter code give you an unfair advantage.
           </p>
         </div>
       </div>
@@ -113,10 +113,10 @@ export default function Opportunities() {
           <div>
             <div className="flex items-center gap-1.5 mb-1">
               <Crosshair className="w-3.5 h-3.5 text-accent-bright" />
-              <h3 className="font-semibold text-xs text-fg">Active DNA: {project.name}</h3>
+              <h3 className="font-semibold text-xs text-fg">Active Starter Project: {project.name}</h3>
             </div>
             <p className="text-2xs text-secondary leading-relaxed">
-              Matching engine analyzes your tech stack and reusable components to compute code adaptation %:
+              We analyze your tech stack and reusable components to show which hackathons you can build for fastest:
             </p>
             <div className="flex flex-wrap gap-1 mt-2">
               {project.capabilities.map((c) => (

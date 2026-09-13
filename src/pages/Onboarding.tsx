@@ -102,7 +102,7 @@ export default function Onboarding() {
               Welcome to HackMax
             </h2>
             <p className="text-secondary text-xs mt-2 max-w-sm mx-auto leading-relaxed">
-              Your AI copilot engineered to maximize submission quality per hour remaining. Not a generic to-do list.
+              Built for CS, ECE, IT students & developers. Max guides you from first-time hacker to podium winner with zero deadline panic.
             </p>
             <div className="mt-5 p-3.5 rounded-lg bg-white/[0.02] border border-white/[0.05] text-xs text-left space-y-2">
               <div className="flex items-center gap-2 text-fg">
@@ -111,7 +111,7 @@ export default function Onboarding() {
               </div>
               <div className="flex items-center gap-2 text-fg">
                 <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-                <span className="text-2xs">Multi-perspective AI judge simulation</span>
+                <span className="text-2xs">AI Practice Judge simulating technical & product rubrics</span>
               </div>
               <div className="flex items-center gap-2 text-fg">
                 <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
@@ -141,19 +141,19 @@ export default function Onboarding() {
             <div className="space-y-2">
               {[
                 {
+                  id: 'first_time',
+                  title: '🎓 First Hackathon Finish (Student MVP)',
+                  desc: 'Focus on shipping a working MVP, recording your demo video, and submitting on time.',
+                },
+                {
                   id: 'win_more',
                   title: '🏆 Win Track & Grand Prizes',
                   desc: 'Heavy weighting on novel innovation, presentation narrative, and judging alignment.',
                 },
                 {
-                  id: 'ship_faster',
-                  title: '⚡ Ship Fast & Clean Code',
-                  desc: 'Focus on code reuse, robust scaffolding, and zero breaking bugs.',
-                },
-                {
                   id: 'portfolio',
-                  title: '🎯 Portfolio & Technical Credibility',
-                  desc: 'Emphasize architectural depth, clean README documentation, and open source stars.',
+                  title: '🎯 Portfolio & Startup Project',
+                  desc: 'Clean architecture, polished live demo URL, and reusable starter components.',
                 },
                 {
                   id: 'all_of_above',
@@ -364,8 +364,8 @@ export default function Onboarding() {
                 <span className="font-medium text-fg text-2xs">Finish core agent workflow</span>
               </div>
               <div className="flex items-center justify-between text-xs">
-                <span className="text-ink-faint text-2xs">Anti-Slop Protection</span>
-                <span className="text-emerald-400 font-medium text-2xs">Active (Demo video priority)</span>
+                <span className="text-ink-faint text-2xs">Hackathon Golden Rule</span>
+                <span className="text-emerald-400 font-medium text-2xs">Active (Demo video + live URL first)</span>
               </div>
             </div>
 

@@ -8,6 +8,7 @@ import {
   Layers,
   ArrowRight,
   X,
+  Lightbulb,
 } from 'lucide-react';
 import { toast } from 'sonner';
 import type { Project } from '@/types';
@@ -59,13 +60,13 @@ export default function Projects() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-white/[0.05]">
         <div>
           <div className="flex items-center gap-2.5">
-            <h1 className="text-lg font-semibold text-fg tracking-snug">Projects & DNA</h1>
+            <h1 className="text-lg font-semibold text-fg tracking-snug">Projects &amp; Reusable Code</h1>
             <span className="px-2 py-0.5 rounded-full bg-accent/10 border border-accent/20 text-accent-bright text-2xs font-mono font-medium">
               {state.projects.length} Repositories Connected
             </span>
           </div>
           <p className="text-secondary text-xs mt-0.5">
-            Manage your project DNA, reusable components, and connected hackathon repositories.
+            Save your starter templates, auth setups, and components to kickstart future hackathons.
           </p>
         </div>
 
@@ -74,8 +75,21 @@ export default function Projects() {
           className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-accent hover:bg-accent-bright text-white text-xs font-medium shadow-ambient transition-all active:scale-[0.97]"
         >
           <Plus className="w-3.5 h-3.5" />
-          <span>New Project DNA</span>
+          <span>Add Project / Template</span>
         </button>
+      </div>
+
+      {/* Student Tip Card */}
+      <div className="p-3.5 rounded-xl glass-panel border border-accent/20 bg-accent/[0.02] flex items-start gap-3 shadow-ambient">
+        <div className="w-7 h-7 rounded-lg bg-accent/15 border border-accent/25 flex items-center justify-center text-accent-bright shrink-0 mt-0.5">
+          <Lightbulb className="w-3.5 h-3.5" />
+        </div>
+        <div className="text-xs">
+          <p className="font-medium text-fg">Why Keep Reusable Starter Projects?</p>
+          <p className="text-secondary text-2xs mt-0.5 leading-relaxed">
+            Winning hackathoners never code basic database setups, auth forms, or UI layouts from scratch. Keeping your starter code here allows you to launch prototypes 10x faster and spend all your competition hours on the core challenge feature.
+          </p>
+        </div>
       </div>
 
       {/* Projects Grid */}

@@ -218,11 +218,11 @@ export default function CommandPalette({ open, onOpenChange, onOpenCopilot }: Co
               {[
                 { to: '/dashboard', label: 'Command Center', icon: LayoutGrid, chord: 'G D' },
                 { to: '/hackathons', label: 'My Hackathons', icon: Trophy, chord: 'G H' },
-                { to: '/projects', label: 'Projects & DNA', icon: Boxes, chord: 'G P' },
-                { to: '/judge', label: 'Judge Mode', icon: Scale, chord: 'G J' },
-                { to: '/opportunities', label: 'Opportunities & Reuse', icon: Crosshair, chord: 'G O' },
-                { to: '/analytics', label: 'Analytics & Trajectory', icon: Activity, chord: 'G A' },
-                { to: '/github', label: 'GitHub Telemetry', icon: Github, chord: 'G T' },
+                { to: '/judge', label: 'AI Practice Judge', icon: Scale, chord: 'G J' },
+                { to: '/opportunities', label: 'Find Hackathons', icon: Crosshair, chord: 'G O' },
+                { to: '/projects', label: 'Projects & Code', icon: Boxes, chord: 'G P' },
+                { to: '/analytics', label: 'Progress & Score', icon: Activity, chord: 'G A' },
+                { to: '/github', label: 'GitHub Sync', icon: Github, chord: 'G T' },
                 { to: '/settings', label: 'Settings', icon: SlidersHorizontal, chord: 'G S' },
               ].map(({ to, label, icon: Icon, chord }) => (
                 <Command.Item

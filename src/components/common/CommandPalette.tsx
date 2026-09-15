@@ -3,18 +3,16 @@ import { useNavigate } from 'react-router-dom';
 import { Command } from 'cmdk';
 import {
   LayoutGrid,
-  Trophy,
   Boxes,
   Scale,
   Crosshair,
-  Activity,
-  Github,
   SlidersHorizontal,
   Sparkles,
   ToggleLeft,
   Search,
   Scissors,
   Flame,
+  Layers,
 } from 'lucide-react';
 import { useHackMaxStore } from '@/lib/store';
 import { toast } from 'sonner';
@@ -56,6 +54,10 @@ export default function CommandPalette({ open, onOpenChange, onOpenCopilot }: Co
           navigate('/dashboard');
           toast.info('Jumped to Command Center (G D)');
           navigated = true;
+        } else if (key === 'w') {
+          navigate('/workspace');
+          toast.info('Jumped to Sprint Workspace (G W)');
+          navigated = true;
         } else if (key === 'h') {
           navigate('/hackathons');
           toast.info('Jumped to Hackathons (G H)');
@@ -77,8 +79,8 @@ export default function CommandPalette({ open, onOpenChange, onOpenCopilot }: Co
           toast.info('Jumped to Progress & Score (G A)');
           navigated = true;
         } else if (key === 't' || key === 'g') {
-          navigate('/github');
-          toast.info('Jumped to GitHub Sync (G T)');
+          navigate('/projects?tab=github');
+          toast.info('Jumped to Git Activity (G T)');
           navigated = true;
         } else if (key === 's') {
           navigate('/settings');
@@ -221,12 +223,10 @@ export default function CommandPalette({ open, onOpenChange, onOpenCopilot }: Co
             >
               {[
                 { to: '/dashboard', label: 'Command Center', icon: LayoutGrid, chord: 'G D' },
-                { to: '/hackathons', label: 'My Hackathons', icon: Trophy, chord: 'G H' },
+                { to: '/workspace', label: 'Sprint Workspace', icon: Layers, chord: 'G W' },
                 { to: '/judge', label: 'AI Practice Judge', icon: Scale, chord: 'G J' },
-                { to: '/opportunities', label: 'Find Hackathons', icon: Crosshair, chord: 'G O' },
                 { to: '/projects', label: 'Projects & Code', icon: Boxes, chord: 'G P' },
-                { to: '/analytics', label: 'Progress & Score', icon: Activity, chord: 'G A' },
-                { to: '/github', label: 'GitHub Sync', icon: Github, chord: 'G T' },
+                { to: '/opportunities', label: 'Find Hackathons', icon: Crosshair, chord: 'G O' },
                 { to: '/settings', label: 'Settings', icon: SlidersHorizontal, chord: 'G S' },
               ].map(({ to, label, icon: Icon, chord }) => (
                 <Command.Item

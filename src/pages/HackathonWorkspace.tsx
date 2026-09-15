@@ -35,9 +35,9 @@ const priorityColors: Record<TaskPriority, string> = {
 export default function HackathonWorkspace() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const { state, liveMaxScore, startTask, completeTask, cutTask, dispatch } = useHackMaxStore();
+  const { state, primaryHackathon, liveMaxScore, startTask, completeTask, cutTask, dispatch } = useHackMaxStore();
 
-  const hackathon = state.hackathons.find((h) => h.id === id) || state.hackathons[0];
+  const hackathon = (id ? state.hackathons.find((h) => h.id === id) : primaryHackathon) || primaryHackathon || state.hackathons[0];
 
   // View state: 'board' vs 'list'
   const [viewMode, setViewMode] = useState<'board' | 'list'>('board');

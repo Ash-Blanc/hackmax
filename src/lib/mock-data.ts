@@ -344,6 +344,7 @@ const getInitialSeed = (): AppState => ({
   demoMode: true,
   onboarded: true,
   githubConnected: true,
+  activeHackathonId: 'hack-1',
 });
 
 export const MOCK_DATA = getInitialSeed();

@@ -4,12 +4,10 @@ import { useHackMaxStore } from '@/lib/store';
 import { cn } from '@/lib/utils';
 import {
   LayoutGrid,
-  Trophy,
+  Layers,
   Boxes,
   Scale,
   Crosshair,
-  Activity,
-  Github,
   SlidersHorizontal,
   Menu,
   X,
@@ -17,8 +15,9 @@ import {
   Search,
   Bell,
   Sparkles,
-  ToggleLeft,
-  ToggleRight,
+  Trophy,
+  ChevronDown,
+  Plus,
 } from 'lucide-react';
 import CommandPalette from '@/components/common/CommandPalette';
 import CopilotDrawer from '@/components/copilot/CopilotDrawer';
@@ -27,13 +26,10 @@ import { toast } from 'sonner';
 
 const navItems = [
   { to: '/dashboard', icon: LayoutGrid, label: 'Command Center', shortcut: '⌘1' },
-  { to: '/hackathons', icon: Trophy, label: 'My Hackathons', shortcut: '⌘2' },
+  { to: '/workspace', icon: Layers, label: 'Sprint Workspace', shortcut: '⌘2' },
   { to: '/judge', icon: Scale, label: 'AI Practice Judge', shortcut: '⌘3' },
-  { to: '/opportunities', icon: Crosshair, label: 'Find Hackathons', shortcut: '⌘4' },
-  { to: '/projects', icon: Boxes, label: 'Projects & Code', shortcut: '⌘5' },
-  { to: '/analytics', icon: Activity, label: 'Progress & Score', shortcut: '⌘6' },
-  { to: '/github', icon: Github, label: 'GitHub Sync', shortcut: '⌘7' },
-  { to: '/settings', icon: SlidersHorizontal, label: 'Settings', shortcut: '⌘8' },
+  { to: '/projects', icon: Boxes, label: 'Projects & Code', shortcut: '⌘4' },
+  { to: '/opportunities', icon: Crosshair, label: 'Find Hackathons', shortcut: '⌘5' },
 ];
 
 export default function Layout() {
@@ -41,8 +37,18 @@ export default function Layout() {
   const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
   const [copilotOpen, setCopilotOpen] = useState(false);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
+  const [hackathonDropdownOpen, setHackathonDropdownOpen] = useState(false);
 
-  const { state, primaryHackathon, liveMaxScore, hoursRemaining, toggleDemo, dispatch } = useHackMaxStore();
+  const {
+    state,
+    primaryHackathon,
+    liveMaxScore,
+    hoursRemaining,
+    toggleDemo,
+    setActiveHackathon,
+    resetSampleData,
+    dispatch,
+  } = useHackMaxStore();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -169,15 +175,19 @@ export default function Layout() {
 
         {/* Active Sprint Widget */}
         {sidebarOpen && primaryHackathon && (
-          <div className="mx-2 mb-2 p-3 rounded-lg bg-white/[0.03] border border-white/[0.05]">
+          <div
+            onClick={() => navigate('/workspace')}
+            className="mx-2 mb-2 p-3 rounded-lg bg-white/[0.03] hover:bg-white/[0.05] border border-white/[0.05] cursor-pointer transition-colors group"
+            title="Open Active Sprint Workspace"
+          >
             <div className="flex items-center justify-between mb-2">
               <div className="flex items-center gap-1.5">
                 <span className="relative flex h-1.5 w-1.5">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
                   <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
                 </span>
-                <span className="text-2xs text-ink-faint uppercase tracking-wider font-medium font-mono">
-                  Active Sprint
+                <span className="text-2xs text-ink-faint uppercase tracking-wider font-medium font-mono group-hover:text-accent-bright transition-colors">
+                  Active Sprint →
                 </span>
               </div>
             </div>
@@ -198,21 +208,110 @@ export default function Layout() {
             </div>
           </div>
         )}
+
+        {/* Settings Navigation Link */}
+        <div className="px-2 pb-2">
+          <NavLink
+            to="/settings"
+            className={cn(
+              'flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-[13px] transition-all duration-hover group relative',
+              location.pathname === '/settings'
+                ? 'bg-white/[0.06] text-fg font-medium shadow-ambient'
+                : 'text-ink-muted hover:text-fg hover:bg-white/[0.03]'
+            )}
+            title={!sidebarOpen ? 'Settings' : undefined}
+          >
+            <div
+              className={cn(
+                'w-6 h-6 rounded-md flex items-center justify-center shrink-0 transition-all duration-hover',
+                location.pathname === '/settings'
+                  ? 'bg-accent/15 text-accent-bright border border-accent/25'
+                  : 'text-ink-faint group-hover:text-ink-body group-hover:bg-white/[0.04]'
+              )}
+            >
+              <SlidersHorizontal className="w-3.5 h-3.5" />
+            </div>
+            {sidebarOpen && <span className="truncate">Settings</span>}
+          </NavLink>
+        </div>
       </aside>
 
       {/* ── Main Container ── */}
       <main className="flex-1 flex flex-col overflow-hidden relative">
         {/* Top Bar */}
         <header className="h-14 border-b border-white/[0.05] flex items-center justify-between px-5 bg-bg-raised/50 backdrop-blur-xl shrink-0 z-10">
-          {/* Left: Search */}
-          <button
-            onClick={() => setCommandPaletteOpen(true)}
-            className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-surface-2 border border-white/[0.06] text-[13px] text-ink-faint hover:text-ink-body hover:border-white/[0.12] transition-all w-64 text-left group shadow-ambient"
-          >
-            <Search className="w-3.5 h-3.5 text-ink-faint group-hover:text-accent-bright transition-colors" />
-            <span className="flex-1 truncate">Search commands, views…</span>
-            <span className="keycap">⌘K</span>
-          </button>
+          {/* Left: Search & Competition Switcher */}
+          <div className="flex items-center gap-2.5">
+            <button
+              onClick={() => setCommandPaletteOpen(true)}
+              className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-surface-2 border border-white/[0.06] text-[13px] text-ink-faint hover:text-ink-body hover:border-white/[0.12] transition-all w-48 sm:w-56 text-left group shadow-ambient"
+            >
+              <Search className="w-3.5 h-3.5 text-ink-faint group-hover:text-accent-bright transition-colors" />
+              <span className="flex-1 truncate">Search commands…</span>
+              <span className="keycap">⌘K</span>
+            </button>
+
+            {/* Competition Quick Switcher */}
+            <div className="relative">
+              <button
+                onClick={() => setHackathonDropdownOpen(!hackathonDropdownOpen)}
+                className="hidden sm:flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-white/[0.03] hover:bg-white/[0.06] border border-white/[0.06] text-xs text-fg transition-all max-w-[220px] group"
+                title="Switch Active Competition"
+              >
+                <Trophy className="w-3.5 h-3.5 text-accent-bright shrink-0" />
+                <span className="truncate font-medium">{primaryHackathon?.title ?? 'Active Sprint'}</span>
+                <ChevronDown className="w-3 h-3 text-ink-faint group-hover:text-fg shrink-0 transition-transform" />
+              </button>
+
+              {hackathonDropdownOpen && (
+                <div className="absolute left-0 mt-2 w-72 glass-elevated rounded-xl p-2 z-50 animate-fade-up shadow-2xl border border-white/[0.08]">
+                  <div className="px-2.5 py-1.5 text-2xs font-mono uppercase tracking-wider text-ink-faint border-b border-white/[0.06] mb-1 flex items-center justify-between">
+                    <span>Active Competition</span>
+                    <span className="text-accent-bright">{state.hackathons.length} Total</span>
+                  </div>
+                  <div className="space-y-1 max-h-56 overflow-y-auto no-scrollbar">
+                    {state.hackathons.map((h) => {
+                      const isSelected = h.id === primaryHackathon?.id;
+                      return (
+                        <button
+                          key={h.id}
+                          onClick={() => {
+                            setActiveHackathon(h.id);
+                            setHackathonDropdownOpen(false);
+                            toast.success(`Active hackathon switched to ${h.title}`);
+                          }}
+                          className={cn(
+                            'w-full text-left p-2 rounded-lg text-xs transition-colors flex items-center justify-between gap-2',
+                            isSelected
+                              ? 'bg-accent/15 text-accent-bright border border-accent/25 font-medium'
+                              : 'text-ink-body hover:bg-white/[0.04] hover:text-fg'
+                          )}
+                        >
+                          <div className="truncate">
+                            <p className="truncate leading-snug">{h.title}</p>
+                            <p className="text-2xs text-ink-faint font-mono mt-0.5">{h.prizePool} • {h.status}</p>
+                          </div>
+                          {isSelected && <span className="w-1.5 h-1.5 rounded-full bg-accent-cyan shrink-0" />}
+                        </button>
+                      );
+                    })}
+                  </div>
+                  <div className="mt-1 pt-1 border-t border-white/[0.06]">
+                    <button
+                      onClick={() => {
+                        setHackathonDropdownOpen(false);
+                        navigate('/onboarding');
+                      }}
+                      className="w-full text-left px-2.5 py-1.5 rounded-lg text-2xs text-accent-bright hover:bg-accent/10 transition-colors flex items-center gap-1.5 font-medium"
+                    >
+                      <Plus className="w-3 h-3" />
+                      <span>Connect New Competition</span>
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
 
           {/* Right: Actions */}
           <div className="flex items-center gap-2">
@@ -291,23 +390,32 @@ export default function Layout() {
               )}
             </div>
 
-            {/* Demo Mode Toggle */}
-            <button
-              onClick={() => {
-                toggleDemo();
-                toast.info(`Demo Mode ${!state.demoMode ? 'on' : 'off'}`);
-              }}
-              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-white/[0.03] border border-white/[0.06] text-2xs text-ink-muted hover:text-secondary transition-colors"
-              title="Toggle Demo Mode"
-            >
-              <span className={cn('w-1.5 h-1.5 rounded-full', state.demoMode ? 'bg-emerald-400' : 'bg-ink-faint')} />
-              <span className="font-mono">Demo</span>
-              {state.demoMode ? (
-                <ToggleRight className="w-3.5 h-3.5 text-emerald-400" />
-              ) : (
-                <ToggleLeft className="w-3.5 h-3.5 text-ink-faint" />
+            {/* Demo Mode Pill & Reset */}
+            <div className="flex items-center rounded-lg bg-surface-2 border border-white/[0.06] p-0.5">
+              <button
+                onClick={() => {
+                  toggleDemo();
+                  toast.info(`Demo Mode ${!state.demoMode ? 'enabled' : 'disabled'}`);
+                }}
+                className="flex items-center gap-1.5 px-2 py-1 text-2xs text-ink-muted hover:text-fg transition-colors"
+                title="Toggle Demo Mode"
+              >
+                <span className={cn('w-1.5 h-1.5 rounded-full', state.demoMode ? 'bg-emerald-400' : 'bg-ink-faint')} />
+                <span className="font-mono">{state.demoMode ? 'Demo' : 'Live'}</span>
+              </button>
+              {state.demoMode && (
+                <button
+                  onClick={() => {
+                    resetSampleData();
+                    toast.success('Sample demo data reset!');
+                  }}
+                  className="px-1.5 py-1 text-2xs font-mono text-ink-faint hover:text-amber-400 border-l border-white/[0.06] transition-colors"
+                  title="Reset demo data to initial state"
+                >
+                  Reset
+                </button>
               )}
-            </button>
+            </div>
 
             {/* Avatar */}
             <div

@@ -2,6 +2,7 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useReducer,
   type ReactNode,
@@ -27,7 +28,9 @@ type Action =
   | { type: 'mark_notification_read'; id: string }
   | { type: 'dismiss_notification'; id: string }
   | { type: 'add_capability'; projectId: string; capability: string }
-  | { type: 'add_component'; projectId: string; component: string };
+  | { type: 'add_component'; projectId: string; component: string }
+  | { type: 'set_active_hackathon'; id: string }
+  | { type: 'reset_sample_data' };
 
 function reducer(state: AppState, action: Action): AppState {
   switch (action.type) {
@@ -94,6 +97,14 @@ function reducer(state: AppState, action: Action): AppState {
             : p
         ),
       };
+    case 'set_active_hackathon':
+      return { ...state, activeHackathonId: action.id };
+    case 'reset_sample_data': {
+      try {
+        localStorage.removeItem('hackmax_state_v2');
+      } catch {}
+      return createSeedState();
+    }
     default:
       return state;
   }
@@ -110,19 +121,38 @@ interface StoreValue {
   completeTask: (id: string) => void;
   cutTask: (id: string) => void;
   toggleDemo: () => void;
+  setActiveHackathon: (id: string) => void;
+  resetSampleData: () => void;
 }
 
 const StoreContext = createContext<StoreValue | null>(null);
 
 export function HackMaxStoreProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(reducer, undefined, () => {
+    try {
+      const saved = localStorage.getItem('hackmax_state_v2');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed?.hackathons?.length) {
+          return parsed;
+        }
+      }
+    } catch {}
     const seeded = createSeedState();
     return { ...seeded, demoMode: !isSupabaseConfigured };
   });
 
+  useEffect(() => {
+    try {
+      localStorage.setItem('hackmax_state_v2', JSON.stringify(state));
+    } catch {}
+  }, [state]);
+
   const primaryHackathon = useMemo(
-    () => state.hackathons.find((h) => h.status === 'active') ?? state.hackathons[0],
-    [state.hackathons]
+    () => state.hackathons.find((h) => h.id === state.activeHackathonId) ??
+          state.hackathons.find((h) => h.status === 'active') ??
+          state.hackathons[0],
+    [state.hackathons, state.activeHackathonId]
   );
 
   const hoursRemaining = primaryHackathon
@@ -153,10 +183,35 @@ export function HackMaxStoreProvider({ children }: { children: ReactNode }) {
   const completeTask = useCallback((id: string) => dispatch({ type: 'toggle_task', id, status: 'done' }), []);
   const cutTask = useCallback((id: string) => dispatch({ type: 'toggle_task', id, status: 'cut' }), []);
   const toggleDemo = useCallback(() => dispatch({ type: 'toggle_demo' }), []);
+  const setActiveHackathon = useCallback((id: string) => dispatch({ type: 'set_active_hackathon', id }), []);
+  const resetSampleData = useCallback(() => dispatch({ type: 'reset_sample_data' }), []);
 
   const value = useMemo(() => ({
-    state, dispatch, primaryHackathon, nextTask, liveMaxScore, hoursRemaining, startTask, completeTask, cutTask, toggleDemo,
-  }), [state, primaryHackathon, nextTask, liveMaxScore, hoursRemaining, startTask, completeTask, cutTask, toggleDemo]);
+    state,
+    dispatch,
+    primaryHackathon,
+    nextTask,
+    liveMaxScore,
+    hoursRemaining,
+    startTask,
+    completeTask,
+    cutTask,
+    toggleDemo,
+    setActiveHackathon,
+    resetSampleData,
+  }), [
+    state,
+    primaryHackathon,
+    nextTask,
+    liveMaxScore,
+    hoursRemaining,
+    startTask,
+    completeTask,
+    cutTask,
+    toggleDemo,
+    setActiveHackathon,
+    resetSampleData,
+  ]);
 
   return <StoreContext.Provider value={value}>{children}</StoreContext.Provider>;
 }

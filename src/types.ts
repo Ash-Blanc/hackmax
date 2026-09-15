@@ -130,6 +130,7 @@ export interface AppState {
   demoMode: boolean;
   onboarded: boolean;
   githubConnected: boolean;
+  activeHackathonId?: string | null;
 }
 
 export interface NotificationItem {

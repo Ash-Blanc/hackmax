@@ -28,6 +28,7 @@ export const router = createBrowserRouter([
     element: <Layout />,
     children: [
       { path: 'dashboard', element: <Dashboard /> },
+      { path: 'workspace', element: <HackathonWorkspace /> },
       { path: 'hackathons', element: <Hackathons /> },
       { path: 'hackathons/:id', element: <HackathonWorkspace /> },
       { path: 'projects', element: <Projects /> },
